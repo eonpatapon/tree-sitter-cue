@@ -1,0 +1,2 @@
+use_nix
+export PATH=$PATH:./node_modules/.bin
