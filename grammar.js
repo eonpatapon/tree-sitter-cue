@@ -1,6 +1,6 @@
 const
 
-  PREC = {
+	PREC = {
 		primary: 10,
 		unary: 9,
 		'/': 7, '*': 7,
@@ -10,152 +10,152 @@ const
 		'||': 3,
 		'&': 2,
 		'|': 1,
-  },
+	},
 
 	binary_operators = ["|", "&", "||", "&&", "==", "!=", "<", "<=", ">", ">=", "=~", "!~", "+", "-", "*", "/"],
 	unary_operators = ["+", "-", "!", "*", "!=", "<", "<=", ">", ">=", "=~", "!~"],
 
-  unicodeLetter = /\p{L}/,
-  unicodeDigit = /[0-9]/,
+	unicodeLetter = /\p{L}/,
+	unicodeDigit = /[0-9]/,
 
-  letter = choice(unicodeLetter),
+	letter = choice(unicodeLetter),
 
-  newline = '\n',
-  terminator = choice(newline, ','),
+	newline = '\n',
+	terminator = choice(newline, ','),
 
-  hexDigit = /[0-9a-fA-F]/,
-  octalDigit = /[0-7]/,
-  decimalDigit = /[0-9]/,
-  binaryDigit = /[01]/,
+	hexDigit = /[0-9a-fA-F]/,
+	octalDigit = /[0-7]/,
+	decimalDigit = /[0-9]/,
+	binaryDigit = /[01]/,
 
 	multiplier = seq(
 		choice("K", "M", "G", "T", "P"),
 		optional('i'),
 	),
 
-  hexDigits = seq(hexDigit, repeat(seq(optional('_'), hexDigit))),
-  octalDigits = seq(octalDigit, repeat(seq(optional('_'), octalDigit))),
-  decimalDigits = seq(decimalDigit, repeat(seq(optional('_'), decimalDigit))),
-  binaryDigits = seq(binaryDigit, repeat(seq(optional('_'), binaryDigit))),
+	hexDigits = seq(hexDigit, repeat(seq(optional('_'), hexDigit))),
+	octalDigits = seq(octalDigit, repeat(seq(optional('_'), octalDigit))),
+	decimalDigits = seq(decimalDigit, repeat(seq(optional('_'), decimalDigit))),
+	binaryDigits = seq(binaryDigit, repeat(seq(optional('_'), binaryDigit))),
 
-  hexLiteral = seq('0', choice('x', 'X'), optional('_'), hexDigits),
-  octalLiteral = seq('0', optional(choice('o', 'O')), optional('_'), octalDigits),
-  decimalLiteral = choice('0', seq(/[1-9]/, optional(seq(optional('_'), decimalDigits)))),
-  binaryLiteral = seq('0', choice('b', 'B'), optional('_'), binaryDigits),
+	hexLiteral = seq('0', choice('x', 'X'), optional('_'), hexDigits),
+	octalLiteral = seq('0', optional(choice('o', 'O')), optional('_'), octalDigits),
+	decimalLiteral = choice('0', seq(/[1-9]/, optional(seq(optional('_'), decimalDigits)))),
+	binaryLiteral = seq('0', choice('b', 'B'), optional('_'), binaryDigits),
 	siLiteral = choice(
 		seq(decimalLiteral, optional(repeat(seq('.', decimalLiteral))), multiplier),
 		seq('.', decimalLiteral, multiplier),
 	),
 
-  decimalExponent = seq(choice('e', 'E'), optional(choice('+', '-')), decimalDigits),
-  decimalFloatLiteral = choice(
-    seq(decimalDigits, '.', optional(decimalDigits), optional(decimalExponent)),
-    seq(decimalDigits, decimalExponent),
-    seq('.', decimalDigits, optional(decimalExponent)),
-  ),
+	decimalExponent = seq(choice('e', 'E'), optional(choice('+', '-')), decimalDigits),
+	decimalFloatLiteral = choice(
+		seq(decimalDigits, '.', optional(decimalDigits), optional(decimalExponent)),
+		seq(decimalDigits, decimalExponent),
+		seq('.', decimalDigits, optional(decimalExponent)),
+	),
 
-  hexExponent = seq(choice('p', 'P'), optional(choice('+', '-')), decimalDigits),
-  hexMantissa = choice(
-    seq(optional('_'), hexDigits, '.', optional(hexDigits)),
-    seq(optional('_'), hexDigits),
-    seq('.', hexDigits),
-  ),
-  hexFloatLiteral = seq('0', choice('x', 'X'), hexMantissa, hexExponent),
+	hexExponent = seq(choice('p', 'P'), optional(choice('+', '-')), decimalDigits),
+	hexMantissa = choice(
+		seq(optional('_'), hexDigits, '.', optional(hexDigits)),
+		seq(optional('_'), hexDigits),
+		seq('.', hexDigits),
+	),
+	hexFloatLiteral = seq('0', choice('x', 'X'), hexMantissa, hexExponent),
 
-  intLiteral = choice(binaryLiteral, decimalLiteral, octalLiteral, hexLiteral, siLiteral)
-  floatLiteral = choice(decimalFloatLiteral, hexFloatLiteral),
+	intLiteral = choice(binaryLiteral, decimalLiteral, octalLiteral, hexLiteral, siLiteral)
+	floatLiteral = choice(decimalFloatLiteral, hexFloatLiteral),
 
 module.exports = grammar({
-  name: 'cue',
+	name: 'cue',
 
-  extras: $ => [
-    $.comment,
-    /\s/
-  ],
+	extras: $ => [
+		$.comment,
+		/\s/
+	],
 
-  externals: $ => [
-    $._str_content,
-    $._ind_str_content,
-  ],
+	externals: $ => [
+		$._str_content,
+		$._ind_str_content,
+	],
 
 	// conflicts: $ => [
-	// 	[$._package_identifier, $._operand_name],
+	//	[$._package_identifier, $._operand_name],
 	// ],
 
 	word: $ => $.identifier,
 
-  rules: {
-    source_file: $ => repeat(choice(
-      $.package_clause,
-      $.import_declaration,
+	rules: {
+		source_file: $ => repeat(choice(
+			$.package_clause,
+			$.import_declaration,
 			seq($._declaration, terminator),
-    )),
+		)),
 
-    _package_identifier: $ => alias($.identifier, $.package_identifier),
+		_package_identifier: $ => alias($.identifier, $.package_identifier),
 
-    package_clause: $ => seq(
-      'package',
-      $._package_identifier
-    ),
+		package_clause: $ => seq(
+			'package',
+			$._package_identifier
+		),
 
-    import_declaration: $ => seq(
-      'import',
-      choice(
-        $.import_spec,
-        $.import_spec_list
-      )
-    ),
+		import_declaration: $ => seq(
+			'import',
+			choice(
+				$.import_spec,
+				$.import_spec_list
+			)
+		),
 
-    import_spec: $ => seq(
-      optional(field('name', choice(
-        $.dot,
-        $.blank_identifier,
-        $._package_identifier
-      ))),
-      field('path', $._string_lit)
-    ),
+		import_spec: $ => seq(
+			optional(field('name', choice(
+				$.dot,
+				$.blank_identifier,
+				$._package_identifier
+			))),
+			field('path', $._string_lit)
+		),
 
-    import_spec_list: $ => seq(
-      '(',
-      repeat(seq(
-        $.import_spec,
-        terminator
-      )),
-      ')'
-    ),
+		import_spec_list: $ => seq(
+			'(',
+			repeat(seq(
+				$.import_spec,
+				terminator
+			)),
+			')'
+		),
 
-    dot: $ => '.',
+		dot: $ => '.',
 
-    blank_identifier: $ => '_',
+		blank_identifier: $ => '_',
 
-    identifier: $ => token(seq(
+		identifier: $ => token(seq(
 			optional(choice('_#', '#', '_')),
 			letter,
 			repeat(choice(letter, unicodeDigit, '$')),
-    )),
+		)),
 		
 		// identifier: $ => choice(
-		// 	$._identifier,
-		// 	$.hidden_identifier,
-		// 	$.definition,
-		// 	$.hidden_definition,
+		//	$._identifier,
+		//	$.hidden_identifier,
+		//	$.definition,
+		//	$.hidden_definition,
 		// ),
 
 		// _identifier: $ => token(seq(
-		// 	letter, repeat(choice(letter, unicodeDigit, '$'))
+		//	letter, repeat(choice(letter, unicodeDigit, '$'))
 		// )),
 
 		// // https://github.com/tree-sitter/tree-sitter/issues/449
 		// hidden_identifier: $ => token(seq(
-		// 	'_', field('name', seq(letter, repeat(choice(letter, unicodeDigit, '$'))))
+		//	'_', field('name', seq(letter, repeat(choice(letter, unicodeDigit, '$'))))
 		// )),
 
 		// definition: $ => token(seq(
-		// 	'#', field('name', seq(letter, repeat(choice(letter, unicodeDigit, '$'))))
+		//	'#', field('name', seq(letter, repeat(choice(letter, unicodeDigit, '$'))))
 		// )),
 
 		// hidden_definition: $ => token(seq(
-		// 	'_#', field('name', seq(letter, repeat(choice(letter, unicodeDigit, '$'))))
+		//	'_#', field('name', seq(letter, repeat(choice(letter, unicodeDigit, '$'))))
 		// )),
 
 		qualified_identifier: $ => seq(
@@ -164,32 +164,32 @@ module.exports = grammar({
 			$.identifier
 		),
 
-    _string_lit: $ => choice(
-      $.string_lit,
-      $.raw_string_lit,
-      $.indented_string_lit,
-      $.raw_indented_string_lit,
-    ),
+		_string_lit: $ => choice(
+			$.string_lit,
+			$.raw_string_lit,
+			$.indented_string_lit,
+			$.raw_indented_string_lit,
+		),
 
-    raw_string_lit: $ => seq('#"', optional($._str_content),'"#'),
+		raw_string_lit: $ => seq('#"', optional($._str_content),'"#'),
 
-    string_lit: $ => seq('"', optional($._string_parts), '"'),
+		string_lit: $ => seq('"', optional($._string_parts), '"'),
 
-    _string_parts: $ => repeat1(choice(
+		_string_parts: $ => repeat1(choice(
 			$._str_content,
 			$.interpolation,
 		)),
 
-    raw_indented_string_lit: $ => seq('#"""', optional($._ind_str_content), '"""#'),
+		raw_indented_string_lit: $ => seq('#"""', optional($._ind_str_content), '"""#'),
 
-    indented_string_lit: $ => seq('"""', optional($._ind_string_parts), '"""'),
+		indented_string_lit: $ => seq('"""', optional($._ind_string_parts), '"""'),
 
-    _ind_string_parts: $ => repeat1(choice(
+		_ind_string_parts: $ => repeat1(choice(
 			$._ind_str_content,
 			$.interpolation,
 		)),
 
-    interpolation: $ => seq('\\(', $._expression, ')'),
+		interpolation: $ => seq('\\(', $._expression, ')'),
 
 		builtin: $ => choice(
 			'len',
@@ -218,18 +218,18 @@ module.exports = grammar({
 
 		top_lit: $ => token('_'),
 
-    bottom_lit: $ => token('_|_'),
+		bottom_lit: $ => token('_|_'),
 
-    null_lit: $ => token('null'),
+		null_lit: $ => token('null'),
 
-    bool_lit: $ => token(choice(
-      'true',
-      'false',
-    )),
+		bool_lit: $ => token(choice(
+			'true',
+			'false',
+		)),
 
-    int_lit: $ => token(intLiteral),
+		int_lit: $ => token(intLiteral),
 
-    float_lit: $ => token(floatLiteral),
+		float_lit: $ => token(floatLiteral),
 
 		_declaration: $ => choice(
 			$.field,
@@ -273,10 +273,10 @@ module.exports = grammar({
 			$._label_expr,
 		),
 		
-    field: $ => prec(1, seq(
-      repeat1(seq($.label, ':')),
+		field: $ => prec(1, seq(
+			repeat1(seq($.label, ':')),
 			$._value
-    )),
+		)),
 
 		_value: $=> alias($._alias_expr, $.value),
 
@@ -310,7 +310,7 @@ module.exports = grammar({
 			$.binary_expression,
 		)),
 
-    binary_expression: $ => choice(...binary_operators.map(operator =>
+		binary_expression: $ => choice(...binary_operators.map(operator =>
 			prec.left(PREC[operator], seq(
 				field('left', $._expression),
 				field('operator', operator),
@@ -369,9 +369,9 @@ module.exports = grammar({
 			$.bottom_lit,
 		),
 
-    comment: $ => token(choice(
-      seq('//', /.*/),
-    ))
+		comment: $ => token(choice(
+			seq('//', /.*/),
+		))
 
-  }
+	}
 });
