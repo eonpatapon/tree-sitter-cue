@@ -6,6 +6,7 @@ a: {
     foo?: int
     bar?: string
 		_hidden: string
+		a: b: c: string
 }
 
 ---
@@ -13,9 +14,9 @@ a: {
 (source_file 
  (field (label (identifier)) (value (struct_lit 
 																		 (field (label (identifier)) (value (int_type))) 
-																		 (field (label (identifier)) (value (string_type)))
-																		 (field (label (identifier)) (value (string_type)))))))
-
+																		 (field (label (identifier)) (value (string_type))) 
+																		 (field (label (identifier)) (value (string_type))) 
+																		 (field (label (identifier)) (label (identifier)) (label (identifier)) (value (string_type)))))))
 
 ===
 closed
