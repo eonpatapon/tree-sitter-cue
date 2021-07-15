@@ -320,7 +320,7 @@ module.exports = grammar({
 
 		_expression: $ => prec.left(1, choice(
 			prec(PREC.primary, $._primary_expression),
-			prec(PREC.unary, $.unary_expression),
+			$.unary_expression,
 			$.binary_expression,
 		)),
 
@@ -332,10 +332,10 @@ module.exports = grammar({
 			))
 		)),
 
-		unary_expression: $ => choice(...unary_operators.map(operator => seq(
+		unary_expression: $ => choice(...unary_operators.map(operator => prec(PREC.unary, seq(
 				field('operator', token(operator)),
 				field('operand', $._expression),
-		))),
+		)))),
 
 		_primary_expression: $ => choice(
 			$._operand,

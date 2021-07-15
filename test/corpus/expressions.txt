@@ -1,0 +1,49 @@
+===
+binary
+===
+
+e: a & b
+e: (a & b) | (c)
+e: len(a) >= 2
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (binary_expression (identifier) (identifier)))) 
+ (field (label (identifier)) (value (binary_expression (binary_expression (identifier) (identifier)) (identifier)))) 
+ (field (label (identifier)) (value (binary_expression (call_expression (builtin) (arguments (argument (identifier)))) (int_lit)))))
+
+===
+unary
+===
+
+i: *1 | number
+r: =~ "foo"
+c: * >=5 | int
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (binary_expression 
+																		 (unary_expression (int_lit)) 
+																		 (number_type)))) 
+ (field (label (identifier)) (value (unary_expression 
+																		 (simple_string_lit)))) 
+ (field (label (identifier)) (value (binary_expression 
+																		 (unary_expression (unary_expression (int_lit))) 
+																		 (int_type)))))
+
+===
+call
+===
+
+b: base64.Encode(null, "foo")
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (call_expression 
+																		 (selector_expression (identifier) (selector (dot) (identifier))) 
+																		 (arguments 
+																			(argument (null_lit)) 
+																			(argument (simple_string_lit)))))))
