@@ -237,8 +237,17 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "\\p{L}"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "PATTERN",
+                    "value": "\\p{L}"
+                  }
+                ]
+              },
+              {
+                "type": "STRING",
+                "value": "$"
               }
             ]
           },
@@ -263,6 +272,10 @@
                 {
                   "type": "STRING",
                   "value": "$"
+                },
+                {
+                  "type": "STRING",
+                  "value": "_"
                 }
               ]
             }

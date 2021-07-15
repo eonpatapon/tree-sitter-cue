@@ -1165,243 +1165,243 @@ static const uint16_t ts_non_terminal_alias_map[] = {
 
 static inline bool sym_identifier_character_set_1(int32_t c) {
   return (c < 6688
-    ? (c < 2990
-      ? (c < 2384
-        ? (c < 1488
-          ? (c < 886
-            ? (c < 216
-              ? (c < 181
-                ? (c < 'a'
-                  ? (c >= 'A' && c <= 'Z')
-                  : (c <= 'z' || c == 170))
-                : (c <= 181 || (c < 192
-                  ? c == 186
-                  : c <= 214)))
-              : (c <= 246 || (c < 748
-                ? (c < 710
-                  ? (c >= 248 && c <= 705)
-                  : (c <= 721 || (c >= 736 && c <= 740)))
-                : (c <= 748 || (c < 880
-                  ? c == 750
-                  : c <= 884)))))
-            : (c <= 887 || (c < 931
-              ? (c < 904
-                ? (c < 895
-                  ? (c >= 890 && c <= 893)
-                  : (c <= 895 || c == 902))
-                : (c <= 906 || (c < 910
-                  ? c == 908
-                  : c <= 929)))
-              : (c <= 1013 || (c < 1329
-                ? (c < 1162
-                  ? (c >= 1015 && c <= 1153)
-                  : c <= 1327)
-                : (c <= 1366 || (c < 1376
-                  ? c == 1369
-                  : c <= 1416)))))))
-          : (c <= 1514 || (c < 1994
-            ? (c < 1774
-              ? (c < 1649
-                ? (c < 1568
-                  ? (c >= 1519 && c <= 1522)
-                  : (c <= 1610 || (c >= 1646 && c <= 1647)))
-                : (c <= 1747 || (c < 1765
-                  ? c == 1749
-                  : c <= 1766)))
-              : (c <= 1775 || (c < 1810
-                ? (c < 1791
-                  ? (c >= 1786 && c <= 1788)
-                  : (c <= 1791 || c == 1808))
-                : (c <= 1839 || (c < 1969
-                  ? (c >= 1869 && c <= 1957)
-                  : c <= 1969)))))
-            : (c <= 2026 || (c < 2112
-              ? (c < 2074
-                ? (c < 2042
-                  ? (c >= 2036 && c <= 2037)
-                  : (c <= 2042 || (c >= 2048 && c <= 2069)))
-                : (c <= 2074 || (c < 2088
-                  ? c == 2084
-                  : c <= 2088)))
-              : (c <= 2136 || (c < 2230
-                ? (c < 2208
-                  ? (c >= 2144 && c <= 2154)
-                  : c <= 2228)
-                : (c <= 2247 || (c < 2365
-                  ? (c >= 2308 && c <= 2361)
-                  : c <= 2365)))))))))
-        : (c <= 2384 || (c < 2707
-          ? (c < 2556
-            ? (c < 2482
-              ? (c < 2447
-                ? (c < 2417
-                  ? (c >= 2392 && c <= 2401)
-                  : (c <= 2432 || (c >= 2437 && c <= 2444)))
-                : (c <= 2448 || (c < 2474
-                  ? (c >= 2451 && c <= 2472)
-                  : c <= 2480)))
-              : (c <= 2482 || (c < 2524
-                ? (c < 2493
-                  ? (c >= 2486 && c <= 2489)
-                  : (c <= 2493 || c == 2510))
-                : (c <= 2525 || (c < 2544
-                  ? (c >= 2527 && c <= 2529)
-                  : c <= 2545)))))
-            : (c <= 2556 || (c < 2616
-              ? (c < 2602
-                ? (c < 2575
-                  ? (c >= 2565 && c <= 2570)
-                  : (c <= 2576 || (c >= 2579 && c <= 2600)))
-                : (c <= 2608 || (c < 2613
-                  ? (c >= 2610 && c <= 2611)
-                  : c <= 2614)))
-              : (c <= 2617 || (c < 2674
-                ? (c < 2654
-                  ? (c >= 2649 && c <= 2652)
-                  : c <= 2654)
-                : (c <= 2676 || (c < 2703
-                  ? (c >= 2693 && c <= 2701)
-                  : c <= 2705)))))))
-          : (c <= 2728 || (c < 2877
-            ? (c < 2809
-              ? (c < 2749
-                ? (c < 2738
-                  ? (c >= 2730 && c <= 2736)
-                  : (c <= 2739 || (c >= 2741 && c <= 2745)))
-                : (c <= 2749 || (c < 2784
-                  ? c == 2768
-                  : c <= 2785)))
-              : (c <= 2809 || (c < 2858
-                ? (c < 2831
-                  ? (c >= 2821 && c <= 2828)
-                  : (c <= 2832 || (c >= 2835 && c <= 2856)))
-                : (c <= 2864 || (c < 2869
-                  ? (c >= 2866 && c <= 2867)
-                  : c <= 2873)))))
-            : (c <= 2877 || (c < 2962
-              ? (c < 2947
-                ? (c < 2911
-                  ? (c >= 2908 && c <= 2909)
-                  : (c <= 2913 || c == 2929))
-                : (c <= 2947 || (c < 2958
-                  ? (c >= 2949 && c <= 2954)
-                  : c <= 2960)))
-              : (c <= 2965 || (c < 2974
-                ? (c < 2972
-                  ? (c >= 2969 && c <= 2970)
-                  : c <= 2972)
-                : (c <= 2975 || (c < 2984
-                  ? (c >= 2979 && c <= 2980)
-                  : c <= 2986)))))))))))
-      : (c <= 3001 || (c < 4193
-        ? (c < 3461
-          ? (c < 3253
-            ? (c < 3160
-              ? (c < 3090
-                ? (c < 3077
-                  ? c == 3024
-                  : (c <= 3084 || (c >= 3086 && c <= 3088)))
-                : (c <= 3112 || (c < 3133
-                  ? (c >= 3114 && c <= 3129)
-                  : c <= 3133)))
-              : (c <= 3162 || (c < 3214
-                ? (c < 3200
-                  ? (c >= 3168 && c <= 3169)
-                  : (c <= 3200 || (c >= 3205 && c <= 3212)))
-                : (c <= 3216 || (c < 3242
-                  ? (c >= 3218 && c <= 3240)
-                  : c <= 3251)))))
-            : (c <= 3257 || (c < 3346
-              ? (c < 3313
-                ? (c < 3294
-                  ? c == 3261
-                  : (c <= 3294 || (c >= 3296 && c <= 3297)))
-                : (c <= 3314 || (c < 3342
-                  ? (c >= 3332 && c <= 3340)
-                  : c <= 3344)))
-              : (c <= 3386 || (c < 3412
-                ? (c < 3406
-                  ? c == 3389
-                  : c <= 3406)
-                : (c <= 3414 || (c < 3450
-                  ? (c >= 3423 && c <= 3425)
-                  : c <= 3455)))))))
-          : (c <= 3478 || (c < 3762
-            ? (c < 3648
-              ? (c < 3520
-                ? (c < 3507
-                  ? (c >= 3482 && c <= 3505)
-                  : (c <= 3515 || c == 3517))
-                : (c <= 3526 || (c < 3634
-                  ? (c >= 3585 && c <= 3632)
-                  : c <= 3635)))
-              : (c <= 3654 || (c < 3724
-                ? (c < 3716
-                  ? (c >= 3713 && c <= 3714)
-                  : (c <= 3716 || (c >= 3718 && c <= 3722)))
-                : (c <= 3747 || (c < 3751
-                  ? c == 3749
-                  : c <= 3760)))))
-            : (c <= 3763 || (c < 3913
-              ? (c < 3804
-                ? (c < 3776
-                  ? c == 3773
-                  : (c <= 3780 || c == 3782))
-                : (c <= 3807 || (c < 3904
-                  ? c == 3840
-                  : c <= 3911)))
-              : (c <= 3948 || (c < 4159
-                ? (c < 4096
-                  ? (c >= 3976 && c <= 3980)
-                  : c <= 4138)
-                : (c <= 4159 || (c < 4186
-                  ? (c >= 4176 && c <= 4181)
-                  : c <= 4189)))))))))
-        : (c <= 4193 || (c < 5112
-          ? (c < 4704
-            ? (c < 4301
-              ? (c < 4238
-                ? (c < 4206
-                  ? (c >= 4197 && c <= 4198)
-                  : (c <= 4208 || (c >= 4213 && c <= 4225)))
-                : (c <= 4238 || (c < 4295
-                  ? (c >= 4256 && c <= 4293)
-                  : c <= 4295)))
-              : (c <= 4301 || (c < 4688
-                ? (c < 4348
-                  ? (c >= 4304 && c <= 4346)
-                  : (c <= 4680 || (c >= 4682 && c <= 4685)))
-                : (c <= 4694 || (c < 4698
-                  ? c == 4696
-                  : c <= 4701)))))
-            : (c <= 4744 || (c < 4808
-              ? (c < 4792
-                ? (c < 4752
-                  ? (c >= 4746 && c <= 4749)
-                  : (c <= 4784 || (c >= 4786 && c <= 4789)))
-                : (c <= 4798 || (c < 4802
-                  ? c == 4800
-                  : c <= 4805)))
-              : (c <= 4822 || (c < 4888
-                ? (c < 4882
-                  ? (c >= 4824 && c <= 4880)
-                  : c <= 4885)
-                : (c <= 4954 || (c < 5024
-                  ? (c >= 4992 && c <= 5007)
-                  : c <= 5109)))))))
-          : (c <= 5117 || (c < 6103
-            ? (c < 5902
-              ? (c < 5792
-                ? (c < 5743
-                  ? (c >= 5121 && c <= 5740)
-                  : (c <= 5759 || (c >= 5761 && c <= 5786)))
-                : (c <= 5866 || (c < 5888
-                  ? (c >= 5873 && c <= 5880)
-                  : c <= 5900)))
-              : (c <= 5905 || (c < 5984
-                ? (c < 5952
-                  ? (c >= 5920 && c <= 5937)
-                  : c <= 5969)
+    ? (c < 2984
+      ? (c < 2365
+        ? (c < 1376
+          ? (c < 880
+            ? (c < 192
+              ? (c < 170
+                ? (c < 'A'
+                  ? c == '$'
+                  : (c <= 'Z' || (c >= 'a' && c <= 'z')))
+                : (c <= 170 || (c < 186
+                  ? c == 181
+                  : c <= 186)))
+              : (c <= 214 || (c < 736
+                ? (c < 248
+                  ? (c >= 216 && c <= 246)
+                  : (c <= 705 || (c >= 710 && c <= 721)))
+                : (c <= 740 || (c < 750
+                  ? c == 748
+                  : c <= 750)))))
+            : (c <= 884 || (c < 910
+              ? (c < 902
+                ? (c < 890
+                  ? (c >= 886 && c <= 887)
+                  : (c <= 893 || c == 895))
+                : (c <= 902 || (c < 908
+                  ? (c >= 904 && c <= 906)
+                  : c <= 908)))
+              : (c <= 929 || (c < 1162
+                ? (c < 1015
+                  ? (c >= 931 && c <= 1013)
+                  : c <= 1153)
+                : (c <= 1327 || (c < 1369
+                  ? (c >= 1329 && c <= 1366)
+                  : c <= 1369)))))))
+          : (c <= 1416 || (c < 1969
+            ? (c < 1765
+              ? (c < 1646
+                ? (c < 1519
+                  ? (c >= 1488 && c <= 1514)
+                  : (c <= 1522 || (c >= 1568 && c <= 1610)))
+                : (c <= 1647 || (c < 1749
+                  ? (c >= 1649 && c <= 1747)
+                  : c <= 1749)))
+              : (c <= 1766 || (c < 1808
+                ? (c < 1786
+                  ? (c >= 1774 && c <= 1775)
+                  : (c <= 1788 || c == 1791))
+                : (c <= 1808 || (c < 1869
+                  ? (c >= 1810 && c <= 1839)
+                  : c <= 1957)))))
+            : (c <= 1969 || (c < 2088
+              ? (c < 2048
+                ? (c < 2036
+                  ? (c >= 1994 && c <= 2026)
+                  : (c <= 2037 || c == 2042))
+                : (c <= 2069 || (c < 2084
+                  ? c == 2074
+                  : c <= 2084)))
+              : (c <= 2088 || (c < 2208
+                ? (c < 2144
+                  ? (c >= 2112 && c <= 2136)
+                  : c <= 2154)
+                : (c <= 2228 || (c < 2308
+                  ? (c >= 2230 && c <= 2247)
+                  : c <= 2361)))))))))
+        : (c <= 2365 || (c < 2703
+          ? (c < 2544
+            ? (c < 2474
+              ? (c < 2437
+                ? (c < 2392
+                  ? c == 2384
+                  : (c <= 2401 || (c >= 2417 && c <= 2432)))
+                : (c <= 2444 || (c < 2451
+                  ? (c >= 2447 && c <= 2448)
+                  : c <= 2472)))
+              : (c <= 2480 || (c < 2510
+                ? (c < 2486
+                  ? c == 2482
+                  : (c <= 2489 || c == 2493))
+                : (c <= 2510 || (c < 2527
+                  ? (c >= 2524 && c <= 2525)
+                  : c <= 2529)))))
+            : (c <= 2545 || (c < 2613
+              ? (c < 2579
+                ? (c < 2565
+                  ? c == 2556
+                  : (c <= 2570 || (c >= 2575 && c <= 2576)))
+                : (c <= 2600 || (c < 2610
+                  ? (c >= 2602 && c <= 2608)
+                  : c <= 2611)))
+              : (c <= 2614 || (c < 2654
+                ? (c < 2649
+                  ? (c >= 2616 && c <= 2617)
+                  : c <= 2652)
+                : (c <= 2654 || (c < 2693
+                  ? (c >= 2674 && c <= 2676)
+                  : c <= 2701)))))))
+          : (c <= 2705 || (c < 2869
+            ? (c < 2784
+              ? (c < 2741
+                ? (c < 2730
+                  ? (c >= 2707 && c <= 2728)
+                  : (c <= 2736 || (c >= 2738 && c <= 2739)))
+                : (c <= 2745 || (c < 2768
+                  ? c == 2749
+                  : c <= 2768)))
+              : (c <= 2785 || (c < 2835
+                ? (c < 2821
+                  ? c == 2809
+                  : (c <= 2828 || (c >= 2831 && c <= 2832)))
+                : (c <= 2856 || (c < 2866
+                  ? (c >= 2858 && c <= 2864)
+                  : c <= 2867)))))
+            : (c <= 2873 || (c < 2958
+              ? (c < 2929
+                ? (c < 2908
+                  ? c == 2877
+                  : (c <= 2909 || (c >= 2911 && c <= 2913)))
+                : (c <= 2929 || (c < 2949
+                  ? c == 2947
+                  : c <= 2954)))
+              : (c <= 2960 || (c < 2972
+                ? (c < 2969
+                  ? (c >= 2962 && c <= 2965)
+                  : c <= 2970)
+                : (c <= 2972 || (c < 2979
+                  ? (c >= 2974 && c <= 2975)
+                  : c <= 2980)))))))))))
+      : (c <= 2986 || (c < 4186
+        ? (c < 3450
+          ? (c < 3242
+            ? (c < 3133
+              ? (c < 3086
+                ? (c < 3024
+                  ? (c >= 2990 && c <= 3001)
+                  : (c <= 3024 || (c >= 3077 && c <= 3084)))
+                : (c <= 3088 || (c < 3114
+                  ? (c >= 3090 && c <= 3112)
+                  : c <= 3129)))
+              : (c <= 3133 || (c < 3205
+                ? (c < 3168
+                  ? (c >= 3160 && c <= 3162)
+                  : (c <= 3169 || c == 3200))
+                : (c <= 3212 || (c < 3218
+                  ? (c >= 3214 && c <= 3216)
+                  : c <= 3240)))))
+            : (c <= 3251 || (c < 3342
+              ? (c < 3296
+                ? (c < 3261
+                  ? (c >= 3253 && c <= 3257)
+                  : (c <= 3261 || c == 3294))
+                : (c <= 3297 || (c < 3332
+                  ? (c >= 3313 && c <= 3314)
+                  : c <= 3340)))
+              : (c <= 3344 || (c < 3406
+                ? (c < 3389
+                  ? (c >= 3346 && c <= 3386)
+                  : c <= 3389)
+                : (c <= 3406 || (c < 3423
+                  ? (c >= 3412 && c <= 3414)
+                  : c <= 3425)))))))
+          : (c <= 3455 || (c < 3751
+            ? (c < 3634
+              ? (c < 3517
+                ? (c < 3482
+                  ? (c >= 3461 && c <= 3478)
+                  : (c <= 3505 || (c >= 3507 && c <= 3515)))
+                : (c <= 3517 || (c < 3585
+                  ? (c >= 3520 && c <= 3526)
+                  : c <= 3632)))
+              : (c <= 3635 || (c < 3718
+                ? (c < 3713
+                  ? (c >= 3648 && c <= 3654)
+                  : (c <= 3714 || c == 3716))
+                : (c <= 3722 || (c < 3749
+                  ? (c >= 3724 && c <= 3747)
+                  : c <= 3749)))))
+            : (c <= 3760 || (c < 3904
+              ? (c < 3782
+                ? (c < 3773
+                  ? (c >= 3762 && c <= 3763)
+                  : (c <= 3773 || (c >= 3776 && c <= 3780)))
+                : (c <= 3782 || (c < 3840
+                  ? (c >= 3804 && c <= 3807)
+                  : c <= 3840)))
+              : (c <= 3911 || (c < 4096
+                ? (c < 3976
+                  ? (c >= 3913 && c <= 3948)
+                  : c <= 3980)
+                : (c <= 4138 || (c < 4176
+                  ? c == 4159
+                  : c <= 4181)))))))))
+        : (c <= 4189 || (c < 5024
+          ? (c < 4698
+            ? (c < 4295
+              ? (c < 4213
+                ? (c < 4197
+                  ? c == 4193
+                  : (c <= 4198 || (c >= 4206 && c <= 4208)))
+                : (c <= 4225 || (c < 4256
+                  ? c == 4238
+                  : c <= 4293)))
+              : (c <= 4295 || (c < 4682
+                ? (c < 4304
+                  ? c == 4301
+                  : (c <= 4346 || (c >= 4348 && c <= 4680)))
+                : (c <= 4685 || (c < 4696
+                  ? (c >= 4688 && c <= 4694)
+                  : c <= 4696)))))
+            : (c <= 4701 || (c < 4802
+              ? (c < 4786
+                ? (c < 4746
+                  ? (c >= 4704 && c <= 4744)
+                  : (c <= 4749 || (c >= 4752 && c <= 4784)))
+                : (c <= 4789 || (c < 4800
+                  ? (c >= 4792 && c <= 4798)
+                  : c <= 4800)))
+              : (c <= 4805 || (c < 4882
+                ? (c < 4824
+                  ? (c >= 4808 && c <= 4822)
+                  : c <= 4880)
+                : (c <= 4885 || (c < 4992
+                  ? (c >= 4888 && c <= 4954)
+                  : c <= 5007)))))))
+          : (c <= 5109 || (c < 6103
+            ? (c < 5888
+              ? (c < 5761
+                ? (c < 5121
+                  ? (c >= 5112 && c <= 5117)
+                  : (c <= 5740 || (c >= 5743 && c <= 5759)))
+                : (c <= 5786 || (c < 5873
+                  ? (c >= 5792 && c <= 5866)
+                  : c <= 5880)))
+              : (c <= 5900 || (c < 5984
+                ? (c < 5920
+                  ? (c >= 5902 && c <= 5905)
+                  : (c <= 5937 || (c >= 5952 && c <= 5969)))
                 : (c <= 5996 || (c < 6016
                   ? (c >= 5998 && c <= 6000)
                   : c <= 6067)))))
@@ -1682,34 +1682,34 @@ static inline bool sym_identifier_character_set_2(int32_t c) {
     ? (c < 2979
       ? (c < 2308
         ? (c < 1369
-          ? (c < 750
-            ? (c < 186
-              ? (c < 'a'
+          ? (c < 748
+            ? (c < 181
+              ? (c < '_'
                 ? (c < '0'
                   ? c == '$'
                   : (c <= '9' || (c >= 'A' && c <= 'Z')))
-                : (c <= 'z' || (c < 181
-                  ? c == 170
-                  : c <= 181)))
-              : (c <= 186 || (c < 710
-                ? (c < 216
-                  ? (c >= 192 && c <= 214)
-                  : (c <= 246 || (c >= 248 && c <= 705)))
-                : (c <= 721 || (c < 748
-                  ? (c >= 736 && c <= 740)
-                  : c <= 748)))))
-            : (c <= 750 || (c < 908
-              ? (c < 895
-                ? (c < 886
-                  ? (c >= 880 && c <= 884)
-                  : (c <= 887 || (c >= 890 && c <= 893)))
-                : (c <= 895 || (c < 904
-                  ? c == 902
-                  : c <= 906)))
-              : (c <= 908 || (c < 1015
-                ? (c < 931
-                  ? (c >= 910 && c <= 929)
-                  : c <= 1013)
+                : (c <= '_' || (c < 170
+                  ? (c >= 'a' && c <= 'z')
+                  : c <= 170)))
+              : (c <= 181 || (c < 248
+                ? (c < 192
+                  ? c == 186
+                  : (c <= 214 || (c >= 216 && c <= 246)))
+                : (c <= 705 || (c < 736
+                  ? (c >= 710 && c <= 721)
+                  : c <= 740)))))
+            : (c <= 748 || (c < 904
+              ? (c < 890
+                ? (c < 880
+                  ? c == 750
+                  : (c <= 884 || (c >= 886 && c <= 887)))
+                : (c <= 893 || (c < 902
+                  ? c == 895
+                  : c <= 902)))
+              : (c <= 906 || (c < 1015
+                ? (c < 910
+                  ? c == 908
+                  : (c <= 929 || (c >= 931 && c <= 1013)))
                 : (c <= 1153 || (c < 1329
                   ? (c >= 1162 && c <= 1327)
                   : c <= 1366)))))))
@@ -2200,6 +2200,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '!') ADVANCE(111);
       if (lookahead == '"') ADVANCE(64);
       if (lookahead == '#') ADVANCE(5);
+      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       if (lookahead == '&') ADVANCE(96);
       if (lookahead == '(') ADVANCE(49);
       if (lookahead == ')') ADVANCE(50);
@@ -2219,7 +2220,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '[') ADVANCE(112);
       if (lookahead == '\\') ADVANCE(14);
       if (lookahead == ']') ADVANCE(87);
-      if (lookahead == '_') ADVANCE(53);
+      if (lookahead == '_') ADVANCE(54);
       if (lookahead == '{') ADVANCE(88);
       if (lookahead == '|') ADVANCE(95);
       if (lookahead == '}') ADVANCE(89);
@@ -2228,13 +2229,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\r' ||
           lookahead == ' ') SKIP(44)
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(72);
-      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 1:
       if (lookahead == '\n') ADVANCE(47);
       if (lookahead == '!') ADVANCE(111);
       if (lookahead == '"') ADVANCE(64);
       if (lookahead == '#') ADVANCE(5);
+      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       if (lookahead == '&') ADVANCE(96);
       if (lookahead == '(') ADVANCE(49);
       if (lookahead == '*') ADVANCE(109);
@@ -2251,7 +2252,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '?') ADVANCE(91);
       if (lookahead == '@') ADVANCE(56);
       if (lookahead == '[') ADVANCE(112);
-      if (lookahead == '_') ADVANCE(53);
+      if (lookahead == '_') ADVANCE(54);
       if (lookahead == '{') ADVANCE(88);
       if (lookahead == '|') ADVANCE(95);
       if (lookahead == '}') ADVANCE(89);
@@ -2259,13 +2260,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\r' ||
           lookahead == ' ') SKIP(2)
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(72);
-      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 2:
       if (lookahead == '\n') ADVANCE(47);
       if (lookahead == '!') ADVANCE(111);
       if (lookahead == '"') ADVANCE(64);
       if (lookahead == '#') ADVANCE(5);
+      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       if (lookahead == '&') ADVANCE(96);
       if (lookahead == '(') ADVANCE(49);
       if (lookahead == '*') ADVANCE(109);
@@ -2282,7 +2283,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '?') ADVANCE(91);
       if (lookahead == '@') ADVANCE(56);
       if (lookahead == '[') ADVANCE(86);
-      if (lookahead == '_') ADVANCE(53);
+      if (lookahead == '_') ADVANCE(54);
       if (lookahead == '{') ADVANCE(88);
       if (lookahead == '|') ADVANCE(95);
       if (lookahead == '}') ADVANCE(89);
@@ -2290,13 +2291,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\r' ||
           lookahead == ' ') SKIP(2)
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(72);
-      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 3:
       if (lookahead == '\n') ADVANCE(47);
       if (lookahead == '!') ADVANCE(111);
       if (lookahead == '"') ADVANCE(64);
       if (lookahead == '#') ADVANCE(5);
+      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       if (lookahead == '&') ADVANCE(96);
       if (lookahead == '(') ADVANCE(49);
       if (lookahead == '*') ADVANCE(109);
@@ -2311,7 +2312,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '>') ADVANCE(103);
       if (lookahead == '@') ADVANCE(56);
       if (lookahead == '[') ADVANCE(86);
-      if (lookahead == '_') ADVANCE(53);
+      if (lookahead == '_') ADVANCE(54);
       if (lookahead == '{') ADVANCE(88);
       if (lookahead == '|') ADVANCE(95);
       if (lookahead == '}') ADVANCE(89);
@@ -2319,11 +2320,11 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\r' ||
           lookahead == ' ') SKIP(3)
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(72);
-      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 4:
       if (lookahead == '"') ADVANCE(64);
       if (lookahead == '#') ADVANCE(5);
+      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       if (lookahead == '(') ADVANCE(49);
       if (lookahead == ')') ADVANCE(50);
       if (lookahead == '.') ADVANCE(51);
@@ -2331,12 +2332,11 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ':') ADVANCE(94);
       if (lookahead == '=') ADVANCE(92);
       if (lookahead == '?') ADVANCE(91);
-      if (lookahead == '_') ADVANCE(54);
+      if (lookahead == '_') ADVANCE(53);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(4)
-      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 5:
       if (lookahead == '"') ADVANCE(61);
@@ -2351,6 +2351,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 8:
       if (lookahead == '"') ADVANCE(63);
       if (lookahead == '#') ADVANCE(43);
+      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       if (lookahead == '/') ADVANCE(22);
       if (lookahead == '[') ADVANCE(86);
       if (lookahead == '\\') ADVANCE(14);
@@ -2359,7 +2360,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(8)
-      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 9:
       if (lookahead == '"') ADVANCE(11);
@@ -2534,6 +2534,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '!') ADVANCE(111);
       if (lookahead == '"') ADVANCE(64);
       if (lookahead == '#') ADVANCE(5);
+      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       if (lookahead == '&') ADVANCE(96);
       if (lookahead == '(') ADVANCE(49);
       if (lookahead == ')') ADVANCE(50);
@@ -2553,7 +2554,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '[') ADVANCE(86);
       if (lookahead == '\\') ADVANCE(14);
       if (lookahead == ']') ADVANCE(87);
-      if (lookahead == '_') ADVANCE(53);
+      if (lookahead == '_') ADVANCE(54);
       if (lookahead == '{') ADVANCE(88);
       if (lookahead == '|') ADVANCE(95);
       if (lookahead == '}') ADVANCE(89);
@@ -2562,13 +2563,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\r' ||
           lookahead == ' ') SKIP(44)
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(72);
-      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 45:
       if (eof) ADVANCE(46);
       if (lookahead == '!') ADVANCE(111);
       if (lookahead == '"') ADVANCE(64);
       if (lookahead == '#') ADVANCE(5);
+      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       if (lookahead == '&') ADVANCE(96);
       if (lookahead == '(') ADVANCE(49);
       if (lookahead == ')') ADVANCE(50);
@@ -2585,7 +2586,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '@') ADVANCE(56);
       if (lookahead == '[') ADVANCE(86);
       if (lookahead == ']') ADVANCE(87);
-      if (lookahead == '_') ADVANCE(53);
+      if (lookahead == '_') ADVANCE(54);
       if (lookahead == '{') ADVANCE(88);
       if (lookahead == '|') ADVANCE(95);
       if (lookahead == '}') ADVANCE(89);
@@ -2594,7 +2595,6 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\r' ||
           lookahead == ' ') SKIP(45)
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(72);
-      if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 46:
       ACCEPT_TOKEN(ts_builtin_sym_end);
@@ -2624,13 +2624,13 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 53:
       ACCEPT_TOKEN(anon_sym__);
       if (lookahead == '#') ADVANCE(43);
-      if (lookahead == '|') ADVANCE(27);
       if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
       END_STATE();
     case 54:
       ACCEPT_TOKEN(anon_sym__);
       if (lookahead == '#') ADVANCE(43);
       if (sym_identifier_character_set_1(lookahead)) ADVANCE(55);
+      if (lookahead == '|') ADVANCE(27);
       END_STATE();
     case 55:
       ACCEPT_TOKEN(sym_identifier);

@@ -132,8 +132,8 @@ module.exports = grammar({
 
 		identifier: $ => token(seq(
 			optional(choice('_#', '#', '_')),
-			letter,
-			repeat(choice(letter, unicodeDigit, '$')),
+			choice(letter, '$'),
+			repeat(choice(letter, unicodeDigit, '$', '_')),
 		)),
 
 		attribute: $ => seq(
