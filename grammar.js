@@ -28,6 +28,11 @@ const
   decimalDigit = /[0-9]/,
   binaryDigit = /[01]/,
 
+	multiplier = seq(
+		choice("K", "M", "G", "T", "P"),
+		optional('i'),
+	),
+
   hexDigits = seq(hexDigit, repeat(seq(optional('_'), hexDigit))),
   octalDigits = seq(octalDigit, repeat(seq(optional('_'), octalDigit))),
   decimalDigits = seq(decimalDigit, repeat(seq(optional('_'), decimalDigit))),
@@ -37,6 +42,10 @@ const
   octalLiteral = seq('0', optional(choice('o', 'O')), optional('_'), octalDigits),
   decimalLiteral = choice('0', seq(/[1-9]/, optional(seq(optional('_'), decimalDigits)))),
   binaryLiteral = seq('0', choice('b', 'B'), optional('_'), binaryDigits),
+	siLiteral = choice(
+		seq(decimalLiteral, optional(repeat(seq('.', decimalLiteral))), multiplier),
+		seq('.', decimalLiteral, multiplier),
+	),
 
   decimalExponent = seq(choice('e', 'E'), optional(choice('+', '-')), decimalDigits),
   decimalFloatLiteral = choice(
@@ -53,7 +62,7 @@ const
   ),
   hexFloatLiteral = seq('0', choice('x', 'X'), hexMantissa, hexExponent),
 
-  intLiteral = choice(binaryLiteral, decimalLiteral, octalLiteral, hexLiteral)
+  intLiteral = choice(binaryLiteral, decimalLiteral, octalLiteral, hexLiteral, siLiteral)
   floatLiteral = choice(decimalFloatLiteral, hexFloatLiteral),
 
 module.exports = grammar({
