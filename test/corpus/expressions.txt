@@ -59,3 +59,38 @@ b: base64.Encode(null, "foo")
 																		 (arguments
 																			(argument (null))
 																			(argument (simple_string_lit)))))))
+
+===
+selector
+===
+
+a: a.b."foo"
+
+---
+
+(source_file 
+ (field (label (identifier)) (value 
+															(selector_expression 
+															 (selector_expression (identifier) 
+																(selector (dot) (identifier))) 
+															 (selector (dot) (simple_string_lit))))))
+
+===
+index
+===
+
+b: a["f"][x]
+l: [1, 2][0]
+
+---
+
+(source_file 
+ (field (label (identifier)) (value 
+															(index_expression 
+															 (index_expression (identifier) 
+																(index (simple_string_lit))) 
+															 (index (identifier))))) 
+ (field (label (identifier)) (value 
+															(index_expression 
+															 (list_lit (int_lit) (int_lit)) 
+															 (index (int_lit))))))
