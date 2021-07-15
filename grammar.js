@@ -87,7 +87,7 @@ module.exports = grammar({
 
 	rules: {
 		source_file: $ => seq(
-			// TODO: optional($.attribute),
+			optional($.attribute),
 			optional($.package_clause),
 			optional(repeat($.import_declaration)),
 			repeat(seq($._declaration, terminator)),
@@ -135,6 +135,11 @@ module.exports = grammar({
 			letter,
 			repeat(choice(letter, unicodeDigit, '$')),
 		)),
+
+		attribute: $ => seq(
+			'@', $.identifier, '(', repeat($.attr_token), ')'
+		),
+		attr_token: $ => /[^\(\)\[\]{}]+/,
 		
 		// identifier: $ => choice(
 		//	$._identifier,
@@ -248,7 +253,6 @@ module.exports = grammar({
 			$.ellipsis,
 			$._embedding,
 			$.let_clause,
-			// TODO: $._attribute,
 		),
 
 		_list_elem: $ => choice(
@@ -287,7 +291,8 @@ module.exports = grammar({
 		
 		field: $ => prec(1, seq(
 			repeat1(seq($.label, ':')),
-			$._value
+			$._value,
+			optional($.attribute),
 		)),
 
 		_value: $=> alias($._alias_expr, $.value),

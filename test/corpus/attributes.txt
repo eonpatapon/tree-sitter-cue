@@ -1,0 +1,25 @@
+===
+build
+===
+
+@if(foo)
+
+package foo
+
+---
+
+(source_file 
+ (attribute (identifier) (attr_token)) 
+ (package_clause (package_identifier)))
+
+
+===
+field
+===
+
+a: string @tag(type=bool,short=foo|bar)
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (string_type)) (attribute (identifier) (attr_token))))
