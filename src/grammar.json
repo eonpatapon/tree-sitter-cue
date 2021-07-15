@@ -261,28 +261,31 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "string_lit"
+          "name": "simple_string_lit"
         },
         {
           "type": "SYMBOL",
-          "name": "raw_string_lit"
+          "name": "raw_simple_string_lit"
         },
         {
           "type": "SYMBOL",
-          "name": "indented_string_lit"
+          "name": "multiline_string_lit"
         },
         {
           "type": "SYMBOL",
-          "name": "raw_indented_string_lit"
+          "name": "raw_multiline_string_lit"
         }
       ]
     },
-    "raw_string_lit": {
+    "raw_simple_string_lit": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "#\""
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "#\""
+          }
         },
         {
           "type": "CHOICE",
@@ -297,12 +300,15 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "\"#"
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\"#"
+          }
         }
       ]
     },
-    "string_lit": {
+    "simple_string_lit": {
       "type": "SEQ",
       "members": [
         {
@@ -339,23 +345,30 @@
           {
             "type": "SYMBOL",
             "name": "interpolation"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "escape_sequence"
           }
         ]
       }
     },
-    "raw_indented_string_lit": {
+    "raw_multiline_string_lit": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "#\"\"\""
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "#\"\"\""
+          }
         },
         {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ind_str_content"
+              "name": "_multi_str_content"
             },
             {
               "type": "BLANK"
@@ -363,24 +376,34 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "\"\"\"#"
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\"\"\"#"
+          }
         }
       ]
     },
-    "indented_string_lit": {
+    "multiline_string_lit": {
       "type": "SEQ",
       "members": [
         {
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\"\"\""
+          }
+        },
+        {
           "type": "STRING",
-          "value": "\"\"\""
+          "value": "\n"
         },
         {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ind_string_parts"
+              "name": "_multi_string_parts"
             },
             {
               "type": "BLANK"
@@ -388,19 +411,22 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "\"\"\""
+          "type": "TOKEN",
+          "content": {
+            "type": "STRING",
+            "value": "\"\"\""
+          }
         }
       ]
     },
-    "_ind_string_parts": {
+    "_multi_string_parts": {
       "type": "REPEAT1",
       "content": {
         "type": "CHOICE",
         "members": [
           {
             "type": "SYMBOL",
-            "name": "_ind_str_content"
+            "name": "_multi_str_content"
           },
           {
             "type": "SYMBOL",
@@ -2126,7 +2152,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string_lit"
+          "name": "simple_string_lit"
         }
       ]
     },
@@ -3389,7 +3415,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "string_lit"
+              "name": "simple_string_lit"
             }
           ]
         }
@@ -3554,7 +3580,11 @@
     },
     {
       "type": "SYMBOL",
-      "name": "_ind_str_content"
+      "name": "_multi_str_content"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "escape_sequence"
     }
   ],
   "inline": [],

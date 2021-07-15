@@ -75,7 +75,8 @@ module.exports = grammar({
 
 	externals: $ => [
 		$._str_content,
-		$._ind_str_content,
+		$._multi_str_content,
+    $.escape_sequence,
 	],
 
 	// conflicts: $ => [
@@ -165,27 +166,40 @@ module.exports = grammar({
 		),
 
 		_string_lit: $ => choice(
-			$.string_lit,
-			$.raw_string_lit,
-			$.indented_string_lit,
-			$.raw_indented_string_lit,
+			$.simple_string_lit,
+			$.raw_simple_string_lit,
+			$.multiline_string_lit,
+			$.raw_multiline_string_lit,
 		),
 
-		raw_string_lit: $ => seq('#"', optional($._str_content),'"#'),
+		raw_simple_string_lit: $ => seq(
+			token('#"'),
+			optional($._str_content),
+			token('"#'),
+		),
 
-		string_lit: $ => seq('"', optional($._string_parts), '"'),
+		simple_string_lit: $ => seq('"', optional($._string_parts), '"'),
 
 		_string_parts: $ => repeat1(choice(
 			$._str_content,
 			$.interpolation,
+			$.escape_sequence,
 		)),
 
-		raw_indented_string_lit: $ => seq('#"""', optional($._ind_str_content), '"""#'),
+		raw_multiline_string_lit: $ => seq(
+			token('#"""'),
+			optional($._multi_str_content),
+			token('"""#')
+		),
 
-		indented_string_lit: $ => seq('"""', optional($._ind_string_parts), '"""'),
+		multiline_string_lit: $ => seq(
+			token('"""'),
+			optional($._multi_string_parts),
+			token('"""'),
+		),
 
-		_ind_string_parts: $ => repeat1(choice(
-			$._ind_str_content,
+		_multi_string_parts: $ => repeat1(choice(
+			$._multi_str_content,
 			$.interpolation,
 		)),
 
@@ -260,7 +274,7 @@ module.exports = grammar({
 
 		_label_name: $ => choice(
 			$.identifier,
-			$.string_lit,
+			$.simple_string_lit,
 		),
 
 		_label_expr: $ => prec.left(1, choice(
@@ -343,7 +357,7 @@ module.exports = grammar({
 		
 		call_expression: $ => seq($._primary_expression, $.arguments),
 
-		selector: $ => seq($.dot, choice($.identifier, $.string_lit)),
+		selector: $ => seq($.dot, choice($.identifier, $.simple_string_lit)),
 
 		index: $ => seq(token.immediate('['), $._expression, ']'),
 

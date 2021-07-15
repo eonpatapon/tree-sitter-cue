@@ -1,0 +1,47 @@
+====
+simple string
+====
+
+s1: "\n"
+s2: "\""
+s3: "日本語"
+s4: "\u65e5本\U00008a9e"
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (simple_string_lit))) 
+ (field (label (identifier)) (value (simple_string_lit))) 
+ (field (label (identifier)) (value (simple_string_lit))) 
+ (field (label (identifier)) (value (simple_string_lit))))
+
+===
+multiline string
+===
+
+s1: """
+	Hello world!"""
+s2: """
+	Hello world!
+	"""
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (multiline_string_lit))) 
+ (field (label (identifier)) (value (multiline_string_lit))))
+
+===
+string interpolation
+===
+
+s1: "Hello, \( name )!"
+s2: """
+	Hello "\( name )" !
+	"""
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (simple_string_lit (interpolation (identifier)))))
+ (field (label (identifier)) (value (multiline_string_lit (interpolation (identifier))))))

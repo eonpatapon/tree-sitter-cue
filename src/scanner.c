@@ -3,6 +3,7 @@
 enum TokenType {
   STR_CONTENT,
   IND_STR_CONTENT,
+	ESCAPE_SEQUENCE,
 
   NONE
 };
@@ -37,7 +38,10 @@ static bool scan_str(TSLexer *lexer) {
           } else {
             return false;
           }
-        }
+        } else {
+					// Accept anything after '\'
+					advance(lexer);
+				}
         has_content = true;
         break;
       case '\0':
@@ -83,7 +87,10 @@ static bool scan_ind_str(TSLexer *lexer) {
           } else {
             return false;
           }
-        }
+        } else {
+					// Accept anything after '\'
+					advance(lexer);
+				}
         has_content = true;
         break;
       case '\0':
