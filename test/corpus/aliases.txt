@@ -1,0 +1,68 @@
+===
+field label
+===
+
+a: {
+	F=f: string
+	X="my-identifier": bool
+}
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (struct_lit 
+																		 (field (label (identifier) (identifier)) (value (string_type))) 
+																		 (field (label (identifier) (simple_string_lit)) (value (bool_type)))))))
+
+
+===
+field value
+===
+
+a: X={
+	s: string
+	X.b
+}
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (identifier) (struct_lit 
+																									(field (label (identifier)) (value (string_type))) 
+																									(selector_expression (identifier) (selector (dot) (identifier)))))))
+
+===
+list elem
+===
+
+l: [X="a", "b"]
+
+---
+
+(source_file 
+ (field (label (identifier)) (value 
+															(list_lit 
+															 (identifier) (simple_string_lit) 
+															 (simple_string_lit)))))
+
+===
+bracketed label
+===
+
+a: [X=string]: int
+
+---
+
+(source_file 
+ (field (label (identifier)) (label (identifier) (string_type)) (value (int_type))))
+
+
+===
+let expression
+===
+
+let X = a * 2
+
+---
+
+(source_file (let_clause (identifier) (binary_expression (identifier) (int_lit))))

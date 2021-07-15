@@ -280,7 +280,7 @@ module.exports = grammar({
 		)),
 
 		label: $ => seq(
-			optional(seq($.identifier, '=')),
+			optional(seq(field('alias', $.identifier), '=')),
 			$._label_expr,
 		),
 		
