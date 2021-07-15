@@ -20,9 +20,9 @@ multiline string
 ===
 
 s1: """
-	Hello world!"""
+	Hello world! \/\/"""
 s2: """
-	Hello world!
+	Hello world \U00008a9e !
 	"""
 
 ---

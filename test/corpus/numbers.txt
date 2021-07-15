@@ -1,5 +1,22 @@
 ===
-Numeric literals
+int type
+===
+
+i1: int
+i2: int16
+i3: float32
+i4: number
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (int_type)))
+ (field (label (identifier)) (value (int_type)))
+ (field (label (identifier)) (value (float_type)))
+ (field (label (identifier)) (value (number_type))))
+
+===
+int literals
 ===
 
 i1: 42
@@ -10,6 +27,20 @@ i5: 0xBad_Face
 i6: 0o755
 i7: 0b0101_0001
 
+---
+
+(source_file 
+ (field (label (identifier)) (value (int_lit))) 
+ (field (label (identifier)) (value (int_lit))) 
+ (field (label (identifier)) (value (int_lit))) 
+ (field (label (identifier)) (value (int_lit))) 
+ (field (label (identifier)) (value (int_lit))) 
+ (field (label (identifier)) (value (int_lit))) 
+ (field (label (identifier)) (value (int_lit))))
+
+===
+float literals
+===
 
 f1: 0.
 f2: 72.40
@@ -24,14 +55,6 @@ f9: .12345E+5
 ---
 
 (source_file 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit)))
-
  (field (label (identifier)) (value (float_lit))) 
  (field (label (identifier)) (value (float_lit))) 
  (field (label (identifier)) (value (float_lit))) 

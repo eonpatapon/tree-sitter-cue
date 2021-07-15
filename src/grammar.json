@@ -395,10 +395,6 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "\n"
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
@@ -3496,6 +3492,10 @@
         {
           "type": "SYMBOL",
           "name": "string_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number_type"
         },
         {
           "type": "SYMBOL",
