@@ -1,0 +1,60 @@
+===
+simple
+===
+
+a: {
+    foo?: int
+    bar?: string
+		_hidden: string
+}
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (struct_lit 
+																		 (field (label (identifier)) (value (int_type))) 
+																		 (field (label (identifier)) (value (string_type)))
+																		 (field (label (identifier)) (value (string_type)))))))
+
+
+===
+closed
+===
+
+a: close({
+    field: int
+})
+
+
+b: a & {
+    field: 3
+}
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (call_expression (builtin) 
+																		 (arguments (argument 
+																			 (struct_lit 
+																				(field (label (identifier)) (value (int_type))))))))) 
+ (field (label (identifier)) (value (binary_expression (identifier) 
+																		 (struct_lit 
+																			(field (label (identifier)) (value (int_lit))))))))
+
+===
+definition
+===
+
+#A: {
+    field: int
+}
+
+_#B: {
+		field: string
+}
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (int_type)))))) 
+ (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (string_type)))))))
