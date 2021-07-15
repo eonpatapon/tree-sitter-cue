@@ -79,9 +79,10 @@ module.exports = grammar({
     $.escape_sequence,
 	],
 
-	// conflicts: $ => [
-	//	[$._package_identifier, $._operand_name],
-	// ],
+	 conflicts: $ => [
+		// [$._package_identifier, $._operand_name],
+		[$._list_elem],
+	 ],
 
 	word: $ => $.identifier,
 
@@ -257,7 +258,7 @@ module.exports = grammar({
 
 		_list_elem: $ => choice(
 			$.ellipsis,
-			seq($._embedding, optional(repeat(seq(',', $._embedding))), optional(seq(',', $.ellipsis)))
+			seq($._embedding, optional(repeat(seq(',', $._embedding))), optional(seq(',', $.ellipsis)), optional(','))
 		),
 
 		list_lit: $ => seq('[', repeat($._list_elem), ']'),

@@ -1,0 +1,38 @@
+===
+simple
+===
+
+l: [1,2,3]
+l: [
+	1,
+	2,
+]
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (list_lit (int_lit) (int_lit) (int_lit))))
+ (field (label (identifier)) (value (list_lit (int_lit) (int_lit)))))
+
+===
+ellipsis
+===
+
+l: [
+	{a: "foo", b: 10},
+	...{
+		a: string,
+		b: int
+	}
+]
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (list_lit 
+																		 (struct_lit 
+																			(field (label (identifier)) (value (simple_string_lit))) 
+																			(field (label (identifier)) (value (int_lit)))) 
+																		 (ellipsis) (struct_lit 
+																			 (field (label (identifier)) (value (string_type))) 
+																			 (field (label (identifier)) (value (int_type))))))))
