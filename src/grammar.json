@@ -590,28 +590,17 @@
         "value": "_|_"
       }
     },
-    "null_lit": {
-      "type": "TOKEN",
-      "content": {
-        "type": "STRING",
-        "value": "null"
-      }
+    "null": {
+      "type": "STRING",
+      "value": "null"
     },
-    "bool_lit": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "true"
-          },
-          {
-            "type": "STRING",
-            "value": "false"
-          }
-        ]
-      }
+    "true": {
+      "type": "STRING",
+      "value": "true"
+    },
+    "false": {
+      "type": "STRING",
+      "value": "false"
     },
     "int_lit": {
       "type": "TOKEN",
@@ -3032,7 +3021,7 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3060,7 +3049,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3088,7 +3077,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3116,7 +3105,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3144,7 +3133,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3172,7 +3161,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3200,7 +3189,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3228,7 +3217,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3256,7 +3245,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3284,7 +3273,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3312,7 +3301,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC",
           "value": 9,
           "content": {
             "type": "SEQ",
@@ -3559,11 +3548,15 @@
         },
         {
           "type": "SYMBOL",
-          "name": "null_lit"
+          "name": "null"
         },
         {
           "type": "SYMBOL",
-          "name": "bool_lit"
+          "name": "true"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "false"
         },
         {
           "type": "SYMBOL",

@@ -234,12 +234,9 @@ module.exports = grammar({
 
 		bottom_lit: $ => token('_|_'),
 
-		null_lit: $ => token('null'),
-
-		bool_lit: $ => token(choice(
-			'true',
-			'false',
-		)),
+		null: $ => 'null',
+    true: $ => 'true',
+    false: $ => 'false',
 
 		int_lit: $ => token(intLiteral),
 
@@ -377,8 +374,9 @@ module.exports = grammar({
 			$.uint_type,
 			$.float_lit,
 			$.float_type,
-			$.null_lit,
-			$.bool_lit,
+			$.null,
+			$.true,
+			$.false,
 			$.bool_type,
 			$.top_lit,
 			$.bottom_lit,

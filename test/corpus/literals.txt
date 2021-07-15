@@ -1,0 +1,42 @@
+===
+top
+===
+
+a: _
+
+---
+
+(source_file (field (label (identifier)) (value (top_lit))))
+
+===
+bottom
+===
+
+e: _|_
+
+---
+
+(source_file (field (label (identifier)) (value (bottom_lit))))
+
+===
+null
+===
+
+n: null
+
+---
+
+(source_file (field (label (identifier)) (value (null))))
+
+===
+bool
+===
+
+a: bool
+b: true | false
+
+---
+
+(source_file
+ (field (label (identifier)) (value (bool_type)))
+ (field (label (identifier)) (value (binary_expression (true) (false)))))
