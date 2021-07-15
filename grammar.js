@@ -86,11 +86,12 @@ module.exports = grammar({
 	word: $ => $.identifier,
 
 	rules: {
-		source_file: $ => repeat(choice(
-			$.package_clause,
-			$.import_declaration,
-			seq($._declaration, terminator),
-		)),
+		source_file: $ => seq(
+			// TODO: optional($.attribute),
+			optional($.package_clause),
+			optional(repeat($.import_declaration)),
+			repeat(seq($._declaration, terminator)),
+		),
 
 		_package_identifier: $ => alias($.identifier, $.package_identifier),
 
