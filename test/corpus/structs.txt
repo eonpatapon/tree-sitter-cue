@@ -43,6 +43,24 @@ b: a & {
 																			(field (label (identifier)) (value (int_lit))))))))
 
 ===
+bulk
+===
+
+a: {
+		foo: string
+		["^i"]: bool
+		...string
+}
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (struct_lit 
+																		 (field (label (identifier)) (value (string_type))) 
+																		 (field (label (simple_string_lit)) (value (bool_type))) 
+																		 (ellipsis) (string_type)))))
+
+===
 definition
 ===
 
