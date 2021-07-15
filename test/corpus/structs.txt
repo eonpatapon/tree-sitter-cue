@@ -77,3 +77,25 @@ _#B: {
 (source_file 
  (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (int_type)))))) 
  (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (string_type)))))))
+
+
+===
+embedding
+===
+
+s1: {
+    a: 1
+    b: 2
+    {
+        c: 3
+    }
+}
+
+---
+
+(source_file 
+ (field (label (identifier)) (value (struct_lit 
+																		 (field (label (identifier)) (value (int_lit))) 
+																		 (field (label (identifier)) (value (int_lit))) 
+																		 (struct_lit 
+																			(field (label (identifier)) (value (int_lit))))))))
