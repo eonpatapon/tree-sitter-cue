@@ -2229,6 +2229,15 @@
         }
       ]
     },
+    "_label_alias_expr": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_alias_expr"
+      },
+      "named": true,
+      "value": "optional"
+    },
     "_label_expr": {
       "type": "PREC_LEFT",
       "value": 1,
@@ -2265,7 +2274,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "_alias_expr"
+                "name": "_label_alias_expr"
               },
               {
                 "type": "STRING",
@@ -3728,6 +3737,10 @@
     [
       "_package_identifier",
       "_operand"
+    ],
+    [
+      "_embedding",
+      "_label_alias_expr"
     ]
   ],
   "precedences": [],

@@ -83,6 +83,7 @@ module.exports = grammar({
 		[$._list_elem],
 		[$.qualified_identifier, $._operand],
 		[$._package_identifier, $._operand],
+		[$._embedding, $._label_alias_expr],
 	 ],
 
 	word: $ => $.identifier,
@@ -281,9 +282,11 @@ module.exports = grammar({
 			$.simple_string_lit,
 		),
 
+		_label_alias_expr: $=> alias($._alias_expr, $.optional),
+
 		_label_expr: $ => prec.left(1, choice(
 			seq($._label_name, optional("?")),
-			seq('[', $._alias_expr, ']'),
+			seq('[', $._label_alias_expr, ']'),
 		)),
 
 		label: $ => seq(

@@ -1309,7 +1309,7 @@
     "named": true,
     "fields": {
       "alias": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
@@ -1321,106 +1321,18 @@
     },
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
-        {
-          "type": "binary_expression",
-          "named": true
-        },
-        {
-          "type": "bool_type",
-          "named": true
-        },
-        {
-          "type": "bottom_lit",
-          "named": true
-        },
-        {
-          "type": "call_expression",
-          "named": true
-        },
-        {
-          "type": "false",
-          "named": true
-        },
-        {
-          "type": "float_lit",
-          "named": true
-        },
-        {
-          "type": "float_type",
-          "named": true
-        },
         {
           "type": "identifier",
           "named": true
         },
         {
-          "type": "index_expression",
-          "named": true
-        },
-        {
-          "type": "int_lit",
-          "named": true
-        },
-        {
-          "type": "int_type",
-          "named": true
-        },
-        {
-          "type": "list_lit",
-          "named": true
-        },
-        {
-          "type": "multiline_string_lit",
-          "named": true
-        },
-        {
-          "type": "null",
-          "named": true
-        },
-        {
-          "type": "number_type",
-          "named": true
-        },
-        {
-          "type": "raw_multiline_string_lit",
-          "named": true
-        },
-        {
-          "type": "raw_simple_string_lit",
-          "named": true
-        },
-        {
-          "type": "selector_expression",
+          "type": "optional",
           "named": true
         },
         {
           "type": "simple_string_lit",
-          "named": true
-        },
-        {
-          "type": "string_type",
-          "named": true
-        },
-        {
-          "type": "struct_lit",
-          "named": true
-        },
-        {
-          "type": "top_lit",
-          "named": true
-        },
-        {
-          "type": "true",
-          "named": true
-        },
-        {
-          "type": "uint_type",
-          "named": true
-        },
-        {
-          "type": "unary_expression",
           "named": true
         }
       ]
@@ -1696,6 +1608,128 @@
       "types": [
         {
           "type": "interpolation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "optional",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "bool_type",
+          "named": true
+        },
+        {
+          "type": "bottom_lit",
+          "named": true
+        },
+        {
+          "type": "call_expression",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_lit",
+          "named": true
+        },
+        {
+          "type": "float_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_expression",
+          "named": true
+        },
+        {
+          "type": "int_lit",
+          "named": true
+        },
+        {
+          "type": "int_type",
+          "named": true
+        },
+        {
+          "type": "list_lit",
+          "named": true
+        },
+        {
+          "type": "multiline_string_lit",
+          "named": true
+        },
+        {
+          "type": "null",
+          "named": true
+        },
+        {
+          "type": "number_type",
+          "named": true
+        },
+        {
+          "type": "raw_multiline_string_lit",
+          "named": true
+        },
+        {
+          "type": "raw_simple_string_lit",
+          "named": true
+        },
+        {
+          "type": "selector_expression",
+          "named": true
+        },
+        {
+          "type": "simple_string_lit",
+          "named": true
+        },
+        {
+          "type": "string_type",
+          "named": true
+        },
+        {
+          "type": "struct_lit",
+          "named": true
+        },
+        {
+          "type": "top_lit",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
+          "type": "uint_type",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]

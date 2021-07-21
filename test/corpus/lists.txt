@@ -2,6 +2,10 @@
 simple
 ===
 
+l: [1]
+l: [
+	1,
+]
 l: [1,2,3]
 l: [
 	1,
@@ -11,6 +15,8 @@ l: [
 ---
 
 (source_file 
+ (field (label (identifier)) (value (list_lit (int_lit))))
+ (field (label (identifier)) (value (list_lit (int_lit))))
  (field (label (identifier)) (value (list_lit (int_lit) (int_lit) (int_lit))))
  (field (label (identifier)) (value (list_lit (int_lit) (int_lit)))))
 
