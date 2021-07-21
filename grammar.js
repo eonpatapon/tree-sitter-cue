@@ -80,8 +80,9 @@ module.exports = grammar({
 	],
 
 	 conflicts: $ => [
-		// [$._package_identifier, $._operand_name],
 		[$._list_elem],
+		[$.qualified_identifier, $._operand],
+		[$._package_identifier, $._operand],
 	 ],
 
 	word: $ => $.identifier,
@@ -350,16 +351,20 @@ module.exports = grammar({
 
 		_operand: $ => choice(
 			$.identifier,
-			$.builtin,
 			$._literal,
 			seq('(', $._expression, ')'),
+		),
+
+		_call_operand: $ => choice(
+			$.builtin,
+			$.qualified_identifier,
 		),
 
 		index_expression: $ => seq($._primary_expression, $.index),
 
 		selector_expression: $ =>	seq($._primary_expression, $.selector),
 		
-		call_expression: $ => seq($._primary_expression, $.arguments),
+		call_expression: $ => seq($._call_operand, $.arguments),
 
 		selector: $ => seq($.dot, choice($.identifier, $.simple_string_lit)),
 

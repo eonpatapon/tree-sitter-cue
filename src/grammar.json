@@ -3464,10 +3464,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "builtin"
-        },
-        {
-          "type": "SYMBOL",
           "name": "_literal"
         },
         {
@@ -3486,6 +3482,19 @@
               "value": ")"
             }
           ]
+        }
+      ]
+    },
+    "_call_operand": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "builtin"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "qualified_identifier"
         }
       ]
     },
@@ -3520,7 +3529,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_primary_expression"
+          "name": "_call_operand"
         },
         {
           "type": "SYMBOL",
@@ -3711,6 +3720,14 @@
   "conflicts": [
     [
       "_list_elem"
+    ],
+    [
+      "qualified_identifier",
+      "_operand"
+    ],
+    [
+      "_package_identifier",
+      "_operand"
     ]
   ],
   "precedences": [],

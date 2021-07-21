@@ -50,15 +50,28 @@ call
 ===
 
 b: base64.Encode(null, "foo")
+s: close({
+	let X = len(["a", "b", "c"])
+})
 
 ---
 
-(source_file
- (field (label (identifier)) (value (call_expression
-																		 (selector_expression (identifier) (selector (dot) (identifier)))
-																		 (arguments
-																			(argument (null))
-																			(argument (simple_string_lit)))))))
+(source_file 
+ (field (label (identifier)) 
+	(value 
+	 (call_expression 
+		(qualified_identifier (package_identifier) (dot) (identifier)) 
+		(arguments (argument (null)) (argument (simple_string_lit)))))) 
+ (field (label (identifier)) 
+	(value 
+	 (call_expression 
+		(builtin) 
+		(arguments 
+		 (argument 
+			(struct_lit 
+			 (let_clause (identifier) 
+				(call_expression (builtin) 
+				 (arguments (argument (list_lit (simple_string_lit) (simple_string_lit) (simple_string_lit)))))))))))))
 
 ===
 selector
