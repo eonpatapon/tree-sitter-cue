@@ -74,7 +74,6 @@ module.exports = grammar({
 	],
 
 	externals: $ => [
-		$._str_content,
 		$._multi_str_content,
 	],
 
@@ -173,41 +172,47 @@ module.exports = grammar({
 			$.identifier
 		),
 
+		escape_char: $ => token.immediate(seq(
+			'\\',
+			seq(choice('a', 'b', 'f', 'n', 'r', 't', 'v', '\\', "'", '"')),
+		)),
+
 		escape_sequence: $ => token.immediate(seq(
 			'\\',
 			optional('#'),
 			choice(
-				/[^xuU]/,
 				/\d{2,3}/,
 				/x[0-9a-fA-F]{2,}/,
+			)
+		)),
+
+		escape_unicode: $ => token.immediate(seq(
+			'\\',
+			optional('#'),
+			choice(
 				/u[0-9a-fA-F]{4}/,
 				/U[0-9a-fA-F]{8}/,
-				seq(choice('a', 'b', 'f', 'n', 'r', 't', 'v', '\\', "'", '"')),
-			)
+			),
 		)),
 
 		_string_lit: $ => choice(
 			$.simple_string_lit,
-			$.raw_simple_string_lit,
 			$.multiline_string_lit,
-			$.raw_multiline_string_lit,
 			$.simple_bytes_lit,
 			// $.multiline_bytes_lit,
+			seq('#', $._string_lit, '#'),
 		),
 
-		raw_simple_string_lit: $ => seq(
-			token('#"'),
-			optional($._str_content),
-			token('"#'),
+		simple_string_lit: $ => seq(
+			'"',
+			repeat(choice(
+				token.immediate(prec(1, /[^"\n\\]+/)),
+				$.escape_char,
+				$.escape_unicode,
+				$.interpolation,
+			)),
+			'"'
 		),
-
-		simple_string_lit: $ => seq('"', optional($._string_parts), '"'),
-
-		_string_parts: $ => repeat1(choice(
-			$._str_content,
-			$.interpolation,
-			$.escape_sequence,
-		)),
 
 		simple_bytes_lit: $ => seq(
 			"'", 
@@ -215,14 +220,10 @@ module.exports = grammar({
 				token.immediate(prec(1, /[^'\n\\]+/)),
 				$.interpolation,
 				$.escape_sequence,
+				$.escape_unicode,
+				$.escape_char,
 			)),
 			"'",
-		),
-
-		raw_multiline_string_lit: $ => seq(
-			token('#"""'),
-			optional($._multi_str_content),
-			token('"""#')
 		),
 
 		multiline_string_lit: $ => seq(

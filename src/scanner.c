@@ -1,9 +1,7 @@
 #include <tree_sitter/parser.h>
 
 enum TokenType {
-  STR_CONTENT,
   IND_STR_CONTENT,
-	ESCAPE_SEQUENCE,
 
   NONE
 };
@@ -14,49 +12,6 @@ static void advance(TSLexer *lexer) {
 
 static void skip(TSLexer *lexer) {
   lexer->advance(lexer, true);
-}
-
-static bool scan_str(TSLexer *lexer) {
-  bool has_content = false;
-  lexer->result_symbol = STR_CONTENT;
-
-  while (true) {
-    switch (lexer->lookahead) {
-      case '"':
-        if (has_content) {
-          lexer->mark_end(lexer);
-          return true;
-        } else {
-          return false;
-        }
-      case '\\':
-        lexer->mark_end(lexer);
-        advance(lexer);
-        if (lexer->lookahead == '(') {
-          if (has_content) {
-            return true;
-          } else {
-            return false;
-          }
-        } else {
-					// Accept anything after '\'
-					advance(lexer);
-				}
-        has_content = true;
-        break;
-      case '\0':
-        if (lexer->eof(lexer)) {
-          return false;
-        }
-        advance(lexer);
-        has_content = true;
-        break;
-      default:
-        advance(lexer);
-        has_content = true;
-        break;
-    }
-  }
 }
 
 static bool scan_ind_str(TSLexer *lexer) {
@@ -109,11 +64,9 @@ static bool scan_ind_str(TSLexer *lexer) {
 }
 
 static bool scan(TSLexer *lexer, const bool *valid_symbols) {
-  if (valid_symbols[STR_CONTENT]) {
-    return scan_str(lexer);
-  } else if (valid_symbols[IND_STR_CONTENT]) {
+  if (valid_symbols[IND_STR_CONTENT]) {
     return scan_ind_str(lexer);
-  }
+	}
 
   return false;
 }
