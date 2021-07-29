@@ -1,7 +1,8 @@
 #include <tree_sitter/parser.h>
 
 enum TokenType {
-  IND_STR_CONTENT,
+  MULTI_STR_CONTENT,
+	MULTI_BYTES_CONTENT,
 
   NONE
 };
@@ -14,18 +15,23 @@ static void skip(TSLexer *lexer) {
   lexer->advance(lexer, true);
 }
 
-static bool scan_ind_str(TSLexer *lexer) {
+static bool scan_multiline(TSLexer *lexer, int c) {
   bool has_content = false;
-  lexer->result_symbol = IND_STR_CONTENT;
+	if (c == '"') {
+		lexer->result_symbol = MULTI_STR_CONTENT;
+	} else if (c == '\'') {
+		lexer->result_symbol = MULTI_BYTES_CONTENT;
+	}
 
   while (true) {
     switch (lexer->lookahead) {
+      case '\'':
       case '"':
         lexer->mark_end(lexer);
         advance(lexer);
-        if (lexer->lookahead == '"') {
+        if (lexer->lookahead == c) {
           advance(lexer);
-          if (lexer->lookahead == '"') {
+          if (lexer->lookahead == c) {
 						if (has_content) {
 							return true;
 						} else {
@@ -43,7 +49,7 @@ static bool scan_ind_str(TSLexer *lexer) {
             return false;
           }
         } else {
-					// Accept anything after '\'
+					// FIXME: Accept anything after '\'
 					advance(lexer);
 				}
         has_content = true;
@@ -64,8 +70,10 @@ static bool scan_ind_str(TSLexer *lexer) {
 }
 
 static bool scan(TSLexer *lexer, const bool *valid_symbols) {
-  if (valid_symbols[IND_STR_CONTENT]) {
-    return scan_ind_str(lexer);
+  if (valid_symbols[MULTI_STR_CONTENT]) {
+    return scan_multiline(lexer, '"');
+	} else if (valid_symbols[MULTI_BYTES_CONTENT]) {
+    return scan_multiline(lexer, '\'');
 	}
 
   return false;

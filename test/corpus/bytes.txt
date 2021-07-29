@@ -9,4 +9,19 @@ b: 'Hello, \(name)!\n\xff\u00FF'
 
 (source_file 
  (field (label (identifier)) (value (simple_bytes_lit))) 
- (field (label (identifier)) (value (simple_bytes_lit (interpolation (identifier)) (escape_char) (escape_sequence) (escape_unicode)))))
+ (field (label (identifier)) (value (simple_bytes_lit (interpolation (identifier)) (escape_char) (escape_byte) (escape_unicode)))))
+
+===
+multiline
+===
+
+b: '''
+	Hello world!
+	\(foo) ' \xff
+	'''
+
+---
+
+(source_file 
+ (field (label (identifier)) 
+	(value (multiline_bytes_lit (interpolation (identifier))))))

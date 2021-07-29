@@ -75,6 +75,7 @@ module.exports = grammar({
 
 	externals: $ => [
 		$._multi_str_content,
+		$._multi_bytes_content,
 	],
 
 	 conflicts: $ => [
@@ -177,12 +178,12 @@ module.exports = grammar({
 			seq(choice('a', 'b', 'f', 'n', 'r', 't', 'v', '\\', "'", '"')),
 		)),
 
-		escape_sequence: $ => token.immediate(seq(
+		escape_byte: $ => token.immediate(seq(
 			'\\',
 			optional('#'),
 			choice(
-				/\d{2,3}/,
-				/x[0-9a-fA-F]{2,}/,
+				/\d{2,3}/, // octal byte value
+				/x[0-9a-fA-F]{2,}/, // hex byte value
 			)
 		)),
 
@@ -199,7 +200,8 @@ module.exports = grammar({
 			$.simple_string_lit,
 			$.multiline_string_lit,
 			$.simple_bytes_lit,
-			// $.multiline_bytes_lit,
+			$.multiline_bytes_lit,
+			// Raw
 			seq('#', $._string_lit, '#'),
 		),
 
@@ -207,9 +209,9 @@ module.exports = grammar({
 			'"',
 			repeat(choice(
 				token.immediate(prec(1, /[^"\n\\]+/)),
-				$.escape_char,
-				$.escape_unicode,
 				$.interpolation,
+				$.escape_unicode,
+				$.escape_char,
 			)),
 			'"'
 		),
@@ -219,7 +221,7 @@ module.exports = grammar({
 			repeat(choice(
 				token.immediate(prec(1, /[^'\n\\]+/)),
 				$.interpolation,
-				$.escape_sequence,
+				$.escape_byte,
 				$.escape_unicode,
 				$.escape_char,
 			)),
@@ -228,14 +230,26 @@ module.exports = grammar({
 
 		multiline_string_lit: $ => seq(
 			token('"""'),
-			optional($._multi_string_parts),
+			repeat(choice(
+				$._multi_str_content,
+				$.interpolation,
+				// $.escape_char,
+				// $.escape_unicode,
+			)),
 			token('"""'),
 		),
 
-		_multi_string_parts: $ => repeat1(choice(
-			$._multi_str_content,
-			$.interpolation,
-		)),
+		multiline_bytes_lit: $ => seq(
+			token("'''"),
+			repeat(choice(
+				$._multi_bytes_content,
+				$.interpolation,
+				// $.escape_byte,
+				// $.escape_unicode,
+				// $.escape_char,
+			)),
+			token("'''"),
+		),
 
 		interpolation: $ => seq('\\(', $._expression, ')'),
 

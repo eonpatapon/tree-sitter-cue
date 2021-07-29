@@ -20,7 +20,9 @@ multiline string
 s1: """
 	Hello world! \/\/"""
 s2: """
-	Hello world \U00008a9e !
+	Hello world
+	\U00008a9e !
+	"
 	"""
 
 ---
