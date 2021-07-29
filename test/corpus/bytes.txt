@@ -1,0 +1,18 @@
+===
+simple
+===
+
+a: 'Hello, world!'
+b: 'Hello, \(name)!\n\xff\u00FF'
+
+
+---
+
+(source_file 
+ (field (label (identifier)) (value 
+															(simple_bytes_lit))) 
+ (field (label (identifier)) (value 
+															(simple_bytes_lit 
+															 (interpolation (identifier)) 
+															 (escape_sequence) (escape_sequence) (escape_sequence)))))
+

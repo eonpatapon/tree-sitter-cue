@@ -76,7 +76,6 @@ module.exports = grammar({
 	externals: $ => [
 		$._str_content,
 		$._multi_str_content,
-    $.escape_sequence,
 	],
 
 	 conflicts: $ => [
@@ -174,11 +173,26 @@ module.exports = grammar({
 			$.identifier
 		),
 
+		escape_sequence: $ => token.immediate(seq(
+			'\\',
+			optional('#'),
+			choice(
+				/[^xuU]/,
+				/\d{2,3}/,
+				/x[0-9a-fA-F]{2,}/,
+				/u[0-9a-fA-F]{4}/,
+				/U[0-9a-fA-F]{8}/,
+				seq(choice('a', 'b', 'f', 'n', 'r', 't', 'v', '\\', "'", '"')),
+			)
+		)),
+
 		_string_lit: $ => choice(
 			$.simple_string_lit,
 			$.raw_simple_string_lit,
 			$.multiline_string_lit,
 			$.raw_multiline_string_lit,
+			$.simple_bytes_lit,
+			// $.multiline_bytes_lit,
 		),
 
 		raw_simple_string_lit: $ => seq(
@@ -194,6 +208,16 @@ module.exports = grammar({
 			$.interpolation,
 			$.escape_sequence,
 		)),
+
+		simple_bytes_lit: $ => seq(
+			"'", 
+			repeat(choice(
+				token.immediate(prec(1, /[^'\n\\]+/)),
+				$.interpolation,
+				$.escape_sequence,
+			)),
+			"'",
+		),
 
 		raw_multiline_string_lit: $ => seq(
 			token('#"""'),
@@ -244,8 +268,8 @@ module.exports = grammar({
 		bottom_lit: $ => token('_|_'),
 
 		null: $ => 'null',
-    true: $ => 'true',
-    false: $ => 'false',
+		true: $ => 'true',
+		false: $ => 'false',
 
 		int_lit: $ => token(intLiteral),
 
