@@ -4,12 +4,14 @@ simple
 
 a: 'Hello, world!'
 b: 'Hello, \(name)!\n\xff\u00FF'
+c: #'Hello \(ignored) \#(interpreted)'#
 
 ---
 
 (source_file 
  (field (label (identifier)) (value (simple_bytes_lit))) 
- (field (label (identifier)) (value (simple_bytes_lit (interpolation (identifier)) (escape_char) (escape_byte) (escape_unicode)))))
+ (field (label (identifier)) (value (simple_bytes_lit (interpolation (identifier)) (escape_char) (escape_byte) (escape_unicode))))
+ (field (label (identifier)) (value (simple_raw_bytes_lit (raw_interpolation (identifier))))))
 
 ===
 multiline

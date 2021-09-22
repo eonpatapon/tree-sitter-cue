@@ -5,13 +5,15 @@ simple string
 s1: "\n \" foo"
 s3: "日本語"
 s4: "\u65e5本\U00008a9e"
+s5: #"raw " '''string ""#
 
 ---
 
 (source_file 
- (field (label (identifier)) (value (simple_string_lit (escape_char) (escape_char)))) 
- (field (label (identifier)) (value (simple_string_lit))) 
- (field (label (identifier)) (value (simple_string_lit (escape_unicode) (escape_unicode)))))
+    (field (label (identifier)) (value (simple_string_lit (escape_char) (escape_char)))) 
+    (field (label (identifier)) (value (simple_string_lit))) 
+    (field (label (identifier)) (value (simple_string_lit (escape_unicode) (escape_unicode)))) 
+    (field (label (identifier)) (value (simple_raw_string_lit))))
 
 ===
 multiline string
@@ -24,12 +26,16 @@ s2: """
 	\U00008a9e !
 	"
 	"""
+s3: #"""
+    Hello world \a foo
+    """#
 
 ---
 
 (source_file 
  (field (label (identifier)) (value (multiline_string_lit))) 
- (field (label (identifier)) (value (multiline_string_lit))))
+ (field (label (identifier)) (value (multiline_string_lit))) 
+ (field (label (identifier)) (value (multiline_raw_string_lit))))
 
 ===
 string interpolation
@@ -39,9 +45,14 @@ s1: "Hello, \( name )!"
 s2: """
 	Hello "\( name )" !
 	"""
+s3: #"""
+	Hello "\#( name )" !
+    \(.)
+	"""#
 
 ---
 
 (source_file 
- (field (label (identifier)) (value (simple_string_lit (interpolation (identifier)))))
- (field (label (identifier)) (value (multiline_string_lit (interpolation (identifier))))))
+    (field (label (identifier)) (value (simple_string_lit (interpolation (identifier)))))
+    (field (label (identifier)) (value (multiline_string_lit (interpolation (identifier))))) 
+    (field (label (identifier)) (value (multiline_raw_string_lit (raw_interpolation (identifier))))))

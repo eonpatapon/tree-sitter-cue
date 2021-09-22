@@ -76,6 +76,10 @@ module.exports = grammar({
 	externals: $ => [
 		$._multi_str_content,
 		$._multi_bytes_content,
+		$._raw_str_content,
+		$._raw_bytes_content,
+		$._multi_raw_str_content,
+		$._multi_raw_bytes_content,
 	],
 
 	 conflicts: $ => [
@@ -201,8 +205,10 @@ module.exports = grammar({
 			$.multiline_string_lit,
 			$.simple_bytes_lit,
 			$.multiline_bytes_lit,
-			// Raw
-			seq('#', $._string_lit, '#'),
+			$.simple_raw_string_lit,
+			$.multiline_raw_string_lit,
+			$.simple_raw_bytes_lit,
+			$.multiline_raw_bytes_lit,
 		),
 
 		simple_string_lit: $ => seq(
@@ -214,6 +220,15 @@ module.exports = grammar({
 				$.escape_char,
 			)),
 			'"'
+		),
+
+		simple_raw_string_lit: $ => seq(
+			'#"',
+			repeat(choice(
+				$._raw_str_content,
+				$.raw_interpolation,
+			)),
+			'"#',
 		),
 
 		simple_bytes_lit: $ => seq(
@@ -228,6 +243,15 @@ module.exports = grammar({
 			"'",
 		),
 
+		simple_raw_bytes_lit: $ => seq(
+			"#'",
+			repeat(choice(
+				$._raw_bytes_content,
+				$.raw_interpolation,
+			)),
+			"'#",
+		),
+
 		multiline_string_lit: $ => seq(
 			token('"""'),
 			repeat(choice(
@@ -237,6 +261,15 @@ module.exports = grammar({
 				// $.escape_unicode,
 			)),
 			token('"""'),
+		),
+
+		multiline_raw_string_lit: $ => seq(
+			token('#"""'),
+			repeat(choice(
+				$._multi_raw_str_content,
+				$.raw_interpolation,
+			)),
+			token('"""#'),
 		),
 
 		multiline_bytes_lit: $ => seq(
@@ -251,7 +284,18 @@ module.exports = grammar({
 			token("'''"),
 		),
 
+		multiline_raw_bytes_lit: $ => seq(
+			token("#'''"),
+			repeat(choice(
+				$._multi_raw_bytes_content,
+				$.raw_interpolation,
+			)),
+			token("'''#"),
+		),
+
 		interpolation: $ => seq('\\(', $._expression, ')'),
+
+		raw_interpolation: $ => seq('\\#(', $._expression, ')'),
 
 		builtin: $ => choice(
 			'len',
