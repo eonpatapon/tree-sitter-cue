@@ -6,6 +6,8 @@ i1: int
 i2: int16
 i3: float32
 i4: number
+i5: uint
+i6: uint16
 
 ---
 
@@ -13,7 +15,9 @@ i4: number
  (field (label (identifier)) (value (int_type)))
  (field (label (identifier)) (value (int_type)))
  (field (label (identifier)) (value (float_type)))
- (field (label (identifier)) (value (number_type))))
+ (field (label (identifier)) (value (number_type)))
+ (field (label (identifier)) (value (uint_type)))
+ (field (label (identifier)) (value (uint_type))))
 
 ===
 int literals
