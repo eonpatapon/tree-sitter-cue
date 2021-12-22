@@ -58,6 +58,7 @@
   (number_type)
   (int_lit)
   (int_type)
+  (uint_type)
   (float_lit)
   (float_type)
 ] @number
