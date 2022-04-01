@@ -9,5 +9,6 @@ in with toolbox; pkgs.runCommand "deps" {
   buildInputs = [
     pkgs.nodejs
     pkgs.gcc
+    pkgs.python39
   ];
 } ""
