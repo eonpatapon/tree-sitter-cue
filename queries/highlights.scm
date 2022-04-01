@@ -52,6 +52,9 @@
   (string_type)
   (simple_string_lit)
   (multiline_string_lit)
+  (bytes_type)
+  (simple_bytes_lit)
+  (multiline_bytes_lit)
 ] @string
 
 [
