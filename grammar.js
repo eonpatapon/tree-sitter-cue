@@ -466,6 +466,7 @@ module.exports = grammar({
 			$.list_lit,
 			$._string_lit,
 			$.string_type,
+			$.bytes_type,
 			$.number_type,
 			$.int_lit,
 			$.int_type,

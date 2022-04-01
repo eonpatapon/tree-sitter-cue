@@ -20,6 +20,10 @@
           "named": true
         },
         {
+          "type": "bytes_type",
+          "named": true
+        },
+        {
           "type": "call_expression",
           "named": true
         },
@@ -186,6 +190,10 @@
           },
           {
             "type": "bottom_lit",
+            "named": true
+          },
+          {
+            "type": "bytes_type",
             "named": true
           },
           {
@@ -389,6 +397,10 @@
             "named": true
           },
           {
+            "type": "bytes_type",
+            "named": true
+          },
+          {
             "type": "call_expression",
             "named": true
           },
@@ -577,6 +589,10 @@
           "named": true
         },
         {
+          "type": "bytes_type",
+          "named": true
+        },
+        {
           "type": "call_expression",
           "named": true
         },
@@ -736,6 +752,10 @@
           "named": true
         },
         {
+          "type": "bytes_type",
+          "named": true
+        },
+        {
           "type": "call_expression",
           "named": true
         },
@@ -868,6 +888,10 @@
           },
           {
             "type": "bottom_lit",
+            "named": true
+          },
+          {
+            "type": "bytes_type",
             "named": true
           },
           {
@@ -1095,6 +1119,10 @@
           "named": true
         },
         {
+          "type": "bytes_type",
+          "named": true
+        },
+        {
           "type": "call_expression",
           "named": true
         },
@@ -1219,6 +1247,10 @@
         },
         {
           "type": "bottom_lit",
+          "named": true
+        },
+        {
+          "type": "bytes_type",
           "named": true
         },
         {
@@ -1355,6 +1387,10 @@
         },
         {
           "type": "bottom_lit",
+          "named": true
+        },
+        {
+          "type": "bytes_type",
           "named": true
         },
         {
@@ -1537,6 +1573,10 @@
             "named": true
           },
           {
+            "type": "bytes_type",
+            "named": true
+          },
+          {
             "type": "call_expression",
             "named": true
           },
@@ -1673,6 +1713,10 @@
         },
         {
           "type": "bottom_lit",
+          "named": true
+        },
+        {
+          "type": "bytes_type",
           "named": true
         },
         {
@@ -1882,6 +1926,10 @@
           "named": true
         },
         {
+          "type": "bytes_type",
+          "named": true
+        },
+        {
           "type": "call_expression",
           "named": true
         },
@@ -2047,6 +2095,10 @@
           "named": true
         },
         {
+          "type": "bytes_type",
+          "named": true
+        },
+        {
           "type": "call_expression",
           "named": true
         },
@@ -2194,6 +2246,10 @@
         },
         {
           "type": "bottom_lit",
+          "named": true
+        },
+        {
+          "type": "bytes_type",
           "named": true
         },
         {
@@ -2423,6 +2479,10 @@
           "named": true
         },
         {
+          "type": "bytes_type",
+          "named": true
+        },
+        {
           "type": "call_expression",
           "named": true
         },
@@ -2585,6 +2645,10 @@
           "named": true
         },
         {
+          "type": "bytes_type",
+          "named": true
+        },
+        {
           "type": "call_expression",
           "named": true
         },
@@ -2743,6 +2807,10 @@
           },
           {
             "type": "bottom_lit",
+            "named": true
+          },
+          {
+            "type": "bytes_type",
             "named": true
           },
           {
@@ -2932,6 +3000,10 @@
         },
         {
           "type": "bottom_lit",
+          "named": true
+        },
+        {
+          "type": "bytes_type",
           "named": true
         },
         {
@@ -3219,6 +3291,10 @@
   },
   {
     "type": "bottom_lit",
+    "named": true
+  },
+  {
+    "type": "bytes_type",
     "named": true
   },
   {
