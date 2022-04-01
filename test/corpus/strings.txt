@@ -6,6 +6,7 @@ s1: "\n \" foo"
 s3: "日本語"
 s4: "\u65e5本\U00008a9e"
 s5: #"raw " '''string ""#
+s6: string
 
 ---
 
@@ -13,7 +14,8 @@ s5: #"raw " '''string ""#
     (field (label (identifier)) (value (simple_string_lit (escape_char) (escape_char)))) 
     (field (label (identifier)) (value (simple_string_lit))) 
     (field (label (identifier)) (value (simple_string_lit (escape_unicode) (escape_unicode)))) 
-    (field (label (identifier)) (value (simple_raw_string_lit))))
+    (field (label (identifier)) (value (simple_raw_string_lit)))
+    (field (label (identifier)) (value (string_type))))
 
 ===
 multiline string

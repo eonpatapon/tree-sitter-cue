@@ -3951,6 +3951,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "bytes_type"
+        },
+        {
+          "type": "SYMBOL",
           "name": "number_type"
         },
         {
