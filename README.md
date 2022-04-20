@@ -7,13 +7,6 @@
 ## Setup in neovim
 
 ```lua
-treesitter.setup {
-  ensure_installed = {
-    "cue",
-    ...
-  }
-}
-
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.cue = {
   install_info = {
@@ -22,6 +15,13 @@ parser_config.cue = {
     branch = "main"
   },
   filetype = "cue", -- if filetype does not agrees with parser name
+}
+
+treesitter.setup {
+  ensure_installed = {
+    "cue",
+    ...
+  }
 }
 ```
 
