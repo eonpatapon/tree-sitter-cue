@@ -7,12 +7,11 @@
 ## Setup in neovim
 
 ```lua
-treesitter.setup {
-  ensure_installed = {
-    "cue",
-    ...
-  }
-}
+-- This is required to not have cue files marked as `cuesheet`
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+        pattern = {"*.cue"},
+        command = "set filetype=cue",
+})
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.cue = {
@@ -22,6 +21,13 @@ parser_config.cue = {
     branch = "main"
   },
   filetype = "cue", -- if filetype does not agrees with parser name
+}
+
+treesitter.setup {
+  ensure_installed = {
+    "cue",
+    ...
+  }
 }
 ```
 
