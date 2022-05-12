@@ -18,7 +18,7 @@ const
 	unicodeLetter = /\p{L}/,
 	unicodeDigit = /[0-9]/,
 
-	letter = choice(unicodeLetter),
+	letter = choice(unicodeLetter, '$', '_'),
 
 	newline = '\n',
 	terminator = choice(newline, ','),
@@ -138,8 +138,8 @@ module.exports = grammar({
 
 		identifier: $ => token(seq(
 			optional(choice('_#', '#', '_')),
-			choice(letter, '$'),
-			repeat(choice(letter, unicodeDigit, '$', '_')),
+			letter,
+			repeat(choice(letter, unicodeDigit)),
 		)),
 
 		attribute: $ => seq(

@@ -6,11 +6,18 @@ CamelCase: string
 $after: string
 snake_case: string
 some_456_Numbers: string
+#def: string
+_#hiddenDef: string
+#_notSohidden: string
+
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (string_type))) 
- (field (label (identifier)) (value (string_type))) 
- (field (label (identifier)) (value (string_type))) 
+(source_file
+ (field (label (identifier)) (value (string_type)))
+ (field (label (identifier)) (value (string_type)))
+ (field (label (identifier)) (value (string_type)))
+ (field (label (identifier)) (value (string_type)))
+ (field (label (identifier)) (value (string_type)))
+ (field (label (identifier)) (value (string_type)))
  (field (label (identifier)) (value (string_type))))
