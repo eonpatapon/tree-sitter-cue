@@ -2633,6 +2633,10 @@
       "required": false,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
           "type": "binary_expression",
           "named": true
         },
