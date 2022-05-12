@@ -237,17 +237,16 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "PATTERN",
-                    "value": "\\p{L}"
-                  }
-                ]
+                "type": "PATTERN",
+                "value": "\\p{L}"
               },
               {
                 "type": "STRING",
                 "value": "$"
+              },
+              {
+                "type": "STRING",
+                "value": "_"
               }
             ]
           },
@@ -262,20 +261,20 @@
                     {
                       "type": "PATTERN",
                       "value": "\\p{L}"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "$"
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "_"
                     }
                   ]
                 },
                 {
                   "type": "PATTERN",
                   "value": "[0-9]"
-                },
-                {
-                  "type": "STRING",
-                  "value": "$"
-                },
-                {
-                  "type": "STRING",
-                  "value": "_"
                 }
               ]
             }
