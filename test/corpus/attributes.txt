@@ -8,18 +8,23 @@ package foo
 
 ---
 
-(source_file 
- (attribute (identifier) (attr_token)) 
+(source_file
+ (attribute (identifier) (attr_token))
  (package_clause (package_identifier)))
 
 
 ===
-field
+data
 ===
 
 a: string @tag(type=bool,short=foo|bar)
+b: {
+    @foo(bar)
+    c: 1
+}
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (string_type)) (attribute (identifier) (attr_token))))
+(source_file
+ (field (label (identifier)) (value (string_type)) (attribute (identifier) (attr_token)))
+ (field (label (identifier)) (value (struct_lit (attribute (identifier) (attr_token)) (field (label (identifier)) (value (int_lit)))))))

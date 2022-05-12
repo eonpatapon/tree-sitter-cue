@@ -146,7 +146,7 @@ module.exports = grammar({
 			'@', $.identifier, '(', repeat($.attr_token), ')'
 		),
 		attr_token: $ => /[^\(\)\[\]{}]+/,
-		
+
 		// identifier: $ => choice(
 		//	$._identifier,
 		//	$.hidden_identifier,
@@ -232,7 +232,7 @@ module.exports = grammar({
 		),
 
 		simple_bytes_lit: $ => seq(
-			"'", 
+			"'",
 			repeat(choice(
 				token.immediate(prec(1, /[^'\n\\]+/)),
 				$.interpolation,
@@ -348,7 +348,7 @@ module.exports = grammar({
 
 		list_lit: $ => seq('[', repeat($._list_elem), ']'),
 
-		struct_lit: $ => seq('{', repeat(seq($._declaration, optional(terminator))), '}'),
+		struct_lit: $ => seq('{', repeat(seq(choice($._declaration, $.attribute), optional(terminator))), '}'),
 
 		ellipsis: $ => prec.left(seq(
 			'...',
@@ -376,8 +376,8 @@ module.exports = grammar({
 			optional(seq(field('alias', $.identifier), '=')),
 			$._label_expr,
 		),
-		
-		field: $ => prec(1, seq(
+
+		field: $ => prec.left(1, seq(
 			repeat1(seq($.label, ':')),
 			$._value,
 			optional($.attribute),
@@ -449,7 +449,7 @@ module.exports = grammar({
 		index_expression: $ => seq($._primary_expression, $.index),
 
 		selector_expression: $ =>	seq($._primary_expression, $.selector),
-		
+
 		call_expression: $ => seq($._call_operand, $.arguments),
 
 		selector: $ => seq($.dot, choice($.identifier, $.simple_string_lit)),
