@@ -2599,41 +2599,67 @@
       }
     },
     "label": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "SEQ",
+              "type": "CHOICE",
               "members": [
                 {
-                  "type": "FIELD",
-                  "name": "alias",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "identifier"
-                  }
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "alias",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "="
+                    }
+                  ]
                 },
                 {
-                  "type": "STRING",
-                  "value": "="
+                  "type": "BLANK"
                 }
               ]
             },
             {
-              "type": "BLANK"
+              "type": "SYMBOL",
+              "name": "_label_expr"
             }
           ]
         },
         {
           "type": "SYMBOL",
-          "name": "_label_expr"
+          "name": "dynamic"
+        }
+      ]
+    },
+    "dynamic": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },
     "field": {
-      "type": "PREC",
+      "type": "PREC_LEFT",
       "value": 1,
       "content": {
         "type": "SEQ",

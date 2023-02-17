@@ -372,10 +372,15 @@ module.exports = grammar({
 			seq('[', $._label_alias_expr, ']'),
 		)),
 
-		label: $ => seq(
-			optional(seq(field('alias', $.identifier), '=')),
-			$._label_expr,
+		label: $ => choice(
+			seq(
+				optional(seq(field('alias', $.identifier), '=')),
+				$._label_expr,
+			),
+			$.dynamic,
 		),
+
+		dynamic: $ => seq('(', $._expression, ')'),
 
 		field: $ => prec.left(1, seq(
 			repeat1(seq($.label, ':')),

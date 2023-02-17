@@ -99,3 +99,95 @@ s1: {
         (field (label (identifier)) (value (int_lit)))
         (struct_lit
             (field (label (identifier)) (value (int_lit))))))))
+
+===
+dynamic
+===
+
+import "list"
+
+a: b: ["x"]
+a: c: ["y"]
+b: "foo"
+
+s: {
+	(b):                        "bar"
+	(list.Slice(a.b, 0, 1)[0]): "x"
+	(a.c[0]):                   "y"
+}
+
+---
+
+(source_file
+  (import_declaration
+    (import_spec
+      (simple_string_lit)))
+  (field
+    (label
+      (identifier))
+    (label
+      (identifier))
+    (value
+      (list_lit
+        (simple_string_lit))))
+  (field
+    (label
+      (identifier))
+    (label
+      (identifier))
+    (value
+      (list_lit
+        (simple_string_lit))))
+  (field
+    (label
+      (identifier))
+    (value
+      (simple_string_lit)))
+  (field
+    (label
+      (identifier))
+    (value
+      (struct_lit
+        (field
+          (label
+            (dynamic
+              (identifier)))
+          (value
+            (simple_string_lit)))
+        (field
+          (label
+            (dynamic
+              (index_expression
+                (call_expression
+                  (qualified_identifier
+                    (package_identifier)
+                    (dot)
+                    (identifier))
+                  (arguments
+                    (argument
+                      (selector_expression
+                        (identifier)
+                        (selector
+                          (dot)
+                          (identifier))))
+                    (argument
+                      (int_lit))
+                    (argument
+                      (int_lit))))
+                (index
+                  (int_lit)))))
+          (value
+            (simple_string_lit)))
+        (field
+          (label
+            (dynamic
+              (index_expression
+                (selector_expression
+                  (identifier)
+                  (selector
+                    (dot)
+                    (identifier)))
+                (index
+                  (int_lit)))))
+          (value
+            (simple_string_lit)))))))
