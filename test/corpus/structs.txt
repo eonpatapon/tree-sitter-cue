@@ -11,12 +11,12 @@ a: {
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (struct_lit 
-																		 (field (label (identifier)) (value (int_type))) 
-																		 (field (label (identifier)) (value (string_type))) 
-																		 (field (label (identifier)) (value (string_type))) 
-																		 (field (label (identifier)) (label (identifier)) (label (identifier)) (value (string_type)))))))
+(source_file
+    (field (label (identifier)) (value (struct_lit
+        (field (label (identifier)) (value (int_type)))
+        (field (label (identifier)) (value (string_type)))
+        (field (label (identifier)) (value (string_type)))
+        (field (label (identifier)) (label (identifier)) (label (identifier)) (value (string_type)))))))
 
 ===
 closed
@@ -33,14 +33,14 @@ b: a & {
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (call_expression (builtin) 
-																		 (arguments (argument 
-																			 (struct_lit 
-																				(field (label (identifier)) (value (int_type))))))))) 
- (field (label (identifier)) (value (binary_expression (identifier) 
-																		 (struct_lit 
-																			(field (label (identifier)) (value (int_lit))))))))
+(source_file
+    (field (label (identifier)) (value (call_expression (builtin)
+        (arguments (argument
+            (struct_lit
+                (field (label (identifier)) (value (int_type)))))))))
+    (field (label (identifier)) (value (binary_expression (identifier)
+        (struct_lit
+            (field (label (identifier)) (value (int_lit))))))))
 
 ===
 bulk
@@ -54,11 +54,11 @@ a: {
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (struct_lit 
-																		 (field (label (identifier)) (value (string_type))) 
-																		 (field (label (optional (simple_string_lit))) (value (bool_type))) 
-																		 (ellipsis) (string_type)))))
+(source_file
+    (field (label (identifier)) (value (struct_lit
+        (field (label (identifier)) (value (string_type)))
+        (field (label (optional (simple_string_lit))) (value (bool_type)))
+        (ellipsis) (string_type)))))
 
 ===
 definition
@@ -74,9 +74,9 @@ _#B: {
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (int_type)))))) 
- (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (string_type)))))))
+(source_file
+    (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (int_type))))))
+    (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (string_type)))))))
 
 
 ===
@@ -93,9 +93,9 @@ s1: {
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (struct_lit 
-																		 (field (label (identifier)) (value (int_lit))) 
-																		 (field (label (identifier)) (value (int_lit))) 
-																		 (struct_lit 
-																			(field (label (identifier)) (value (int_lit))))))))
+(source_file
+    (field (label (identifier)) (value (struct_lit
+        (field (label (identifier)) (value (int_lit)))
+        (field (label (identifier)) (value (int_lit)))
+        (struct_lit
+            (field (label (identifier)) (value (int_lit))))))))
