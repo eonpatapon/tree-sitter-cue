@@ -23,8 +23,8 @@ import (
 
 (source_file 
  (import_declaration 
-	(import_spec (simple_string_lit))) 
+	(import_spec (string))) 
  (import_declaration 
 	(import_spec_list 
-	 (import_spec (simple_string_lit)) 
-	 (import_spec (package_identifier) (simple_string_lit)))))
+	 (import_spec (string)) 
+	 (import_spec (package_identifier) (string)))))

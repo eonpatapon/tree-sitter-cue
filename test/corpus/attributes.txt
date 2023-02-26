@@ -9,7 +9,7 @@ package foo
 ---
 
 (source_file
- (attribute (identifier) (attr_token))
+ (attribute (identifier) (identifier))
  (package_clause (package_identifier)))
 
 
@@ -26,5 +26,28 @@ b: {
 ---
 
 (source_file
- (field (label (identifier)) (value (string_type)) (attribute (identifier) (attr_token)))
- (field (label (identifier)) (value (struct_lit (attribute (identifier) (attr_token)) (field (label (identifier)) (value (int_lit)))))))
+  (field
+	(label
+	  (identifier))
+	(value
+	  (primitive_type))
+	(attribute
+	  (identifier)
+	  (identifier)
+	  (primitive_type)
+	  (identifier)
+	  (identifier)
+	  (identifier)))
+  (field
+	(label
+	  (identifier))
+	(value
+	  (struct_lit
+		(attribute
+		  (identifier)
+		  (identifier))
+		(field
+		  (label
+			(identifier))
+		  (value
+			(number)))))))

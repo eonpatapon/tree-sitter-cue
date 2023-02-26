@@ -11,11 +11,11 @@ s6: string
 ---
 
 (source_file 
-    (field (label (identifier)) (value (simple_string_lit (escape_char) (escape_char)))) 
-    (field (label (identifier)) (value (simple_string_lit))) 
-    (field (label (identifier)) (value (simple_string_lit (escape_unicode) (escape_unicode)))) 
-    (field (label (identifier)) (value (simple_raw_string_lit)))
-    (field (label (identifier)) (value (string_type))))
+    (field (label (identifier)) (value (string (escape_char) (escape_char)))) 
+    (field (label (identifier)) (value (string))) 
+    (field (label (identifier)) (value (string (escape_unicode) (escape_unicode)))) 
+    (field (label (identifier)) (value (string)))
+    (field (label (identifier)) (value (primitive_type))))
 
 ===
 multiline string
@@ -35,9 +35,9 @@ s3: #"""
 ---
 
 (source_file 
- (field (label (identifier)) (value (multiline_string_lit))) 
- (field (label (identifier)) (value (multiline_string_lit))) 
- (field (label (identifier)) (value (multiline_raw_string_lit))))
+ (field (label (identifier)) (value (string))) 
+ (field (label (identifier)) (value (string))) 
+ (field (label (identifier)) (value (string))))
 
 ===
 string interpolation
@@ -55,6 +55,6 @@ s3: #"""
 ---
 
 (source_file 
-    (field (label (identifier)) (value (simple_string_lit (interpolation (identifier)))))
-    (field (label (identifier)) (value (multiline_string_lit (interpolation (identifier))))) 
-    (field (label (identifier)) (value (multiline_raw_string_lit (raw_interpolation (identifier))))))
+    (field (label (identifier)) (value (string (interpolation (identifier)))))
+    (field (label (identifier)) (value (string (interpolation (identifier))))) 
+    (field (label (identifier)) (value (string (raw_interpolation (identifier))))))
