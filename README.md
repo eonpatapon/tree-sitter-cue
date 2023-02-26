@@ -1,67 +1,34 @@
 # tree-sitter-cue
 
+[![Build Status](https://github.com/eonpatapon/tree-sitter-cue/actions/workflows/ci.yml/badge.svg)](https://github.com/eonpatapon/tree-sitter-cue/actions/workflows/ci.yml)
+[![Discord](https://img.shields.io/discord/1063097320771698699?logo=discord)](https://discord.gg/w7nTvsVJhm)
+
 [Cue][] grammar for [tree-sitter][].
 
-![AST and hilights in neovim](./neovim-ts.png)
+![AST and highlights in Neovim](./neovim-ts.png)
 
-## Setup in neovim
+## Setup in Neovim
+
+Using [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
--- This is required to not have cue files marked as `cuesheet`
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-        pattern = {"*.cue"},
-        command = "set filetype=cue",
-})
 
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.cue = {
-  install_info = {
-    url = "https://github.com/eonpatapon/tree-sitter-cue", -- local path or git repo
-    files = {"src/parser.c", "src/scanner.c"},
-    branch = "main"
+return {
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  event = { "BufReadPost", "BufNewFile" },
+  --- @type TSConfig
+  opts = {
+    ensure_installed = {
+      "cue",
+    },
   },
-  filetype = "cue", -- if filetype does not agrees with parser name
-}
-
-treesitter.setup {
-  ensure_installed = {
-    "cue",
-    ...
-  }
+  ---@param opts TSConfig
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
 }
 ```
-
-For highlighting to work, copy
-[./queries/highlights.scm](./queries/highlights.scm) in your nvim configuration
-(usually `~/.config/nvim`) in a directory `queries/cue/`.
-
-Alternatively the `queries` directory can be put in any directory referenced in
-nvim `runtimepath`.
-
-### Custom captures
-
-You can customize highlighting further by remapping captures to nvim highlighting
-groups like so:
-
-```lua
-treesitter.setup {
-
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-    custom_captures = {
-      --- cue
-      ["operator.default"] = "Statement",
-      ["operator.regexp"] = "Statement",
-      ["operator.unify"] = "Statement",
-      ["operator.disjunct"] = "Label",
-      ["definition"] = "Bold"
-    }
-  }
-
-}
-```
-
 
 [tree-sitter]: https://github.com/tree-sitter/tree-sitter
-[Cue]: https://github.com/cue-lang/cue
+[cue]: https://github.com/cue-lang/cue
