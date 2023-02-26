@@ -1,107 +1,164 @@
-(package_clause "package" @include)
-
-(package_identifier) @variable
-
-(import_declaration "import" @include)
+; Includes
 
 [
-  "!"
-  "*"
-  "|"
-  "&"
+  "package"
+	"import"
+] @include
+
+; Namespaces
+
+(package_identifier) @namespace
+
+(import_spec ["." "_"] @punctuation.special)
+
+[
+  (attr_path)
+  (package_path)
+] @text.uri ;; In attributes
+
+; Attributes
+
+(attribute) @attribute
+
+; Conditionals
+
+"if" @conditional
+
+; Repeats
+
+[
+  "for"
+] @repeat
+
+(for_clause "_" @punctuation.special)
+
+; Keywords
+
+[
+  "let"
+] @keyword
+
+[
+  "in"
+] @keyword.operator
+
+; Operators
+
+[
+  "+"
+	"-"
+	"*"
+	"/"
+	"|"
+	"&"
   "||"
   "&&"
-  "=="
-  "!="
+	"=="
+	"!="
   "<"
   "<="
   ">"
   ">="
   "=~"
   "!~"
-  "+"
-  "-"
-  "*"
-  "/"
+	"!"
+	"="
 ] @operator
 
-(unary_expression "*" @operator.default)
+; Fields & Properties
 
-(unary_expression "=~" @operator.regexp)
+(field 
+	 (label 
+		 (identifier) @field))
 
-(unary_expression "!~" @operator.regexp)
+(selector_expression
+	  (_)
+		(identifier) @property)
 
-(binary_expression _ "&" @operator.unify _)
+; Functions
 
-(binary_expression _ "|" @operator.disjunct _)
+(call_expression
+	function: (identifier) @function.call)
+(call_expression
+	function: (selector_expression
+	  (_)
+		(identifier) @function.call))
+(call_expression
+	function: (builtin_function) @function.call)
 
-(builtin) @function.builtin
+(builtin_function) @function.builtin
 
-(qualified_identifier) @function.builtin
+; Variables
 
-(let_clause "let" @keyword)
+(identifier) @variable
 
-(for_clause "for" @repeat)
-(for_clause "in" @repeat)
+; Types
 
-(guard_clause "if" @conditional)
+(primitive_type) @type.builtin
 
-(comment) @comment
-
-[
-  (string_type)
-  (simple_string_lit)
-  (multiline_string_lit)
-  (bytes_type)
-  (simple_bytes_lit)
-  (multiline_bytes_lit)
-] @string
-
-[
-  (number_type)
-  (int_lit)
-  (int_type)
-  (uint_type)
-  (float_lit)
-  (float_type)
-] @number
+((identifier) @type
+ (#match? @type "^(#|_#)"))
 
 [
-  (bool_type)
-  (true)
-  (false)
-] @boolean
+  (slice_type)
+	(pointer_type)
+] @type ;; In attributes
 
-(null) @constant.builtin
-
-(ellipsis) @punctuation.special
+; Punctuation
 
 [
   ","
   ":"
 ] @punctuation.delimiter
 
+[ "{" "}" ] @punctuation.bracket
+
+[ "[" "]" ] @punctuation.bracket
+
+[ "(" ")" ] @punctuation.bracket
+
+[ "<" ">" ] @punctuation.bracket
+
 [
-  "("
-  ")"
-  "["
-  "]"
-  "{"
-  "}"
-] @punctuation.bracket
+  (ellipsis)
+	"?"
+] @punctuation.special
+
+; Literals
+
+(string) @string
+
+[
+  (escape_char)
+	(escape_unicode)
+] @string.escape
+
+(number) @number
+
+(float) @float
+
+(si_unit
+	(float)
+  (_) @symbol)
+
+(boolean) @boolean
+
+[
+  (null)
+	(top)
+	(bottom)
+] @constant.builtin
+
+; Interpolations
 
 (interpolation "\\(" @punctuation.special (_) ")" @punctuation.special) @none
 
-(field (label (identifier) @field))
+(interpolation "\\(" (identifier) @variable ")")
 
-(
-  (identifier) @definition
-  (#match? @definition "^#")
-)
+; Commments
 
-(field (label alias: (identifier) @label))
+(comment) @comment @spell
 
-(let_clause left: (identifier) @label)
+; Errors
 
-
-(attribute (identifier) @attribute)
+(ERROR) @error
