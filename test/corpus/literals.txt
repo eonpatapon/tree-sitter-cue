@@ -6,7 +6,7 @@ a: _
 
 ---
 
-(source_file (field (label (identifier)) (value (top_lit))))
+(source_file (field (label (identifier)) (value (top))))
 
 ===
 bottom
@@ -16,7 +16,7 @@ e: _|_
 
 ---
 
-(source_file (field (label (identifier)) (value (bottom_lit))))
+(source_file (field (label (identifier)) (value (bottom))))
 
 ===
 null
@@ -38,5 +38,5 @@ b: true | false
 ---
 
 (source_file
- (field (label (identifier)) (value (bool_type)))
- (field (label (identifier)) (value (binary_expression (true) (false)))))
+ (field (label (identifier)) (value (primitive_type)))
+ (field (label (identifier)) (value (binary_expression (boolean) (boolean)))))

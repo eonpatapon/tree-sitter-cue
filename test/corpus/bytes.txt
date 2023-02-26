@@ -10,10 +10,10 @@ d: bytes
 ---
 
 (source_file 
- (field (label (identifier)) (value (simple_bytes_lit))) 
- (field (label (identifier)) (value (simple_bytes_lit (interpolation (identifier)) (escape_char) (escape_byte) (escape_unicode))))
- (field (label (identifier)) (value (simple_raw_bytes_lit (raw_interpolation (identifier)))))
- (field (label (identifier)) (value (bytes_type))))
+ (field (label (identifier)) (value (string))) 
+ (field (label (identifier)) (value (string (interpolation (identifier)) (escape_char) (escape_byte) (escape_unicode))))
+ (field (label (identifier)) (value (string (raw_interpolation (identifier)))))
+ (field (label (identifier)) (value (primitive_type))))
 
 ===
 multiline
@@ -28,4 +28,4 @@ b: '''
 
 (source_file 
  (field (label (identifier)) 
-	(value (multiline_bytes_lit (interpolation (identifier))))))
+	(value (string (interpolation (identifier))))))

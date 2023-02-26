@@ -11,4 +11,4 @@ package foo
 (source_file
 	(package_clause
 		(package_identifier))
-	(simple_string_lit))
+	(string))

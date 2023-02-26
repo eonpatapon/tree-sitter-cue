@@ -12,12 +12,12 @@ i6: uint16
 ---
 
 (source_file 
- (field (label (identifier)) (value (int_type)))
- (field (label (identifier)) (value (int_type)))
- (field (label (identifier)) (value (float_type)))
- (field (label (identifier)) (value (number_type)))
- (field (label (identifier)) (value (uint_type)))
- (field (label (identifier)) (value (uint_type))))
+ (field (label (identifier)) (value (primitive_type)))
+ (field (label (identifier)) (value (primitive_type)))
+ (field (label (identifier)) (value (primitive_type)))
+ (field (label (identifier)) (value (primitive_type)))
+ (field (label (identifier)) (value (primitive_type)))
+ (field (label (identifier)) (value (primitive_type))))
 
 ===
 int literals
@@ -34,13 +34,13 @@ i7: 0b0101_0001
 ---
 
 (source_file 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))) 
- (field (label (identifier)) (value (int_lit))))
+ (field (label (identifier)) (value (number)))
+ (field (label (identifier)) (value (si_unit (float))))
+ (field (label (identifier)) (value (si_unit (float))))
+ (field (label (identifier)) (value (number)))
+ (field (label (identifier)) (value (number)))
+ (field (label (identifier)) (value (number)))
+ (field (label (identifier)) (value (number))))
 
 ===
 float literals
@@ -59,12 +59,12 @@ f9: .12345E+5
 ---
 
 (source_file 
- (field (label (identifier)) (value (float_lit))) 
- (field (label (identifier)) (value (float_lit))) 
- (field (label (identifier)) (value (float_lit))) 
- (field (label (identifier)) (value (float_lit))) 
- (field (label (identifier)) (value (float_lit))) 
- (field (label (identifier)) (value (float_lit))) 
- (field (label (identifier)) (value (float_lit)))
- (field (label (identifier)) (value (float_lit)))
- (field (label (identifier)) (value (float_lit))))
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float))))

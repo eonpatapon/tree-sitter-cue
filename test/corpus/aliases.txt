@@ -11,8 +11,8 @@ a: {
 
 (source_file 
  (field (label (identifier)) (value (struct_lit 
-																		 (field (label (identifier) (identifier)) (value (string_type))) 
-																		 (field (label (identifier) (simple_string_lit)) (value (bool_type)))))))
+																		 (field (label (identifier) (identifier)) (value (primitive_type))) 
+																		 (field (label (identifier) (string)) (value (primitive_type)))))))
 
 
 ===
@@ -28,8 +28,8 @@ a: X={
 
 (source_file 
  (field (label (identifier)) (value (identifier) (struct_lit 
-																									(field (label (identifier)) (value (string_type))) 
-																									(selector_expression (identifier) (selector (dot) (identifier)))))))
+																									(field (label (identifier)) (value (primitive_type))) 
+																									(selector_expression (identifier) (identifier))))))
 
 ===
 list elem
@@ -42,8 +42,8 @@ l: [X="a", "b"]
 (source_file 
  (field (label (identifier)) (value 
 															(list_lit 
-															 (identifier) (simple_string_lit) 
-															 (simple_string_lit)))))
+															 (identifier) (string) 
+															 (string)))))
 
 ===
 bracketed label
@@ -53,7 +53,7 @@ a: [X=string]: int
 
 ---
 
-(source_file (field (label (identifier)) (label (optional (identifier) (string_type))) (value (int_type))))
+(source_file (field (label (identifier)) (label (optional (identifier) (primitive_type))) (value (primitive_type))))
 
 ===
 let expression
@@ -63,4 +63,4 @@ let X = a * 2
 
 ---
 
-(source_file (let_clause (identifier) (binary_expression (identifier) (int_lit))))
+(source_file (let_clause (identifier) (binary_expression (identifier) (number))))

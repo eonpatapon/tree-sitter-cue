@@ -17,11 +17,11 @@ c: {
 	(value (struct_lit
 					(comprehension
 					 (for_clause (identifier) (identifier))
-					 (guard_clause (binary_expression (identifier) (int_lit)))
-					 (let_clause (identifier) (int_lit))
+					 (guard_clause (binary_expression (identifier) (number)))
+					 (let_clause (identifier) (number))
 					 (struct_lit
 					  (field
-						 (label (simple_string_lit (interpolation (identifier))))
+						 (label (string (interpolation (identifier))))
 						 (value (binary_expression (identifier) (identifier))))))))))
 
 ===
@@ -37,5 +37,5 @@ b: [ for x in a if x > 1 { x+1 } ]
 	(value (list_lit 
 					(comprehension 
 					 (for_clause (identifier) (identifier)) 
-					 (guard_clause (binary_expression (identifier) (int_lit))) 
-					 (struct_lit (binary_expression (identifier) (int_lit))))))))
+					 (guard_clause (binary_expression (identifier) (number))) 
+					 (struct_lit (binary_expression (identifier) (number))))))))
