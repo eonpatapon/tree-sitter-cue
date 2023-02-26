@@ -1,27 +1,27 @@
 [package]
 name = "tree-sitter-cue"
-description = "cue grammar for the tree-sitter parsing library"
+description = "Cue grammar for tree-sitter"
 version = "0.0.1"
+authors = [
+	"Jean-Philippe Braun <eon@patapon.info>",
+	"Amaan Qureshi <amaanq12@gmail.com>",
+]
+license = "MIT"
 readme = "bindings/rust/README.md"
 keywords = ["incremental", "parsing", "cue"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/tree-sitter/tree-sitter-cue"
-edition = "2018"
-license = "MIT"
+repository = "https://github.com/eonpatapon/tree-sitter-cue"
+edition = "2021"
+autoexamples = false
 
 build = "bindings/rust/build.rs"
-include = [
-  "bindings/rust/*",
-  "grammar.js",
-  "queries/*",
-  "src/*",
-]
+include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
 
 [lib]
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "~0.20.0"
+tree-sitter = "~0.20.3"
 
 [build-dependencies]
 cc = "1.0"
