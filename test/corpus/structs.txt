@@ -91,11 +91,37 @@ s1: {
     }
 }
 
+s2: {
+    "Hello world!"
+}
+
 ---
 
 (source_file
-    (field (label (identifier)) (value (struct_lit
-        (field (label (identifier)) (value (int_lit)))
-        (field (label (identifier)) (value (int_lit)))
+  (field
+    (label
+      (identifier))
+    (value
+      (struct_lit
+        (field
+          (label
+            (identifier))
+          (value
+            (int_lit)))
+        (field
+          (label
+            (identifier))
+          (value
+            (int_lit)))
         (struct_lit
-            (field (label (identifier)) (value (int_lit))))))))
+          (field
+            (label
+              (identifier))
+            (value
+              (int_lit)))))))
+  (field
+    (label
+      (identifier))
+    (value
+      (struct_lit
+        (simple_string_lit)))))
