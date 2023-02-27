@@ -10,5 +10,6 @@ in with toolbox; pkgs.runCommand "deps" {
     pkgs.nodejs
     pkgs.gcc
     pkgs.python39
+    pkgs.graphviz
   ];
 } ""
