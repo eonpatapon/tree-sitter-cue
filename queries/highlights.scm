@@ -2,7 +2,7 @@
 
 [
   "package"
-	"import"
+  "import"
 ] @include
 
 ; Namespaces
@@ -46,45 +46,45 @@
 
 [
   "+"
-	"-"
-	"*"
-	"/"
-	"|"
-	"&"
+  "-"
+  "*"
+  "/"
+  "|"
+  "&"
   "||"
   "&&"
-	"=="
-	"!="
+  "=="
+  "!="
   "<"
   "<="
   ">"
   ">="
   "=~"
   "!~"
-	"!"
-	"="
+  "!"
+  "="
 ] @operator
 
 ; Fields & Properties
 
 (field 
-	 (label 
-		 (identifier) @field))
+  (label 
+  (identifier) @field))
 
 (selector_expression
-	  (_)
-		(identifier) @property)
+  (_)
+  (identifier) @property)
 
 ; Functions
 
 (call_expression
-	function: (identifier) @function.call)
+  function: (identifier) @function.call)
 (call_expression
-	function: (selector_expression
-	  (_)
-		(identifier) @function.call))
+  function: (selector_expression
+  (_)
+  (identifier) @function.call))
 (call_expression
-	function: (builtin_function) @function.call)
+  function: (builtin_function) @function.call)
 
 (builtin_function) @function.builtin
 
@@ -97,11 +97,11 @@
 (primitive_type) @type.builtin
 
 ((identifier) @type
- (#match? @type "^(#|_#)"))
+  (#match? @type "^(#|_#)"))
 
 [
   (slice_type)
-	(pointer_type)
+  (pointer_type)
 ] @type ;; In attributes
 
 ; Punctuation
@@ -121,7 +121,7 @@
 
 [
   (ellipsis)
-	"?"
+  "?"
 ] @punctuation.special
 
 ; Literals
@@ -130,7 +130,7 @@
 
 [
   (escape_char)
-	(escape_unicode)
+  (escape_unicode)
 ] @string.escape
 
 (number) @number
@@ -138,15 +138,15 @@
 (float) @float
 
 (si_unit
-	(float)
+  (float)
   (_) @symbol)
 
 (boolean) @boolean
 
 [
   (null)
-	(top)
-	(bottom)
+  (top)
+  (bottom)
 ] @constant.builtin
 
 ; Interpolations
@@ -155,7 +155,7 @@
 
 (interpolation "\\(" (identifier) @variable ")")
 
-; Commments
+; Comments
 
 (comment) @comment @spell
 
