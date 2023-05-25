@@ -55,10 +55,14 @@ f6: 6.67428e-11
 f7: 1E6
 f8: .25
 f9: .12345E+5
+f10: -2.5
+f11: -.25
 
 ---
 
 (source_file 
+ (field (label (identifier)) (value (float)))
+ (field (label (identifier)) (value (float)))
  (field (label (identifier)) (value (float)))
  (field (label (identifier)) (value (float)))
  (field (label (identifier)) (value (float)))
