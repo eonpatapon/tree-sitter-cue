@@ -11,5 +11,6 @@ in with toolbox; pkgs.runCommand "deps" {
     pkgs.gcc
     pkgs.python39
     pkgs.graphviz
+    pkgs.bc
   ];
 } ""
