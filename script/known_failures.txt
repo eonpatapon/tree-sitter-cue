@@ -1,5 +1,5 @@
-examples/cue/cue/load/testdata/tagsbad/prod.cue
-examples/cue/cue/load/testdata/tagsbad/stage.cue
+examples/cue/cue/load/testdata/testmod/tagsbad/prod.cue
+examples/cue/cue/load/testdata/testmod/tagsbad/stage.cue
 examples/cue/cue/parser/corpus/+commas.cue
 examples/cue/cue/parser/corpus/+comp.cue
 examples/cue/cue/scanner/corpus/+basic.cue

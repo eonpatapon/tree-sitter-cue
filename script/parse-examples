@@ -25,7 +25,7 @@ function clone_repo {
 	popd >/dev/null
 }
 
-clone_repo cue-lang cue 5a6bd1910821112123897c2b553b848c15f6eae2
+clone_repo cue-lang cue 251790edc0f6b73fe1dcd4fb41d408b0d962c179
 
 known_failures="$(cat script/known_failures.txt)"
 
