@@ -492,9 +492,8 @@ module.exports = grammar({
       const decimal_exponent = seq(choice('e', 'E'), optional(choice('+', '-')), decimal_digits);
 
       const decimal_float_literal = choice(
-        seq(decimal_digits, '.', optional(decimal_digits), optional(decimal_exponent)),
+        seq(optional('-'), optional(decimal_digits), '.', optional(decimal_digits), optional(decimal_exponent)),
         seq(decimal_digits, decimal_exponent),
-        seq('.', decimal_digits, optional(decimal_exponent)),
       );
 
       const hex_exponent = seq(choice('p', 'P'), optional(choice('+', '-')), decimal_digits);
