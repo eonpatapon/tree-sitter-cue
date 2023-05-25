@@ -370,7 +370,7 @@ module.exports = grammar({
         ['&', PREC.bitwise_and],
         ['||', PREC.or],
         ['&&', PREC.and],
-        [choice('==', '!=', '<', '<=', '>', '>='), PREC.compare],
+        [choice('==', '=~', '!~', '!=', '<', '<=', '>', '>='), PREC.compare],
       ];
 
       // @ts-ignore
