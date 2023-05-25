@@ -5,18 +5,51 @@ simple
 a: {
     foo?: int
     bar?: string
-		_hidden: string
-		a: b: c: string
+    required!: int
+    _hidden: string
+    a: b: c: string
 }
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (struct_lit 
-																		 (field (label (identifier)) (value (primitive_type))) 
-																		 (field (label (identifier)) (value (primitive_type))) 
-																		 (field (label (identifier)) (value (primitive_type))) 
-																		 (field (label (identifier)) (label (identifier)) (label (identifier)) (value (primitive_type)))))))
+(source_file
+  (field
+    (label
+      (identifier))
+    (value
+      (struct_lit
+        (field
+          (label
+            (optional
+              (identifier)))
+          (value
+            (primitive_type)))
+        (field
+          (label
+            (optional
+              (identifier)))
+          (value
+            (primitive_type)))
+        (field
+          (label
+            (required
+              (identifier)))
+          (value
+            (primitive_type)))
+        (field
+          (label
+            (identifier))
+          (value
+            (primitive_type)))
+        (field
+          (label
+            (identifier))
+          (label
+            (identifier))
+          (label
+            (identifier))
+          (value
+            (primitive_type)))))))
 
 ===
 closed
@@ -106,8 +139,8 @@ _#B: {
 
 ---
 
-(source_file 
- (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (primitive_type)))))) 
+(source_file
+ (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (primitive_type))))))
  (field (label (identifier)) (value (struct_lit (field (label (identifier)) (value (primitive_type)))))))
 
 

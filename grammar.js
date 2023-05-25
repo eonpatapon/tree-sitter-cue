@@ -289,29 +289,33 @@ module.exports = grammar({
       $._alias_expr,
     ),
 
-    _label_name: $ => choice(
+    _label_name: $ => prec(1, choice(
       $.identifier,
       $.keyword_identifier,
       alias($._simple_string_lit, $.string),
       $.selector_expression,
-    ),
+      alias($.parenthesized_expression, $.dynamic),
+    )),
 
     _label_alias_expr: $ => alias($._alias_expr, $.optional),
 
+    required: $ => seq($._label_name, '!'),
+
+    optional: $ => seq($._label_name, '?'),
+
     _label_expr: $ => choice(
-      seq($._label_name, optional('?')),
+      $._label_name,
+      $.optional,
+      $.required,
       seq('[', $._label_alias_expr, ']'),
     ),
 
-    label: $ => choice(
-      seq(
-        optional(seq(
-          field('alias', choice($.identifier, $.keyword_identifier)),
-          '=',
-        )),
-        $._label_expr,
-      ),
-      $.parenthesized_expression,
+    label: $ => seq(
+      optional(seq(
+        field('alias', choice($.identifier, $.keyword_identifier)),
+        '=',
+      )),
+      $._label_expr,
     ),
 
     field: $ => prec.right(seq(

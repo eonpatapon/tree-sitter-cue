@@ -202,8 +202,8 @@ l: [1, 2][0]
 dynamic
 ===
 
-(b): "bar"
-(list.Slice(a.b, 0, 1)[0]): "x"
+(b)?: "bar"
+(list.Slice(a.b, 0, 1)[0])!: string
 (x): (a.c[0]): "y"
 
 ---
@@ -211,33 +211,35 @@ dynamic
 (source_file
   (field
     (label
-      (parenthesized_expression
-        (identifier)))
+      (optional
+        (dynamic
+          (identifier))))
     (value
       (string)))
   (field
     (label
-      (parenthesized_expression
-        (index_expression
-          (call_expression
-            (selector_expression
-              (identifier)
-              (identifier))
-            (arguments
+      (required
+        (dynamic
+          (index_expression
+            (call_expression
               (selector_expression
                 (identifier)
                 (identifier))
-              (number)
-              (number)))
-          (number))))
+              (arguments
+                (selector_expression
+                  (identifier)
+                  (identifier))
+                (number)
+                (number)))
+            (number)))))
     (value
-      (string)))
+      (primitive_type)))
   (field
     (label
-      (parenthesized_expression
+      (dynamic
         (identifier)))
     (label
-      (parenthesized_expression
+      (dynamic
         (index_expression
           (selector_expression
             (identifier)
@@ -245,3 +247,4 @@ dynamic
           (number))))
     (value
       (string))))
+

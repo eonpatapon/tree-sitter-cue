@@ -67,8 +67,8 @@
 
 ; Fields & Properties
 
-(field 
-  (label 
+(field
+  (label
   (identifier) @field))
 
 (selector_expression
@@ -122,6 +122,7 @@
 [
   (ellipsis)
   "?"
+  "!"
 ] @punctuation.special
 
 ; Literals

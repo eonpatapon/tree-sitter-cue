@@ -337,6 +337,21 @@
     }
   },
   {
+    "type": "dynamic",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "ellipsis",
     "named": true,
     "fields": {},
@@ -527,6 +542,10 @@
       "required": true,
       "types": [
         {
+          "type": "dynamic",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -535,7 +554,7 @@
           "named": true
         },
         {
-          "type": "parenthesized_expression",
+          "type": "required",
           "named": true
         },
         {
@@ -629,7 +648,23 @@
       "required": true,
       "types": [
         {
+          "type": "dynamic",
+          "named": true
+        },
+        {
           "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "selector_expression",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -758,6 +793,33 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "required",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "dynamic",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "selector_expression",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -1298,11 +1360,11 @@
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float32",
@@ -1374,11 +1436,11 @@
   },
   {
     "type": "number",
-    "named": true
+    "named": false
   },
   {
     "type": "number",
-    "named": false
+    "named": true
   },
   {
     "type": "or",
