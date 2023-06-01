@@ -1269,45 +1269,54 @@
       ]
     },
     "label": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "SEQ",
+              "type": "CHOICE",
               "members": [
                 {
-                  "type": "FIELD",
-                  "name": "alias",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "keyword_identifier"
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "FIELD",
+                      "name": "alias",
+                      "content": {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "identifier"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "keyword_identifier"
+                          }
+                        ]
                       }
-                    ]
-                  }
+                    },
+                    {
+                      "type": "STRING",
+                      "value": "="
+                    }
+                  ]
                 },
                 {
-                  "type": "STRING",
-                  "value": "="
+                  "type": "BLANK"
                 }
               ]
             },
             {
-              "type": "BLANK"
+              "type": "SYMBOL",
+              "name": "_label_expr"
             }
           ]
         },
         {
           "type": "SYMBOL",
-          "name": "_label_expr"
+          "name": "parenthesized_expression"
         }
       ]
     },
@@ -1619,15 +1628,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "call_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "identifier"
         },
         {
           "type": "SYMBOL",
           "name": "_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "call_expression"
         }
       ]
     },
@@ -2264,7 +2273,11 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "expression"
+                  "name": "selector_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
                 }
               ]
             }

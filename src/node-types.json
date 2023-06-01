@@ -288,7 +288,11 @@
             "named": true
           },
           {
-            "type": "expression",
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "selector_expression",
             "named": true
           }
         ]
@@ -528,6 +532,10 @@
         },
         {
           "type": "optional",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
           "named": true
         },
         {

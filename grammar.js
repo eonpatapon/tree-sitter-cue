@@ -303,12 +303,15 @@ module.exports = grammar({
       seq('[', $._label_alias_expr, ']'),
     ),
 
-    label: $ => seq(
-      optional(seq(
-        field('alias', choice($.identifier, $.keyword_identifier)),
-        '=',
-      )),
-      $._label_expr,
+    label: $ => choice(
+      seq(
+        optional(seq(
+          field('alias', choice($.identifier, $.keyword_identifier)),
+          '=',
+        )),
+        $._label_expr,
+      ),
+      $.parenthesized_expression,
     ),
 
     field: $ => prec.right(seq(
@@ -355,9 +358,9 @@ module.exports = grammar({
       $.parenthesized_expression,
       $.selector_expression,
       $.index_expression,
+      $.call_expression,
       $.identifier,
       $._literal,
-      $.call_expression,
     ),
 
     binary_expression: $ => {
@@ -394,7 +397,8 @@ module.exports = grammar({
     call_expression: $ => prec(PREC.call, seq(
       field('function', choice(
         $.builtin_function,
-        $.expression,
+        $.selector_expression,
+        $.identifier,
       )),
       $.arguments,
     )),
