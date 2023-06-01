@@ -197,3 +197,51 @@ l: [1, 2][0]
 		(number))))
   (list_lit
 	(number)))
+
+===
+dynamic
+===
+
+(b): "bar"
+(list.Slice(a.b, 0, 1)[0]): "x"
+(x): (a.c[0]): "y"
+
+---
+
+(source_file
+  (field
+    (label
+      (parenthesized_expression
+        (identifier)))
+    (value
+      (string)))
+  (field
+    (label
+      (parenthesized_expression
+        (index_expression
+          (call_expression
+            (selector_expression
+              (identifier)
+              (identifier))
+            (arguments
+              (selector_expression
+                (identifier)
+                (identifier))
+              (number)
+              (number)))
+          (number))))
+    (value
+      (string)))
+  (field
+    (label
+      (parenthesized_expression
+        (identifier)))
+    (label
+      (parenthesized_expression
+        (index_expression
+          (selector_expression
+            (identifier)
+            (identifier))
+          (number))))
+    (value
+      (string))))
