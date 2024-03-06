@@ -1,7 +1,7 @@
 examples/cue/cue/load/testdata/testmod/tagsbad/prod.cue
 examples/cue/cue/load/testdata/testmod/tagsbad/stage.cue
-examples/cue/cue/parser/corpus/+commas.cue
-examples/cue/cue/parser/corpus/+comp.cue
-examples/cue/cue/scanner/corpus/+basic.cue
-examples/cue/cue/scanner/corpus/+comments.cue
-examples/cue/cue/scanner/corpus/+tokens.cue
+examples/cue/cue/parser/testdata/corpus/+commas.cue
+examples/cue/cue/parser/testdata/corpus/+comp.cue
+examples/cue/cue/scanner/testdata/corpus/+basic.cue
+examples/cue/cue/scanner/testdata/corpus/+comments.cue
+examples/cue/cue/scanner/testdata/corpus/+tokens.cue
