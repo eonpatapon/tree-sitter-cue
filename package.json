@@ -24,7 +24,7 @@
   "devDependencies": {
     "eslint": "^8.33.0",
     "eslint-config-google": "^0.14.0",
-    "tree-sitter-cli": "^0.20.6"
+    "tree-sitter-cli": "^0.21.0"
   },
   "repository": "https://github.com/eonpatapon/tree-sitter-cue",
   "scripts": {
