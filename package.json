@@ -33,20 +33,5 @@
     "parse": "tree-sitter parse",
     "test-windows": "tree-sitter test",
     "lint": "eslint grammar.js"
-  },
-  "tree-sitter": [
-    {
-      "scope": "source.cue",
-      "file-types": [
-        "cue"
-      ],
-      "injection-regex": "^(cue)$",
-      "highlights": [
-        "queries/highlights.scm"
-      ],
-      "indents": [
-        "queries/indents.scm"
-      ]
-    }
-  ]
+  }
 }

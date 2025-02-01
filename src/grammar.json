@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "cue",
   "word": "identifier",
   "rules": {
@@ -1229,15 +1230,6 @@
         ]
       }
     },
-    "_label_alias_expr": {
-      "type": "ALIAS",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_alias_expr"
-      },
-      "named": true,
-      "value": "optional"
-    },
     "required": {
       "type": "SEQ",
       "members": [
@@ -1264,6 +1256,44 @@
         }
       ]
     },
+    "constraint": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_alias_expr"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "!"
+                },
+                {
+                  "type": "STRING",
+                  "value": "?"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "_label_expr": {
       "type": "CHOICE",
       "members": [
@@ -1280,21 +1310,8 @@
           "name": "required"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "["
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_label_alias_expr"
-            },
-            {
-              "type": "STRING",
-              "value": "]"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "constraint"
         }
       ]
     },
@@ -3817,7 +3834,7 @@
   "conflicts": [
     [
       "_embedding",
-      "_label_alias_expr"
+      "constraint"
     ]
   ],
   "precedences": [],
@@ -3853,17 +3870,5 @@
   "supertypes": [
     "expression",
     "primary_expression"
-  ],
-  "PREC": {
-    "bitwise_or": 1,
-    "bitwise_and": 2,
-    "or": 3,
-    "and": 4,
-    "compare": 5,
-    "add": 6,
-    "multiply": 7,
-    "unary": 8,
-    "call": 9
-  }
+  ]
 }
-

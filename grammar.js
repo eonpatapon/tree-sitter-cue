@@ -141,7 +141,7 @@ module.exports = grammar({
   ],
 
   conflicts: $ => [
-    [$._embedding, $._label_alias_expr],
+    [$._embedding, $.constraint],
   ],
 
   word: $ => $.identifier,
@@ -297,17 +297,20 @@ module.exports = grammar({
       alias($.parenthesized_expression, $.dynamic),
     )),
 
-    _label_alias_expr: $ => alias($._alias_expr, $.optional),
-
     required: $ => seq($._label_name, '!'),
 
     optional: $ => seq($._label_name, '?'),
+
+    constraint: $ => seq(
+      '[', $._alias_expr, ']',
+      optional(choice('!', '?')),
+    ),
 
     _label_expr: $ => choice(
       $._label_name,
       $.optional,
       $.required,
-      seq('[', $._label_alias_expr, ']'),
+      $.constraint,
     ),
 
     label: $ => seq(
