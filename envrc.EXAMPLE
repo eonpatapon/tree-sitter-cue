@@ -1,2 +1,2 @@
-use_nix
+use flake
 export PATH=$PATH:./node_modules/.bin
