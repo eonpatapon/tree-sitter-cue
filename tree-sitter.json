@@ -1,0 +1,39 @@
+{
+  "grammars": [
+    {
+      "name": "cue",
+      "camelcase": "cue",
+      "scope": "source.cue",
+      "path": ".",
+      "file-types": [
+        "cue"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "injection-regex": "^(cue)$"
+    }
+  ],
+  "metadata": {
+    "version": "0.0.1",
+    "license": "MIT",
+    "description": "Cue grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Jean-Philippe Braun",
+        "email": "eon@patapon.info"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/eonpatapon/tree-sitter-cue"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

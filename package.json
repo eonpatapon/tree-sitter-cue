@@ -19,12 +19,12 @@
   },
   "homepage": "https://github.com/eonpatapon/tree-sitter-cue#readme",
   "dependencies": {
-    "nan": "^2.14.2"
+    "nan": "^2.22.0"
   },
   "devDependencies": {
     "eslint": "^8.33.0",
     "eslint-config-google": "^0.14.0",
-    "tree-sitter-cli": "^0.21.0"
+    "tree-sitter-cli": "^0.24.6"
   },
   "repository": "https://github.com/eonpatapon/tree-sitter-cue",
   "scripts": {
@@ -33,20 +33,5 @@
     "parse": "tree-sitter parse",
     "test-windows": "tree-sitter test",
     "lint": "eslint grammar.js"
-  },
-  "tree-sitter": [
-    {
-      "scope": "source.cue",
-      "file-types": [
-        "cue"
-      ],
-      "injection-regex": "^(cue)$",
-      "highlights": [
-        "queries/highlights.scm"
-      ],
-      "indents": [
-        "queries/indents.scm"
-      ]
-    }
-  ]
+  }
 }

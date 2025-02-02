@@ -921,6 +921,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "alias": {
         "multiple": true,
@@ -1360,11 +1361,11 @@
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float32",
@@ -1436,11 +1437,11 @@
   },
   {
     "type": "number",
-    "named": false
+    "named": true
   },
   {
     "type": "number",
-    "named": true
+    "named": false
   },
   {
     "type": "or",
