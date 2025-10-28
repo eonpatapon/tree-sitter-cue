@@ -1,0 +1,95 @@
+================================================================================
+Postfix field alias
+================================================================================
+
+foo~X: 123
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias (identifier)))
+    (value (number))))
+
+================================================================================
+Postfix tuple alias
+================================================================================
+
+foo~(K,V): {bar: 1}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias
+        (key_alias (identifier))
+        (value_alias (identifier))))
+    (value (struct_lit
+      (field (label (identifier)) (value (number)))))))
+
+================================================================================
+Postfix tuple alias : dont care left hand side
+================================================================================
+
+foo~(K,_): {bar: K}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias
+        (key_alias (identifier))
+        (value_alias)))
+    (value (struct_lit
+      (field
+        (label (identifier))
+        (value (identifier)))))))
+
+================================================================================
+Postfix tuple alias : dont care right hand side
+================================================================================
+
+foo~(_,V): {bar: V}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias
+        (key_alias)
+        (value_alias (identifier))))
+    (value (struct_lit
+      (field 
+        (label (identifier))
+        (value (identifier)))))))
+
+================================================================================
+Self reference
+================================================================================
+
+foo: {
+  bar: self.baz
+  baz: 42
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label (identifier))
+    (value (struct_lit
+      (field
+        (label (identifier))
+        (value (selector_expression (self) (identifier))))
+      (field
+        (label (identifier))
+        (value (number)))))))
+

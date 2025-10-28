@@ -26,9 +26,9 @@
  *
  */
 function listSeq(rule, separator, trailing_separator = false) {
-  return trailing_separator ?
-    seq(rule, repeat(seq(separator, rule)), optional(separator)) :
-    seq(rule, repeat(seq(separator, rule)));
+  return trailing_separator
+    ? seq(rule, repeat(seq(separator, rule)), optional(separator))
+    : seq(rule, repeat(seq(separator, rule)));
 }
 
 /**
@@ -40,7 +40,7 @@ function listSeq(rule, separator, trailing_separator = false) {
  * @return {SeqRule}
  */
 function commaSep1(rule, trailing_separator = false) {
-  return listSeq(rule, ',', trailing_separator);
+  return listSeq(rule, ",", trailing_separator);
 }
 
 /**
@@ -65,7 +65,7 @@ function commaSep(rule, trailing_separator = false) {
  *
  */
 function optionalCommaSep1(rule) {
-  return seq(rule, repeat(seq(optional(','), rule)), optional(','));
+  return seq(rule, repeat(seq(optional(","), rule)), optional(","));
 }
 
 /**
@@ -93,36 +93,33 @@ const PREC = {
 };
 
 const primitive_types = [
-  'number',
-  'float',
-  'float32',
-  'float64',
-  'uint',
-  'uint8',
-  'uint16',
-  'uint32',
-  'uint64',
-  'uint128',
-  'int',
-  'int8',
-  'int16',
-  'int32',
-  'int64',
-  'int128',
-  'string',
-  'bytes',
-  'bool',
+  "number",
+  "float",
+  "float32",
+  "float64",
+  "uint",
+  "uint8",
+  "uint16",
+  "uint32",
+  "uint64",
+  "uint128",
+  "int",
+  "int8",
+  "int16",
+  "int32",
+  "int64",
+  "int128",
+  "string",
+  "bytes",
+  "bool",
 ];
 
 module.exports = grammar({
-  name: 'cue',
+  name: "cue",
 
-  extras: $ => [
-    $.comment,
-    /\s/,
-  ],
+  extras: ($) => [$.comment, /\s/],
 
-  externals: $ => [
+  externals: ($) => [
     $._multi_str_content,
     $._multi_bytes_content,
     $._raw_str_content,
@@ -131,302 +128,340 @@ module.exports = grammar({
     $._multi_raw_bytes_content,
   ],
 
-  inline: $ => [
-    $.keyword_identifier,
-  ],
+  inline: ($) => [$.keyword_identifier],
 
-  supertypes: $ => [
-    $.expression,
-    $.primary_expression,
-  ],
+  supertypes: ($) => [$.expression, $.primary_expression],
 
-  conflicts: $ => [
-    [$._embedding, $._label_alias_expr],
-  ],
+  conflicts: ($) => [[$._embedding, $._label_alias_expr]],
 
-  word: $ => $.identifier,
+  word: ($) => $.identifier,
 
   rules: {
-    source_file: $ => seq(
-      optional($.attribute),
-      optional($.package_clause),
-      optional(repeat($.import_declaration)),
-      optionalCommaSep($._declaration),
-    ),
-
-    _package_identifier: $ => alias($.identifier, $.package_identifier),
-
-    package_clause: $ => seq(
-      'package',
-      $._package_identifier,
-    ),
-
-    import_declaration: $ => seq(
-      'import',
-      choice(
-        $.import_spec,
-        $.import_spec_list,
-      ),
-    ),
-
-    import_spec: $ => seq(
-      optional(field('name', choice(
-        '.',
-        '_',
-        $._package_identifier,
-      ))),
-      field('path', $.string),
-    ),
-
-    import_spec_list: $ => seq(
-      '(',
-      optionalCommaSep($.import_spec),
-      ')',
-    ),
-
-    identifier: _ => token(choice(
+    source_file: ($) =>
       seq(
-        optional(choice('_#', '#', '_')),
-        choice(/\p{L}/, '$', '_'),
-        repeat(choice(/\p{L}/, '$', '_', /[0-9]/)),
+        optional($.attribute),
+        optional($.package_clause),
+        optional(repeat($.import_declaration)),
+        optionalCommaSep($._declaration),
       ),
-      choice('_#', '#', '_'),
-    )),
-    keyword_identifier: $ => prec(-3, alias(
-      choice(
-        'let',
-        'if',
-        'for',
-        ...primitive_types,
-      ),
-      $.identifier,
-    )),
 
-    attribute: $ => seq(
-      '@',
-      $.identifier,
-      '(',
-      optional(choice(',', '-')),
-      repeat(
-        prec.right(choice(
-          commaSep1($._attr_token),
-          seq('(', commaSep($._attr_token), ')'),
-          seq('[', commaSep($._attr_token), ']'),
-          seq('{', commaSep($._attr_token), '}'),
-          seq('<', commaSep($._attr_token), '>'),
-        )),
-      ),
-      ')',
-    ),
-    _attr_token: $ => prec.right(choice(
-      $._attr_item,
-      seq($._attr_item, '=', choice($._attr_item, $.attr_path)),
-      seq('(', $._attr_item, ')', '=', choice($._attr_item, $.attr_path)),
-    )),
+    _package_identifier: ($) => alias($.identifier, $.package_identifier),
 
-    _attr_item: $ => choice(
-      $.string,
-      $.number,
-      $.float,
-      $.si_unit,
-      $.boolean,
-      $.null,
-      $.top,
-      $.bottom,
-      $.primitive_type,
-      seq('[', ']', alias($._attr_item, $.slice_type)),
-      seq('*', alias($._attr_item, $.pointer_type)),
-      $.package_path,
-      $.identifier,
-      prec(-1, /[^0-9_]/),
-    ),
-    attr_path: _ => /(?:\/[\p{L}\d\.]+)*[\p{L}\d\.]+(?:\/[\p{L}\d\.]+)*(?:\/)?/,
-    package_path: $ => seq($.identifier, repeat1(seq('.', $.identifier))),
+    package_clause: ($) => seq("package", $._package_identifier),
 
-    builtin_function: _ => choice(
-      'len',
-      'close',
-      'and',
-      'or',
-      'div',
-      'mod',
-      'quo',
-      'rem',
-    ),
+    import_declaration: ($) =>
+      seq("import", choice($.import_spec, $.import_spec_list)),
 
-    _declaration: $ => choice(
-      $.field,
-      $.ellipsis,
-      $._embedding,
-      $.let_clause,
-    ),
-
-    _list_elem: $ => prec.right(choice(
-      $.ellipsis,
+    import_spec: ($) =>
       seq(
-        $._embedding,
-        optional(repeat(seq(',', $._embedding))),
-        optional(seq(',', $.ellipsis)),
-        optional(','),
+        optional(field("name", choice(".", "_", $._package_identifier))),
+        field("path", $.string),
       ),
-    )),
 
-    list_lit: $ => seq('[', repeat($._list_elem), ']'),
+    import_spec_list: ($) => seq("(", optionalCommaSep($.import_spec), ")"),
 
-    struct_lit: $ => seq(
-      '{',
-      optionalCommaSep(choice($._declaration, $.attribute)),
-      '}',
-    ),
+    identifier: (_) =>
+      token(
+        choice(
+          seq(
+            optional(choice("_#", "#", "_")),
+            choice(/\p{L}/, "$", "_"),
+            repeat(choice(/\p{L}/, "$", "_", /[0-9]/)),
+          ),
+          choice("_#", "#", "_"),
+        ),
+      ),
+    keyword_identifier: ($) =>
+      prec(
+        -3,
+        alias(choice("let", "if", "for", ...primitive_types), $.identifier),
+      ),
 
-    ellipsis: $ => prec.left(seq(
-      '...',
-      optional($.expression),
-    )),
+    attribute: ($) =>
+      seq(
+        "@",
+        $.identifier,
+        "(",
+        optional(choice(",", "-")),
+        repeat(
+          prec.right(
+            choice(
+              commaSep1($._attr_token),
+              seq("(", commaSep($._attr_token), ")"),
+              seq("[", commaSep($._attr_token), "]"),
+              seq("{", commaSep($._attr_token), "}"),
+              seq("<", commaSep($._attr_token), ">"),
+            ),
+          ),
+        ),
+        ")",
+      ),
+    _attr_token: ($) =>
+      prec.right(
+        choice(
+          $._attr_item,
+          seq($._attr_item, "=", choice($._attr_item, $.attr_path)),
+          seq("(", $._attr_item, ")", "=", choice($._attr_item, $.attr_path)),
+        ),
+      ),
 
-    _embedding: $ => choice(
-      $.comprehension,
-      $._alias_expr,
-    ),
+    _attr_item: ($) =>
+      choice(
+        $.string,
+        $.number,
+        $.float,
+        $.si_unit,
+        $.boolean,
+        $.null,
+        $.top,
+        $.bottom,
+        $.primitive_type,
+        seq("[", "]", alias($._attr_item, $.slice_type)),
+        seq("*", alias($._attr_item, $.pointer_type)),
+        $.package_path,
+        $.identifier,
+        prec(-1, /[^0-9_]/),
+      ),
+    attr_path: (_) =>
+      /(?:\/[\p{L}\d\.]+)*[\p{L}\d\.]+(?:\/[\p{L}\d\.]+)*(?:\/)?/,
+    package_path: ($) => seq($.identifier, repeat1(seq(".", $.identifier))),
 
-    _label_name: $ => prec(1, choice(
-      $.identifier,
-      $.keyword_identifier,
-      alias($._simple_string_lit, $.string),
-      $.selector_expression,
-      alias($.parenthesized_expression, $.dynamic),
-    )),
+    builtin_function: (_) =>
+      choice("len", "close", "and", "or", "div", "mod", "quo", "rem"),
 
-    _label_alias_expr: $ => alias($._alias_expr, $.optional),
+    _declaration: ($) =>
+      choice($.field, $.ellipsis, $._embedding, $.let_clause),
 
-    required: $ => seq($._label_name, '!'),
+    _list_elem: ($) =>
+      prec.right(
+        choice(
+          $.ellipsis,
+          seq(
+            $._embedding,
+            optional(repeat(seq(",", $._embedding))),
+            optional(seq(",", $.ellipsis)),
+            optional(","),
+          ),
+        ),
+      ),
 
-    optional: $ => seq($._label_name, '?'),
+    list_lit: ($) => seq("[", repeat($._list_elem), "]"),
 
-    _label_expr: $ => choice(
-      $._label_name,
-      $.optional,
-      $.required,
-      seq('[', $._label_alias_expr, ']'),
-    ),
+    struct_lit: ($) =>
+      seq("{", optionalCommaSep(choice($._declaration, $.attribute)), "}"),
 
-    label: $ => seq(
-      optional(seq(
-        field('alias', choice($.identifier, $.keyword_identifier)),
-        '=',
-      )),
-      $._label_expr,
-    ),
+    ellipsis: ($) => prec.left(seq("...", optional($.expression))),
 
-    field: $ => prec.right(seq(
-      repeat1(seq($.label, ':')),
-      $._value,
-      optional($.attribute),
-    )),
+    _embedding: ($) => choice($.comprehension, $._alias_expr),
 
-    _value: $ => alias($._alias_expr, $.value),
+    _label_name: ($) =>
+      prec(
+        1,
+        choice(
+          $.identifier,
+          $.keyword_identifier,
+          alias($._simple_string_lit, $.string),
+          $.selector_expression,
+          alias($.parenthesized_expression, $.dynamic),
+        ),
+      ),
+    // postfix_alias: ($) =>
+    //   seq(
+    //     "~",
+    //     field(
+    //       "alias",
+    //       choice($.identifier, seq("(", $.identifier, ",", $.identifier, ")")),
+    //     ),
+    //   ),
+    //
 
-    for_clause: $ => seq(
-      'for',
-      choice($.identifier, '_'),
-      optional(seq(',', choice($.identifier, '_'))),
-      'in', $.expression,
-    ),
+    postfix_alias: ($) =>
+      seq(
+        "~",
+        choice(
+          seq(
+            "(",
+            $.key_alias,
+            ",",
+            $.value_alias,
+            ")",
+          ),
+          field("alias", $.identifier),
+        ),
+      ),
 
-    guard_clause: $ => seq('if', field('condition', $.expression)),
+    key_alias: ($) => field("key_alias", choice($.identifier, "_")),
+    value_alias: ($) => field("value_alias", choice($.identifier, "_")),
 
-    let_clause: $ => seq('let', field('left', $.identifier), '=', field('right', $.expression)),
+    _label_alias_expr: ($) => alias($._alias_expr, $.optional),
 
-    _clause: $ => choice($.for_clause, $.guard_clause, $.let_clause),
+    required: ($) => seq($._label_name, "!"),
 
-    comprehension: $ => seq(
-      choice($.for_clause, $.guard_clause),
-      repeat(seq(optional(','), $._clause)),
-      $.struct_lit,
-    ),
+    optional: ($) => seq($._label_name, "?"),
 
-    _alias_expr: $ => seq(
-      optional(seq(field('alias', $.identifier), '=')),
-      $.expression,
-    ),
+    _label_expr: ($) =>
+      choice(
+        $._label_name,
+        $.optional,
+        $.required,
+        seq("[", $._label_alias_expr, "]"),
+      ),
 
-    parenthesized_expression: $ => seq('(', $.expression, ')'),
+    label: ($) =>
+      choice(
+        // Old prefix syntax (deprecated but still supported)
+        seq(
+          optional(
+            seq(
+              field("alias", choice($.identifier, $.keyword_identifier)),
+              "=",
+            ),
+          ),
+          $._label_expr,
+        ),
+        // New postfix syntax
+        seq($._label_expr, $.postfix_alias),
+      ),
 
-    expression: $ => prec.left(choice(
-      $.primary_expression,
-      $.unary_expression,
-      $.binary_expression,
-    )),
+    field: ($) =>
+      prec.right(
+        seq(repeat1(seq($.label, ":")), $._value, optional($.attribute)),
+      ),
 
-    primary_expression: $ => choice(
-      $.parenthesized_expression,
-      $.selector_expression,
-      $.index_expression,
-      $.call_expression,
-      $.identifier,
-      $._literal,
-    ),
+    _value: ($) => alias($._alias_expr, $.value),
 
-    binary_expression: $ => {
+    for_clause: ($) =>
+      seq(
+        "for",
+        choice($.identifier, "_"),
+        optional(seq(",", choice($.identifier, "_"))),
+        "in",
+        $.expression,
+      ),
+
+    guard_clause: ($) => seq("if", field("condition", $.expression)),
+
+    let_clause: ($) =>
+      seq(
+        "let",
+        field("left", $.identifier),
+        "=",
+        field("right", $.expression),
+      ),
+
+    _clause: ($) => choice($.for_clause, $.guard_clause, $.let_clause),
+
+    comprehension: ($) =>
+      seq(
+        choice($.for_clause, $.guard_clause),
+        repeat(seq(optional(","), $._clause)),
+        $.struct_lit,
+      ),
+
+    // _alias_expr: ($) =>
+    //   choice(
+    //     // Old prefix syntax
+    //     seq(optional(seq(field("alias", $.identifier), "=")), $.expression),
+    //   ),
+    _alias_expr: ($) =>
+      seq(optional(seq(field("alias", $.identifier), "=")), $.expression),
+
+    parenthesized_expression: ($) => seq("(", $.expression, ")"),
+
+    expression: ($) =>
+      prec.left(
+        choice($.primary_expression, $.unary_expression, $.binary_expression),
+      ),
+
+    primary_expression: ($) =>
+      choice(
+        $.parenthesized_expression,
+        $.selector_expression,
+        $.index_expression,
+        $.call_expression,
+        $.self,
+        $.identifier,
+        $._literal,
+      ),
+
+    binary_expression: ($) => {
       const table = [
-        ['+', PREC.add],
-        ['-', PREC.add],
-        ['*', PREC.multiply],
-        ['/', PREC.multiply],
-        ['|', PREC.bitwise_or],
-        ['&', PREC.bitwise_and],
-        ['||', PREC.or],
-        ['&&', PREC.and],
-        [choice('==', '=~', '!~', '!=', '<', '<=', '>', '>='), PREC.compare],
+        ["+", PREC.add],
+        ["-", PREC.add],
+        ["*", PREC.multiply],
+        ["/", PREC.multiply],
+        ["|", PREC.bitwise_or],
+        ["&", PREC.bitwise_and],
+        ["||", PREC.or],
+        ["&&", PREC.and],
+        [choice("==", "=~", "!~", "!=", "<", "<=", ">", ">="), PREC.compare],
       ];
 
       // @ts-ignore
-      return choice(...table.map(([operator, precedence]) => prec.left(precedence, seq(
-        field('left', $.expression),
-        // @ts-ignore
-        field('operator', operator),
-        field('right', $.expression),
-      ))));
+      return choice(
+        ...table.map(([operator, precedence]) =>
+          prec.left(
+            precedence,
+            seq(
+              field("left", $.expression),
+              // @ts-ignore
+              field("operator", operator),
+              field("right", $.expression),
+            ),
+          ),
+        ),
+      );
     },
 
-    unary_expression: $ => {
-      const unary_operators = ['+', '-', '!', '*', '!=', '<', '<=', '>', '>=', '=~', '!~'];
+    unary_expression: ($) => {
+      const unary_operators = [
+        "+",
+        "-",
+        "!",
+        "*",
+        "!=",
+        "<",
+        "<=",
+        ">",
+        ">=",
+        "=~",
+        "!~",
+      ];
 
-      return choice(...unary_operators.map((operator) => prec(PREC.unary, seq(
-        field('operator', operator),
-        field('argument', $.expression),
-      ))));
+      return choice(
+        ...unary_operators.map((operator) =>
+          prec(
+            PREC.unary,
+            seq(field("operator", operator), field("argument", $.expression)),
+          ),
+        ),
+      );
     },
 
-    call_expression: $ => prec(PREC.call, seq(
-      field('function', choice(
-        $.builtin_function,
-        $.selector_expression,
-        $.identifier,
-      )),
-      $.arguments,
-    )),
+    call_expression: ($) =>
+      prec(
+        PREC.call,
+        seq(
+          field(
+            "function",
+            choice($.builtin_function, $.selector_expression, $.identifier),
+          ),
+          $.arguments,
+        ),
+      ),
 
-    index_expression: $ => seq(
-      $.primary_expression,
-      '[',
-      $.expression,
-      ']',
-    ),
+    index_expression: ($) => seq($.primary_expression, "[", $.expression, "]"),
 
-    selector_expression: $ => seq(
-      $.primary_expression,
-      '.',
-      choice($.identifier, alias($._simple_string_lit, $.string)),
-    ),
+    selector_expression: ($) =>
+      seq(
+        $.primary_expression,
+        ".",
+        choice($.identifier, alias($._simple_string_lit, $.string)),
+      ),
 
-    arguments: $ => seq(
-      '(',
-      commaSep(optional($.expression)),
-      ')',
-    ),
+    arguments: ($) => seq("(", commaSep(optional($.expression)), ")"),
 
-    _literal: $ =>
+    _literal: ($) =>
       choice(
         $.struct_lit,
         $.list_lit,
@@ -441,218 +476,257 @@ module.exports = grammar({
         $.primitive_type,
       ),
 
-    primitive_type: _ => choice(...primitive_types),
+    primitive_type: (_) => choice(...primitive_types),
 
-    top: _ => '_',
+    top: (_) => "_",
 
-    bottom: _ => '_|_',
+    bottom: (_) => "_|_",
 
-    boolean: _ => choice('true', 'false'),
+    boolean: (_) => choice("true", "false"),
 
-    null: _ => 'null',
+    null: (_) => "null",
 
-    number: _ => {
-      const binary_literal = seq(
-        /0[bB]/,
-        /[01](_?[01])*/,
-      );
+    number: (_) => {
+      const binary_literal = seq(/0[bB]/, /[01](_?[01])*/);
 
-      const hex_literal = seq(
-        /0[xX]/,
-        /[\da-fA-F](_?[\da-fA-F])*/,
-      );
+      const hex_literal = seq(/0[xX]/, /[\da-fA-F](_?[\da-fA-F])*/);
 
       const octal_literal = seq(
-        optional(choice('-', '+')),
+        optional(choice("-", "+")),
         /0[oO]/,
         /[0-7](_?[0-7])*/,
       );
 
       const decimal_digits = /\d(_?\d)*/;
-      const signed_integer = seq(optional(choice('-', '+')), decimal_digits);
+      const signed_integer = seq(optional(choice("-", "+")), decimal_digits);
 
       const decimal_integer_literal = choice(
-        '0',
-        seq(optional('0'), /[1-9]/, optional(seq(optional('_'), decimal_digits))),
+        "0",
+        seq(
+          optional("0"),
+          /[1-9]/,
+          optional(seq(optional("_"), decimal_digits)),
+        ),
       );
 
       const decimal_literal = choice(
-        seq(optional(choice('-', '+')), decimal_integer_literal),
+        seq(optional(choice("-", "+")), decimal_integer_literal),
         decimal_digits,
         signed_integer,
       );
 
-
-      return token(choice(
-        hex_literal,
-        binary_literal,
-        decimal_literal,
-        octal_literal,
-      ));
+      return token(
+        choice(hex_literal, binary_literal, decimal_literal, octal_literal),
+      );
     },
 
-    float: _ => {
+    float: (_) => {
       const hex_digit = /[0-9a-fA-F]/;
-      const hex_digits = seq(hex_digit, repeat(seq(optional('_'), hex_digit)));
+      const hex_digits = seq(hex_digit, repeat(seq(optional("_"), hex_digit)));
 
       const decimal_digits = /\d(_?\d)*/;
 
-      const decimal_exponent = seq(choice('e', 'E'), optional(choice('+', '-')), decimal_digits);
+      const decimal_exponent = seq(
+        choice("e", "E"),
+        optional(choice("+", "-")),
+        decimal_digits,
+      );
 
       const decimal_float_literal = choice(
-        seq(optional('-'), optional(decimal_digits), '.', optional(decimal_digits), optional(decimal_exponent)),
+        seq(
+          optional("-"),
+          optional(decimal_digits),
+          ".",
+          optional(decimal_digits),
+          optional(decimal_exponent),
+        ),
         seq(decimal_digits, decimal_exponent),
       );
 
-      const hex_exponent = seq(choice('p', 'P'), optional(choice('+', '-')), decimal_digits);
-      const hex_mantissa = choice(
-        seq(optional('_'), hex_digits, '.', optional(hex_digits)),
-        seq(optional('_'), hex_digits),
-        seq('.', hex_digits),
+      const hex_exponent = seq(
+        choice("p", "P"),
+        optional(choice("+", "-")),
+        decimal_digits,
       );
-      const hex_float_literal = seq('0', choice('x', 'X'), hex_mantissa, hex_exponent);
+      const hex_mantissa = choice(
+        seq(optional("_"), hex_digits, ".", optional(hex_digits)),
+        seq(optional("_"), hex_digits),
+        seq(".", hex_digits),
+      );
+      const hex_float_literal = seq(
+        "0",
+        choice("x", "X"),
+        hex_mantissa,
+        hex_exponent,
+      );
 
       return token(choice(decimal_float_literal, hex_float_literal));
     },
 
-    si_unit: $ => seq(
-      $.float,
-      field('unit',
-        token.immediate(seq(
-          choice('K', 'M', 'G', 'T', 'P'),
-          optional('i'),
-        )),
+    si_unit: ($) =>
+      seq(
+        $.float,
+        field(
+          "unit",
+          token.immediate(seq(choice("K", "M", "G", "T", "P"), optional("i"))),
+        ),
       ),
-    ),
 
-    escape_char: _ => token.immediate(seq(
-      '\\',
-      repeat('#'),
-      seq(choice('a', 'b', 'f', 'n', 'r', 't', 'v', '/', '\\', '\'', '"')),
-    )),
+    escape_char: (_) =>
+      token.immediate(
+        seq(
+          "\\",
+          repeat("#"),
+          seq(choice("a", "b", "f", "n", "r", "t", "v", "/", "\\", "'", '"')),
+        ),
+      ),
 
-    escape_byte: _ => token.immediate(seq(
-      '\\',
-      repeat('#'),
+    escape_byte: (_) =>
+      token.immediate(
+        seq(
+          "\\",
+          repeat("#"),
+          choice(
+            /[0-7]{3}/, // octal byte value
+            /x[0-9a-fA-F]{2}/, // hex byte value
+          ),
+        ),
+      ),
+
+    _escape_unicode: ($) =>
       choice(
-        /[0-7]{3}/, // octal byte value
-        /x[0-9a-fA-F]{2}/, // hex byte value
+        $.escape_char,
+        alias(
+          token.immediate(
+            seq(
+              "\\",
+              repeat("#"),
+              choice(/u[0-9a-fA-F]{4}/, /U[0-9a-fA-F]{8}/),
+            ),
+          ),
+          $.escape_unicode,
+        ),
       ),
-    )),
 
-    _escape_unicode: $ => choice(
-      $.escape_char,
-      alias(token.immediate(seq(
-        '\\',
-        repeat('#'),
-        choice(
-          /u[0-9a-fA-F]{4}/,
-          /U[0-9a-fA-F]{8}/,
-        ))),
-      $.escape_unicode,
+    string: ($) =>
+      choice(
+        $._simple_string_lit,
+        $._simple_bytes_lit,
+        $._multiline_string_lit,
+        $._multiline_bytes_lit,
+        $._simple_raw_string_lit,
+        $._simple_raw_bytes_lit,
+        $._multiline_raw_string_lit,
+        $._multiline_raw_bytes_lit,
       ),
-    ),
 
-    string: $ => choice(
-      $._simple_string_lit,
-      $._simple_bytes_lit,
-      $._multiline_string_lit,
-      $._multiline_bytes_lit,
-      $._simple_raw_string_lit,
-      $._simple_raw_bytes_lit,
-      $._multiline_raw_string_lit,
-      $._multiline_raw_bytes_lit,
-    ),
+    _simple_string_lit: ($) =>
+      seq(
+        '"',
+        repeat(
+          choice(
+            token.immediate(prec(1, /[^"\n\\]+/)),
+            $.interpolation,
+            $._escape_unicode,
+          ),
+        ),
+        '"',
+      ),
 
-    _simple_string_lit: $ => seq(
-      '"',
-      repeat(choice(
-        token.immediate(prec(1, /[^"\n\\]+/)),
-        $.interpolation,
-        $._escape_unicode,
-      )),
-      '"',
-    ),
+    _simple_bytes_lit: ($) =>
+      seq(
+        "'",
+        repeat(
+          choice(
+            token.immediate(prec(1, /[^'\n\\]+/)),
+            $.interpolation,
+            $.escape_byte,
+            $._escape_unicode,
+          ),
+        ),
+        "'",
+      ),
 
-    _simple_bytes_lit: $ => seq(
-      '\'',
-      repeat(choice(
-        token.immediate(prec(1, /[^'\n\\]+/)),
-        $.interpolation,
-        $.escape_byte,
-        $._escape_unicode,
-      )),
-      '\'',
-    ),
+    _multiline_string_lit: ($) =>
+      seq(
+        token('"""'),
+        repeat(
+          choice($._multi_str_content, $.interpolation, $._escape_unicode),
+        ),
+        token('"""'),
+      ),
 
-    _multiline_string_lit: $ => seq(
-      token('"""'),
-      repeat(choice(
-        $._multi_str_content,
-        $.interpolation,
-        $._escape_unicode,
-      )),
-      token('"""'),
-    ),
+    _multiline_bytes_lit: ($) =>
+      seq(
+        token("'''"),
+        repeat(
+          choice(
+            $._multi_bytes_content,
+            $.interpolation,
+            $.escape_byte,
+            $._escape_unicode,
+          ),
+        ),
+        token("'''"),
+      ),
 
-    _multiline_bytes_lit: $ => seq(
-      token('\'\'\''),
-      repeat(choice(
-        $._multi_bytes_content,
-        $.interpolation,
-        $.escape_byte,
-        $._escape_unicode,
-      )),
-      token('\'\'\''),
-    ),
+    _simple_raw_string_lit: ($) =>
+      seq(
+        '#"',
+        repeat(
+          choice($._raw_str_content, $.raw_interpolation, $._escape_unicode),
+        ),
+        '"#',
+      ),
 
-    _simple_raw_string_lit: $ => seq(
-      '#"',
-      repeat(choice(
-        $._raw_str_content,
-        $.raw_interpolation,
-        $._escape_unicode,
-      )),
-      '"#',
-    ),
+    _simple_raw_bytes_lit: ($) =>
+      seq(
+        "#'",
+        repeat(
+          choice(
+            $._raw_bytes_content,
+            $.raw_interpolation,
+            $.escape_byte,
+            $._escape_unicode,
+          ),
+        ),
+        "'#",
+      ),
 
-    _simple_raw_bytes_lit: $ => seq(
-      '#\'',
-      repeat(choice(
-        $._raw_bytes_content,
-        $.raw_interpolation,
-        $.escape_byte,
-        $._escape_unicode,
-      )),
-      '\'#',
-    ),
+    _multiline_raw_string_lit: ($) =>
+      seq(
+        token('#"""'),
+        repeat(
+          choice(
+            $._multi_raw_str_content,
+            $.raw_interpolation,
+            $._escape_unicode,
+          ),
+        ),
+        token('"""#'),
+      ),
 
-    _multiline_raw_string_lit: $ => seq(
-      token('#"""'),
-      repeat(choice(
-        $._multi_raw_str_content,
-        $.raw_interpolation,
-        $._escape_unicode,
-      )),
-      token('"""#'),
-    ),
+    _multiline_raw_bytes_lit: ($) =>
+      seq(
+        token("#'''"),
+        repeat(
+          choice(
+            $._multi_raw_bytes_content,
+            $.raw_interpolation,
+            $.escape_byte,
+            $._escape_unicode,
+          ),
+        ),
+        token("'''#"),
+      ),
 
-    _multiline_raw_bytes_lit: $ => seq(
-      token('#\'\'\''),
-      repeat(choice(
-        $._multi_raw_bytes_content,
-        $.raw_interpolation,
-        $.escape_byte,
-        $._escape_unicode,
-      )),
-      token('\'\'\'#'),
-    ),
+    interpolation: ($) => seq("\\(", $.expression, ")"),
 
-    interpolation: $ => seq('\\(', $.expression, ')'),
+    raw_interpolation: ($) => seq("\\#(", $.expression, ")"),
 
-    raw_interpolation: $ => seq('\\#(', $.expression, ')'),
+    self: (_) => "self",
 
-    comment: _ => token(seq('//', /.*/)),
+    comment: (_) => token(seq("//", /.*/)),
   },
 });
 
