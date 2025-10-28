@@ -70,6 +70,10 @@
         "named": true
       },
       {
+        "type": "self",
+        "named": true
+      },
+      {
         "type": "si_unit",
         "named": true
       },
@@ -538,11 +542,15 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "dynamic",
+          "named": true
+        },
+        {
+          "type": "expression",
           "named": true
         },
         {
@@ -551,6 +559,10 @@
         },
         {
           "type": "optional",
+          "named": true
+        },
+        {
+          "type": "postfix_alias",
           "named": true
         },
         {
@@ -592,6 +604,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "lhs_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -779,6 +806,25 @@
     }
   },
   {
+    "type": "postfix_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lhs_alias",
+          "named": true
+        },
+        {
+          "type": "rhs_alias",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "primitive_type",
     "named": true,
     "fields": {}
@@ -820,6 +866,21 @@
         },
         {
           "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rhs_alias",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -1337,7 +1398,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "div",
@@ -1464,6 +1526,10 @@
     "named": false
   },
   {
+    "type": "self",
+    "named": true
+  },
+  {
     "type": "string",
     "named": false
   },
@@ -1509,6 +1575,10 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
     "named": false
   }
 ]

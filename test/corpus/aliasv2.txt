@@ -1,0 +1,305 @@
+================================================================================
+Postfix field alias
+================================================================================
+
+f~right_hand_side: {n: 0}
+r: right_hand_side.n
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias
+        (rhs_alias
+          (identifier))))
+    (value
+      (struct_lit
+        (field
+          (label
+            (identifier))
+          (value
+            (number))))))
+  (field
+    (label
+      (identifier))
+    (value
+      (selector_expression
+        (identifier)
+        (identifier)))))
+
+================================================================================
+Postfix single rhs alias
+================================================================================
+
+fo~X: {n: 1, lhs: null, rhs: X.n}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias
+        (rhs_alias
+          (identifier))))
+    (value
+      (struct_lit
+        (field
+          (label
+            (identifier))
+          (value
+            (number)))
+        (field
+          (label
+            (identifier))
+          (value
+            (null)))
+        (field
+          (label
+            (identifier))
+          (value
+            (selector_expression
+              (identifier)
+              (identifier))))))))
+
+================================================================================
+Postfix tuple alias
+================================================================================
+
+foo~(K,V): {n: 2, l: K, r: V.n}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias
+        (lhs_alias
+          (identifier))
+        (rhs_alias
+          (identifier))))
+    (value
+      (struct_lit
+        (field
+          (label
+            (identifier))
+          (value
+            (number)))
+        (field
+          (label
+            (identifier))
+          (value
+            (identifier)))
+        (field
+          (label
+            (identifier))
+          (value
+            (selector_expression
+              (identifier)
+              (identifier))))))))
+
+================================================================================
+Postfix tuple alias : dont care left hand side
+================================================================================
+
+fooo~(_,W): {n: 3, l: null, r: W.n}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias
+        (lhs_alias)
+        (rhs_alias
+          (identifier))))
+    (value
+      (struct_lit
+        (field
+          (label
+            (identifier))
+          (value
+            (number)))
+        (field
+          (label
+            (identifier))
+          (value
+            (null)))
+        (field
+          (label
+            (identifier))
+          (value
+            (selector_expression
+              (identifier)
+              (identifier))))))))
+
+================================================================================
+Postfix tuple alias : dont care right hand side
+================================================================================
+
+foooo~(L,_): {n: 4, l: L, v: null}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier)
+      (postfix_alias
+        (lhs_alias
+          (identifier))
+        (rhs_alias)))
+    (value
+      (struct_lit
+        (field
+          (label
+            (identifier))
+          (value
+            (number)))
+        (field
+          (label
+            (identifier))
+          (value
+            (identifier)))
+        (field
+          (label
+            (identifier))
+          (value
+            (null)))))))
+
+================================================================================
+Postfix pattern tuple alias : dont care left hand side
+================================================================================
+
+fooooo: {[string]~(_,Y): {n: 5, l: null, r: Y.n}} & {"": _}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier))
+    (value
+      (binary_expression
+        left: (struct_lit
+          (field
+            (label
+              (primitive_type)
+              (postfix_alias
+                (lhs_alias)
+                (rhs_alias
+                  (identifier))))
+            (value
+              (struct_lit
+                (field
+                  (label
+                    (identifier))
+                  (value
+                    (number)))
+                (field
+                  (label
+                    (identifier))
+                  (value
+                    (null)))
+                (field
+                  (label
+                    (identifier))
+                  (value
+                    (selector_expression
+                      (identifier)
+                      (identifier))))))))
+        right: (struct_lit
+          (field
+            (label
+              (string))
+            (value
+              (top))))))))
+
+================================================================================
+Postfix pattern tuple alias : dont care right hand side
+================================================================================
+
+foooooo: {[string]~(M,_): {n: 5, l: M, r: null}} & {a: _}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier))
+    (value
+      (binary_expression
+        left: (struct_lit
+          (field
+            (label
+              (primitive_type)
+              (postfix_alias
+                (lhs_alias
+                  (identifier))
+                (rhs_alias)))
+            (value
+              (struct_lit
+                (field
+                  (label
+                    (identifier))
+                  (value
+                    (number)))
+                (field
+                  (label
+                    (identifier))
+                  (value
+                    (identifier)))
+                (field
+                  (label
+                    (identifier))
+                  (value
+                    (null)))))))
+        right: (struct_lit
+          (field
+            (label
+              (identifier))
+            (value
+              (top))))))))
+
+
+================================================================================
+Self reference
+================================================================================
+
+fooooooo: {
+	n: 42
+	l: self.n
+	r: self.n
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (field
+    (label
+      (identifier))
+    (value
+      (struct_lit
+        (field
+          (label
+            (identifier))
+          (value
+            (number)))
+        (field
+          (label
+            (identifier))
+          (value
+            (selector_expression
+              (self)
+              (identifier))))
+        (field
+          (label
+            (identifier))
+          (value
+            (selector_expression
+              (self)
+              (identifier))))))))

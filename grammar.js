@@ -142,6 +142,7 @@ module.exports = grammar({
 
   conflicts: $ => [
     [$._embedding, $._label_alias_expr],
+    [$._label_expr, $._alias_expr],
   ],
 
   word: $ => $.identifier,
@@ -307,16 +308,27 @@ module.exports = grammar({
       $._label_name,
       $.optional,
       $.required,
-      seq('[', $._label_alias_expr, ']'),
+      choice(
+        seq('[', $.expression, ']', $.postfix_alias),
+        prec(-1,seq('[', $._label_alias_expr, ']')),
+      ),
     ),
 
-    label: $ => seq(
-      optional(seq(
-        field('alias', choice($.identifier, $.keyword_identifier)),
-        '=',
-      )),
-      $._label_expr,
-    ),
+    label: ($) =>
+      choice(
+        // Old prefix syntax (deprecated but still supported)
+        seq(
+          optional(
+            seq(
+              field("alias", choice($.identifier, $.keyword_identifier)),
+              "=",
+            ),
+          ),
+          $._label_expr,
+        ),
+        // New postfix syntax
+        seq($._label_expr, $.postfix_alias),
+      ),
 
     field: $ => prec.right(seq(
       repeat1(seq($.label, ':')),
@@ -350,6 +362,20 @@ module.exports = grammar({
       $.expression,
     ),
 
+    postfix_alias: ($) =>
+      seq(
+        "~",
+        choice(
+          seq("(", $.lhs_alias, ",", $.rhs_alias, ")"),
+          alias($.field_alias,$.rhs_alias),
+        ),
+      ),
+
+    lhs_alias: ($) => choice($.identifier, $.keyword_identifier, "_"),
+    rhs_alias: ($) => choice($.identifier, $.keyword_identifier, "_"),
+    field_alias: ($) => $.identifier,
+
+
     parenthesized_expression: $ => seq('(', $.expression, ')'),
 
     expression: $ => prec.left(choice(
@@ -363,6 +389,7 @@ module.exports = grammar({
       $.selector_expression,
       $.index_expression,
       $.call_expression,
+      $.self,
       $.identifier,
       $._literal,
     ),
@@ -651,6 +678,8 @@ module.exports = grammar({
     interpolation: $ => seq('\\(', $.expression, ')'),
 
     raw_interpolation: $ => seq('\\#(', $.expression, ')'),
+
+    self: (_) => "self",
 
     comment: _ => token(seq('//', /.*/)),
   },
