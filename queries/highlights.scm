@@ -22,7 +22,10 @@
 
 ; Conditionals
 
-"if" @conditional
+[
+  "if"
+  "else"
+] @conditional
 
 ; Repeats
 

@@ -34,8 +34,36 @@ b: [ for x in a if x > 1 { x+1 } ]
 
 (source_file
  (field (label (identifier))
-	(value (list_lit 
-					(comprehension 
-					 (for_clause (identifier) (identifier)) 
-					 (guard_clause (binary_expression (identifier) (number))) 
+	(value (list_lit
+					(comprehension
+					 (for_clause (identifier) (identifier))
+					 (guard_clause (binary_expression (identifier) (number)))
 					 (struct_lit (binary_expression (identifier) (number))))))))
+
+===
+if-else
+===
+
+if enabled { a: 1 } else { b: 2 }
+
+---
+
+(source_file
+ (comprehension
+  (guard_clause (identifier))
+  (struct_lit (field (label (identifier)) (value (number))))
+  (else_clause (struct_lit (field (label (identifier)) (value (number)))))))
+
+===
+for-else
+===
+
+for x in list { (x): true } else { empty: true }
+
+---
+
+(source_file
+ (comprehension
+  (for_clause (identifier) (identifier))
+  (struct_lit (field (label (dynamic (identifier))) (value (boolean))))
+  (else_clause (struct_lit (field (label (identifier)) (value (boolean)))))))
