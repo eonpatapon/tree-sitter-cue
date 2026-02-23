@@ -410,6 +410,10 @@
           "named": true
         },
         {
+          "type": "postfix_alias",
+          "named": true
+        },
+        {
           "type": "value",
           "named": true
         }
@@ -808,6 +812,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "postfix_alias",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1510,11 +1540,11 @@
   },
   {
     "type": "number",
-    "named": false
+    "named": true
   },
   {
     "type": "number",
-    "named": true
+    "named": false
   },
   {
     "type": "or",
@@ -1586,6 +1616,10 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
     "named": false
   }
 ]

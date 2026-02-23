@@ -323,8 +323,16 @@ module.exports = grammar({
       $._label_expr,
     ),
 
+    postfix_alias: $ => seq(
+      '~',
+      choice(
+        field('field', $.identifier),
+        seq('(', field('label', $.identifier), ',', field('field', $.identifier), ')'),
+      ),
+    ),
+
     field: $ => prec.right(seq(
-      repeat1(seq($.label, ':')),
+      repeat1(seq($.label, optional($.postfix_alias), ':')),
       $._value,
       optional($.attribute),
     )),

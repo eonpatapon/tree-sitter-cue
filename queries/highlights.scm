@@ -67,6 +67,7 @@
   "!~"
   "!"
   "="
+  "~"
 ] @operator
 
 ; Fields & Properties
