@@ -7,7 +7,44 @@
 
 ![AST and highlights in Neovim](./neovim-ts.png)
 
-## Setup in Neovim
+## Development
+
+This project uses [Nix flakes](https://nixos.wiki/wiki/Flakes) to provide a
+reproducible development environment with `tree-sitter`, `node`, `bc`, and
+`python3`. You need Nix with `flakes` and `nix-command` experimental features
+enabled (see [Nix flakes - Enable flakes](https://nixos.wiki/wiki/Flakes#Enable_flakes)).
+
+```sh
+nix develop
+npm install
+```
+
+After modifying `grammar.js`, regenerate the parser and run tests:
+
+```sh
+tree-sitter generate
+tree-sitter test
+```
+
+## Testing
+
+```sh
+# Run all tests (corpus tests + parse real CUE files)
+npm test
+
+# Run only tree-sitter corpus tests
+tree-sitter test
+
+# Parse example CUE files from cue-lang/cue
+script/parse-examples
+
+# Lint grammar.js
+npm run lint
+```
+
+## Editor Setup
+
+### Neovim
 
 Using [lazy.nvim](https://github.com/folke/lazy.nvim)
 
