@@ -142,6 +142,8 @@ module.exports = grammar({
 
   conflicts: $ => [
     [$._embedding, $._label_alias_expr],
+    [$._label_name, $.primary_expression],
+    [$._label_name, $.string],
   ],
 
   word: $ => $.identifier,
@@ -198,6 +200,7 @@ module.exports = grammar({
         'if',
         'for',
         'else',
+        'try',
         ...primitive_types,
       ),
       $.identifier,
@@ -290,13 +293,14 @@ module.exports = grammar({
       $._alias_expr,
     ),
 
-    _label_name: $ => prec(1, choice(
-      $.identifier,
-      $.keyword_identifier,
-      alias($._simple_string_lit, $.string),
-      $.selector_expression,
-      alias($.parenthesized_expression, $.dynamic),
-    )),
+    _label_name: $ => choice(
+      prec.dynamic(1, $.identifier),
+      prec(1, $.keyword_identifier),
+      prec(1, alias($.primitive_type, $.identifier)),
+      prec.dynamic(1, alias($._simple_string_lit, $.string)),
+      prec.dynamic(1, $.selector_expression),
+      prec.dynamic(1, alias($.parenthesized_expression, $.dynamic)),
+    ),
 
     _label_alias_expr: $ => alias($._alias_expr, $.optional),
 
@@ -338,10 +342,15 @@ module.exports = grammar({
 
     let_clause: $ => seq('let', field('left', $.identifier), '=', field('right', $.expression)),
 
-    _clause: $ => choice($.for_clause, $.guard_clause, $.let_clause),
+    _clause: $ => choice($.for_clause, $.guard_clause, $.let_clause, $.try_clause),
+
+    try_clause: $ => seq(
+      'try',
+      optional(seq(field('left', $.identifier), '=', field('right', $.expression))),
+    ),
 
     comprehension: $ => prec.right(seq(
-      choice($.for_clause, $.guard_clause),
+      choice($.for_clause, $.guard_clause, $.try_clause),
       repeat(seq(optional(','), $._clause)),
       $.struct_lit,
       optional($.else_clause),
@@ -367,9 +376,15 @@ module.exports = grammar({
       $.selector_expression,
       $.index_expression,
       $.call_expression,
+      $.postfix_expression,
       $.identifier,
       $._literal,
     ),
+
+    postfix_expression: $ => prec(PREC.call, seq(
+      $.primary_expression,
+      '?',
+    )),
 
     binary_expression: $ => {
       const table = [
