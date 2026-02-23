@@ -318,6 +318,10 @@
       "required": true,
       "types": [
         {
+          "type": "else_clause",
+          "named": true
+        },
+        {
           "type": "for_clause",
           "named": true
         },
@@ -361,6 +365,21 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "struct_lit",
           "named": true
         }
       ]
@@ -1341,6 +1360,10 @@
   },
   {
     "type": "div",
+    "named": false
+  },
+  {
+    "type": "else",
     "named": false
   },
   {

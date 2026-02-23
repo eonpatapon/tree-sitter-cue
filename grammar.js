@@ -197,6 +197,7 @@ module.exports = grammar({
         'let',
         'if',
         'for',
+        'else',
         ...primitive_types,
       ),
       $.identifier,
@@ -339,11 +340,14 @@ module.exports = grammar({
 
     _clause: $ => choice($.for_clause, $.guard_clause, $.let_clause),
 
-    comprehension: $ => seq(
+    comprehension: $ => prec.right(seq(
       choice($.for_clause, $.guard_clause),
       repeat(seq(optional(','), $._clause)),
       $.struct_lit,
-    ),
+      optional($.else_clause),
+    )),
+
+    else_clause: $ => seq('else', $.struct_lit),
 
     _alias_expr: $ => seq(
       optional(seq(field('alias', $.identifier), '=')),
