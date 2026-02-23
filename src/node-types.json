@@ -62,6 +62,10 @@
         "named": true
       },
       {
+        "type": "postfix_expression",
+        "named": true
+      },
+      {
         "type": "primitive_type",
         "named": true
       },
@@ -336,6 +340,10 @@
         {
           "type": "struct_lit",
           "named": true
+        },
+        {
+          "type": "try_clause",
+          "named": true
         }
       ]
     }
@@ -442,6 +450,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "import_declaration",
@@ -798,6 +811,21 @@
     }
   },
   {
+    "type": "postfix_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "primary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "primitive_type",
     "named": true,
     "fields": {}
@@ -1073,6 +1101,32 @@
     "type": "top",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "try_clause",
+    "named": true,
+    "fields": {
+      "left": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "unary_expression",
@@ -1403,10 +1457,6 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
-  },
-  {
     "type": "if",
     "named": false
   },
@@ -1460,11 +1510,11 @@
   },
   {
     "type": "number",
-    "named": true
+    "named": false
   },
   {
     "type": "number",
-    "named": false
+    "named": true
   },
   {
     "type": "or",
@@ -1492,6 +1542,10 @@
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "try",
     "named": false
   },
   {

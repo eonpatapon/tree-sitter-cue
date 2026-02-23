@@ -39,6 +39,7 @@
 
 [
   "let"
+  "try"
 ] @keyword
 
 [
