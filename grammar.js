@@ -138,6 +138,7 @@ module.exports = grammar({
   supertypes: $ => [
     $.expression,
     $.primary_expression,
+    $.literal,
   ],
 
   conflicts: $ => [
@@ -375,8 +376,6 @@ module.exports = grammar({
       $.expression,
     ),
 
-    parenthesized_expression: $ => seq('(', $.expression, ')'),
-
     expression: $ => prec.left(choice(
       $.primary_expression,
       $.unary_expression,
@@ -390,7 +389,7 @@ module.exports = grammar({
       $.call_expression,
       $.postfix_expression,
       $.identifier,
-      $._literal,
+      $.literal,
     ),
 
     postfix_expression: $ => prec(PREC.call, seq(
@@ -429,6 +428,8 @@ module.exports = grammar({
       ))));
     },
 
+    parenthesized_expression: $ => seq('(', $.expression, ')'),
+
     call_expression: $ => prec(PREC.call, seq(
       field('function', choice(
         $.builtin_function,
@@ -457,7 +458,7 @@ module.exports = grammar({
       ')',
     ),
 
-    _literal: $ =>
+    literal: $ =>
       choice(
         $.struct_lit,
         $.list_lit,
