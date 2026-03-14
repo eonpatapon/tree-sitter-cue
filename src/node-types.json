@@ -18,7 +18,7 @@
     ]
   },
   {
-    "type": "primary_expression",
+    "type": "literal",
     "named": true,
     "subtypes": [
       {
@@ -30,19 +30,7 @@
         "named": true
       },
       {
-        "type": "call_expression",
-        "named": true
-      },
-      {
         "type": "float",
-        "named": true
-      },
-      {
-        "type": "identifier",
-        "named": true
-      },
-      {
-        "type": "index_expression",
         "named": true
       },
       {
@@ -58,19 +46,7 @@
         "named": true
       },
       {
-        "type": "parenthesized_expression",
-        "named": true
-      },
-      {
-        "type": "postfix_expression",
-        "named": true
-      },
-      {
         "type": "primitive_type",
-        "named": true
-      },
-      {
-        "type": "selector_expression",
         "named": true
       },
       {
@@ -87,6 +63,40 @@
       },
       {
         "type": "top",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "primary_expression",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "call_expression",
+        "named": true
+      },
+      {
+        "type": "identifier",
+        "named": true
+      },
+      {
+        "type": "index_expression",
+        "named": true
+      },
+      {
+        "type": "literal",
+        "named": true
+      },
+      {
+        "type": "parenthesized_expression",
+        "named": true
+      },
+      {
+        "type": "postfix_expression",
+        "named": true
+      },
+      {
+        "type": "selector_expression",
         "named": true
       }
     ]
@@ -542,13 +552,24 @@
   {
     "type": "index_expression",
     "named": true,
-    "fields": {},
+    "fields": {
+      "index": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "expression",
+          "type": "primary_expression",
           "named": true
         }
       ]
@@ -923,6 +944,10 @@
       "types": [
         {
           "type": "primary_expression",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]

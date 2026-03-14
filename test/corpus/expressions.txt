@@ -214,6 +214,7 @@ a: a.b."foo"
 index
 ===
 
+a: b[2]
 b: a["f"][x]
 l: [1, 2][0]
 
@@ -221,23 +222,30 @@ l: [1, 2][0]
 
 (source_file
   (field
-	(label
-	  (identifier))
-	(value
-	  (identifier)))
-  (list_lit
-	(string))
-  (list_lit
-	(identifier))
+    (label
+      (identifier))
+    (value
+      (index_expression
+        (identifier)
+        (number))))
   (field
-	(label
-	  (identifier))
-	(value
-	  (list_lit
-		(number)
-		(number))))
-  (list_lit
-	(number)))
+    (label
+      (identifier))
+    (value
+      (index_expression
+        (index_expression
+          (identifier)
+          (string))
+        (identifier))))
+  (field
+    (label
+      (identifier))
+    (value
+      (index_expression
+        (list_lit
+          (number)
+          (number))
+        (number)))))
 
 ===
 dynamic
