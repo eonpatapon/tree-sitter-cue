@@ -441,8 +441,8 @@ module.exports = grammar({
 
     index_expression: $ => seq(
       $.primary_expression,
-      '[',
-      $.expression,
+      token.immediate('['),
+      field('index', $.expression),
       ']',
     ),
 
