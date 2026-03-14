@@ -22,9 +22,12 @@
           buildInputs = [
             pkgs.nodejs
             pkgs.bc
-            pkgs.tree-sitter
-            pkgs.python3
+            pkgs.graphviz-nox
+            pkgs.python313
           ];
+          shellHook = ''
+            export PATH=./node_modules/.bin/:$PATH
+          '';
         };
       });
 }
