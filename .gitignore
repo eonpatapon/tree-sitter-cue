@@ -1,6 +1,7 @@
 Cargo.lock
-package-lock.json
 /build
 /node_modules
-/examples/*/
+script/examples/*/
 /target
+log.html
+test.cue

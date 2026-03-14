@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-set -eu
+set -euo pipefail
 
-cd "$(dirname "$0")/.."
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 function clone_repo {
 	owner=$1
 	name=$2
 	sha=$3
 
-	path=examples/$name
+	path=$SCRIPT_DIR/examples/$name
 	if [ ! -d "$path" ]; then
 		echo "Cloning $owner/$name"
 		git clone "https://github.com/$owner/$name" "$path"
@@ -27,18 +27,6 @@ function clone_repo {
 
 clone_repo cue-lang cue 7d4d90de3798a00807f50373466322771bd0a10a
 
-known_failures="$(cat script/known_failures.txt)"
-
-# shellcheck disable=2046
-tree-sitter parse -q \
-	"examples/**/*.cue" \
-	$(for file in $known_failures; do echo "!${file}"; done)
-
-example_count=$(find examples -name "*.cue" | wc -l)
-failure_count=$(wc -w <<<"$known_failures")
-success_count=$((example_count - failure_count))
-success_percent=$(bc -l <<<"100*${success_count}/${example_count}")
-
-printf \
-	"Successfully parsed %d of %d example files (%.1f%%)\n" \
-	"$success_count" "$example_count" "$success_percent"
+find $SCRIPT_DIR/examples -type f -name '*.cue' \
+    | grep -vFf $SCRIPT_DIR/known_failures.txt \
+    | xargs tree-sitter parse -q -s

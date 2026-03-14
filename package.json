@@ -19,12 +19,12 @@
   },
   "homepage": "https://github.com/eonpatapon/tree-sitter-cue#readme",
   "dependencies": {
-    "nan": "^2.22.0"
+    "nan": "^2.25.0",
+    "tree-sitter-cli": "^0.26.7"
   },
   "devDependencies": {
     "eslint": "^8.33.0",
-    "eslint-config-google": "^0.14.0",
-    "tree-sitter-cli": "^0.24.6"
+    "eslint-config-google": "^0.14.0"
   },
   "repository": "https://github.com/eonpatapon/tree-sitter-cue",
   "scripts": {
