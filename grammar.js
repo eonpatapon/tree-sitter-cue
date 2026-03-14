@@ -130,6 +130,15 @@ module.exports = grammar({
     $._raw_bytes_content,
     $._multi_raw_str_content,
     $._multi_raw_bytes_content,
+    $._raw_str_open,
+    $._raw_bytes_open,
+    $._multi_raw_str_open,
+    $._multi_raw_bytes_open,
+    $._raw_str_close,
+    $._raw_bytes_close,
+    $._multi_raw_str_close,
+    $._multi_raw_bytes_close,
+    $._raw_interpolation_open,
   ],
 
   inline: $ => [
@@ -641,50 +650,50 @@ module.exports = grammar({
     ),
 
     _simple_raw_string_lit: $ => seq(
-      '#"',
+      $._raw_str_open,
       repeat(choice(
         $._raw_str_content,
         $.raw_interpolation,
         $._escape_unicode,
       )),
-      '"#',
+      $._raw_str_close,
     ),
 
     _simple_raw_bytes_lit: $ => seq(
-      '#\'',
+      $._raw_bytes_open,
       repeat(choice(
         $._raw_bytes_content,
         $.raw_interpolation,
         $.escape_byte,
         $._escape_unicode,
       )),
-      '\'#',
+      $._raw_bytes_close,
     ),
 
     _multiline_raw_string_lit: $ => seq(
-      token('#"""'),
+      $._multi_raw_str_open,
       repeat(choice(
         $._multi_raw_str_content,
         $.raw_interpolation,
         $._escape_unicode,
       )),
-      token('"""#'),
+      $._multi_raw_str_close,
     ),
 
     _multiline_raw_bytes_lit: $ => seq(
-      token('#\'\'\''),
+      $._multi_raw_bytes_open,
       repeat(choice(
         $._multi_raw_bytes_content,
         $.raw_interpolation,
         $.escape_byte,
         $._escape_unicode,
       )),
-      token('\'\'\'#'),
+      $._multi_raw_bytes_close,
     ),
 
     interpolation: $ => seq('\\(', $.expression, ')'),
 
-    raw_interpolation: $ => seq('\\#(', $.expression, ')'),
+    raw_interpolation: $ => seq($._raw_interpolation_open, $.expression, ')'),
 
     comment: _ => token(seq('//', /.*/)),
   },
