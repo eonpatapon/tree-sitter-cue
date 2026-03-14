@@ -1476,8 +1476,7 @@
   },
   {
     "type": "comment",
-    "named": true,
-    "extra": true
+    "named": true
   },
   {
     "type": "div",
@@ -1509,11 +1508,11 @@
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float32",
@@ -1589,11 +1588,11 @@
   },
   {
     "type": "number",
-    "named": false
+    "named": true
   },
   {
     "type": "number",
-    "named": true
+    "named": false
   },
   {
     "type": "or",
@@ -1613,6 +1612,10 @@
   },
   {
     "type": "rem",
+    "named": false
+  },
+  {
+    "type": "rune",
     "named": false
   },
   {
