@@ -5,3 +5,5 @@ cue/cue/parser/testdata/corpus/+comp.cue
 cue/cue/scanner/testdata/corpus/+basic.cue
 cue/cue/scanner/testdata/corpus/+comments.cue
 cue/cue/scanner/testdata/corpus/+tokens.cue
+cue/encoding/protobuf/testdata/cue.mod/module.cue
+cue/cue/parser/testdata/cue.mod/module.cue

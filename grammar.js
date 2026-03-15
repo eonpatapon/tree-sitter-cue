@@ -150,7 +150,7 @@ module.exports = grammar({
 
   rules: {
     source_file: $ => seq(
-      optional($.attribute),
+      optional(repeat($.attribute)),
       optional($.package_clause),
       optional(repeat($.import_declaration)),
       optionalCommaSep($._declaration),
@@ -208,7 +208,7 @@ module.exports = grammar({
 
     attribute: $ => seq(
       '@',
-      $.identifier,
+      field('name', $.identifier),
       '(',
       optional(choice(',', '-')),
       repeat(

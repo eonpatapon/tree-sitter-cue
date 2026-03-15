@@ -12,6 +12,26 @@ package foo
  (attribute (identifier) (identifier))
  (package_clause (package_identifier)))
 
+===
+multiple
+===
+
+@experiment(explicitopen)
+@experiment(try)
+
+package main
+
+---
+
+(source_file
+  (attribute
+    (identifier)
+    (identifier))
+  (attribute
+    (identifier)
+    (identifier))
+  (package_clause
+    (package_identifier)))
 
 ===
 data
