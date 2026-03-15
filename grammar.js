@@ -256,6 +256,9 @@ module.exports = grammar({
       'mod',
       'quo',
       'rem',
+      'matchN',
+      'matchIf',
+      'error',
     ),
 
     _declaration: $ => choice(
@@ -297,6 +300,7 @@ module.exports = grammar({
       prec.dynamic(1, $.identifier),
       prec(1, $.keyword_identifier),
       prec(1, alias($.primitive_type, $.identifier)),
+      prec(1, alias($.builtin_function, $.identifier)),
       prec.dynamic(1, alias($._simple_string_lit, $.string)),
       prec.dynamic(1, $.selector_expression),
       prec.dynamic(1, alias($.parenthesized_expression, $.dynamic)),

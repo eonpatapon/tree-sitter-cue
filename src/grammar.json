@@ -954,6 +954,18 @@
         {
           "type": "STRING",
           "value": "rem"
+        },
+        {
+          "type": "STRING",
+          "value": "matchN"
+        },
+        {
+          "type": "STRING",
+          "value": "matchIf"
+        },
+        {
+          "type": "STRING",
+          "value": "error"
         }
       ]
     },
@@ -1226,6 +1238,19 @@
             "content": {
               "type": "SYMBOL",
               "name": "primitive_type"
+            },
+            "named": true,
+            "value": "identifier"
+          }
+        },
+        {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "builtin_function"
             },
             "named": true,
             "value": "identifier"

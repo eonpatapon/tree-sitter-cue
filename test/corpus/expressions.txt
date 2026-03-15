@@ -151,6 +151,47 @@ s: close({
 					(string)))))))))))
 
 ===
+builtin functions
+===
+
+a: matchN(1, [string, int])
+b: matchIf(true, string, int)
+c: error("invalid value")
+
+---
+
+(source_file
+  (field
+	(label
+	  (identifier))
+	(value
+	  (call_expression
+		(builtin_function)
+		(arguments
+		  (number)
+		  (list_lit
+			(primitive_type)
+			(primitive_type))))))
+  (field
+	(label
+	  (identifier))
+	(value
+	  (call_expression
+		(builtin_function)
+		(arguments
+		  (boolean)
+		  (primitive_type)
+		  (primitive_type)))))
+  (field
+	(label
+	  (identifier))
+	(value
+	  (call_expression
+		(builtin_function)
+		(arguments
+		  (string))))))
+
+===
 selector
 ===
 
