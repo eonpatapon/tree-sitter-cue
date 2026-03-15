@@ -1451,6 +1451,10 @@
     "named": false
   },
   {
+    "type": "error",
+    "named": false
+  },
+  {
     "type": "escape_byte",
     "named": true
   },
@@ -1468,11 +1472,11 @@
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float32",
@@ -1531,6 +1535,14 @@
     "named": false
   },
   {
+    "type": "matchIf",
+    "named": false
+  },
+  {
+    "type": "matchN",
+    "named": false
+  },
+  {
     "type": "mod",
     "named": false
   },
@@ -1540,11 +1552,11 @@
   },
   {
     "type": "number",
-    "named": true
+    "named": false
   },
   {
     "type": "number",
-    "named": false
+    "named": true
   },
   {
     "type": "or",
