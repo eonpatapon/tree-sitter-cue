@@ -10,8 +10,11 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "attribute"
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "attribute"
+              }
             },
             {
               "type": "BLANK"
@@ -466,8 +469,12 @@
           "value": "@"
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
         },
         {
           "type": "STRING",
@@ -4091,5 +4098,6 @@
   "supertypes": [
     "expression",
     "primary_expression"
-  ]
+  ],
+  "reserved": {}
 }
