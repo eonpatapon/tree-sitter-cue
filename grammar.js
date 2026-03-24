@@ -150,12 +150,12 @@ module.exports = grammar({
   word: $ => $.identifier,
 
   rules: {
-    source_file: $ => seq(
-      optional(repeat($.attribute)),
+    source_file: $ => prec(1, seq(
+      optionalCommaSep($.attribute),
       optional($.package_clause),
-      optional(repeat($.import_declaration)),
+      optionalCommaSep($.import_declaration),
       optionalCommaSep($._declaration),
-    ),
+    )),
 
     _package_identifier: $ => alias($.identifier, $.package_identifier),
 
@@ -262,12 +262,13 @@ module.exports = grammar({
       'error',
     ),
 
-    _declaration: $ => choice(
+    _declaration: $ => prec(-1, choice(
+      $.attribute,
       $.field,
       $.ellipsis,
       $._embedding,
       $.let_clause,
-    ),
+    )),
 
     _list_elem: $ => prec.right(choice(
       $.ellipsis,
@@ -283,7 +284,7 @@ module.exports = grammar({
 
     struct_lit: $ => seq(
       '{',
-      optionalCommaSep(choice($._declaration, $.attribute)),
+      optionalCommaSep($._declaration),
       '}',
     ),
 

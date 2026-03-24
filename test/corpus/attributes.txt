@@ -1,37 +1,42 @@
 ===
-package
+file
 ===
 
-@if(foo)
+@if(foo), @blah()
+@experiment(try)
 
 package foo
 
 ---
 
 (source_file
- (attribute (identifier) (identifier))
- (package_clause (package_identifier)))
-
-===
-package multiple
-===
-
-@experiment(explicitopen)
-@experiment(try)
-
-package main
-
----
-
-(source_file
   (attribute
     (identifier)
+    (identifier))
+  (attribute
     (identifier))
   (attribute
     (identifier)
     (identifier))
   (package_clause
     (package_identifier)))
+
+===
+package
+===
+
+package foo
+
+@foo(bar)
+
+---
+
+(source_file
+  (package_clause
+    (package_identifier))
+  (attribute
+    (identifier)
+    (identifier)))
 
 ===
 field and struct
