@@ -534,6 +534,10 @@
             {
               "type": "STRING",
               "value": "bool"
+            },
+            {
+              "type": "STRING",
+              "value": "rune"
             }
           ]
         },
@@ -2865,6 +2869,10 @@
         {
           "type": "STRING",
           "value": "bool"
+        },
+        {
+          "type": "STRING",
+          "value": "rune"
         }
       ]
     },

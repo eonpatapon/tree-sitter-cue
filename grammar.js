@@ -112,6 +112,7 @@ const primitive_types = [
   'string',
   'bytes',
   'bool',
+  'rune',
 ];
 
 module.exports = grammar({

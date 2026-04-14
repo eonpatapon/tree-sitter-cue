@@ -1616,6 +1616,10 @@
     "named": false
   },
   {
+    "type": "rune",
+    "named": false
+  },
+  {
     "type": "string",
     "named": false
   },
